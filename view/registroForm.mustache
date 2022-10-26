@@ -1,0 +1,35 @@
+{{> header}}
+
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <h1>Registro</h1>
+    <form action="/registro/procesarAlta"  method="post">
+        <div>
+            <label for="name">Nombre: </label>
+            <input id="name" type="text" name="name" required>
+        </div>
+
+        <div>
+          <label for="username">Email: </label>
+          <input id="username" type="email" name="email" required>
+        </div>
+
+        <div>
+          <label for="password">Password: </label>
+          <input id="password" type="password" name="password" required>
+        </div>
+
+        <div>
+            <label for="ubicacion">Coordenadas de su ubicación: </label>
+            <input id="ubicacion" type="ubicacion" name="residencia" required>
+        </div>
+
+        <button type="submit">Enviar</button>
+
+        {{#error}}
+          <p>{{error}}</p>
+        {{/error}}
+
+    </form>
+</div>
+
+{{> footer}}

@@ -1,0 +1,25 @@
+{{> header}}
+
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <h1>Noticias</h1>
+    <h4> Aca se deben listar las noticias</h4>
+    <h2 class='w3-wide'>Noticias</h2>
+        <table class='w3-table'>
+            <tr>
+                <th>Cancion</th>
+                <th>duracion</th>
+                <th>reproducir</th>
+            </tr>
+
+            {{#noticias}}
+               <tr>
+                    <td>{{nombre}}</td>
+                    <td>{{duracion}}</td>
+                    <td>Reproducir</td>
+                </tr>
+            {{/noticias}}
+
+        </table>
+</div>
+
+{{> footer}}
