@@ -1,13 +1,19 @@
 <?php
 
-class InfoneteController{
-    private $renderer;
+class InfoneteController {
 
-    public function __construct($render){
+    private $renderer;
+    private $model;
+
+    public function __construct($render, $model)
+    {
         $this->renderer = $render;
+        $this->model = $model;
     }
-    public function list(){
-        $this->renderer->render('infonete.mustache');
+
+    public function list() {
+        $data["contenido"] = $this->model->getContenido();
+        $this->renderer->render('infonete.mustache', $data);
     }
 
 }

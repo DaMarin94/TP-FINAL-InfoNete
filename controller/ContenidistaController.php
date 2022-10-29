@@ -32,6 +32,7 @@ class ContenidistaController
 
         if($this->model->alta($titulo, $subtitulo, $imagen, $contenido)){
             echo "bien";
+            Redirect::redirect('/contenido');
         };
     }
 }

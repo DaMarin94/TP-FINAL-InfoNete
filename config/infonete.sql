@@ -98,7 +98,7 @@ CREATE TABLE `passwords` (
   `id` int(7) NOT NULL,
   `clave` char(60) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `verificado` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
-  `vencimiento` date NOT NULL DEFAULT current_timestamp()
+  `vencimiento` date NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
