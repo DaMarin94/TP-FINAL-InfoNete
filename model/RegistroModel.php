@@ -24,7 +24,7 @@ class RegistroModel
             return false;
         }
 
-        $sqlPassword = "INSERT INTO passwords (clave, verificado, vencimiento) VALUES('$hash', '', '')";
+        $sqlPassword = "INSERT INTO passwords (clave, verificado, vencimiento) VALUES('$hash', '', '0000-00-00 00:00:00')";
         
         $passId = $this->database->insert($sqlPassword);
 
