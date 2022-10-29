@@ -8,11 +8,13 @@ include_once("model/LoginModel.php");
 include_once("model/RegistroModel.php");
 include_once("model/ContenidistaModel.php");
 include_once("model/InfoneteModel.php");
+include_once("model/ContenidoModel.php");
 
 include_once("controller/InfoneteController.php");
 include_once("controller/LoginController.php");
 include_once("controller/RegistroController.php");
 include_once("controller/ContenidistaController.php");
+include_once("controller/ContenidoController.php");
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
@@ -57,6 +59,14 @@ class Configuration{
 
     public function getContenidistaModel(){
         return new ContenidistaModel($this->database);
+    }
+
+    public function getContenidoController(){
+        return new ContenidoController($this->view, $this->getContenidoModel());
+    }
+
+    public function getContenidoModel(){
+        return new ContenidoModel($this->database);
     }
 
     public function getRouter(){
