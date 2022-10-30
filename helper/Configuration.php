@@ -59,18 +59,6 @@ class Configuration{
         return new ContenidistaController($this->view, $this->getContenidistaModel());
     }
 
-    public function getAdminController(){
-        return new AdminController($this->view, $this->getAdminModel());
-    }
-
-    public function getLoginModel(){
-        return new LoginModel($this->database);
-    }
-
-    public function getRegistroModel(){
-        return new RegistroModel($this->database);
-    }
-
     public function getContenidistaModel(){
         return new ContenidistaModel($this->database);
     }
@@ -82,6 +70,10 @@ class Configuration{
     public function getContenidoModel(){
         return new ContenidoModel($this->database);
 
+    }
+
+    public function getAdminController(){
+        return new AdminController($this->view, $this->getAdminModel());
     }
 
     public function getAdminModel(){
