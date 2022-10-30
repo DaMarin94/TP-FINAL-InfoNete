@@ -22,7 +22,7 @@ class RegistroController{
         $password  = $_POST["password"];
         $residencia  = $_POST["residencia"];
 
-        // $this->model->alta($name, $email, $password, $residencia);
+//         $this->model->alta($name, $email, $password, $residencia);
 
         if($this->model->alta($name, $email, $password, $residencia)){
             Redirect::redirect('/');
@@ -30,7 +30,6 @@ class RegistroController{
             $data['error'] = "Error al registrarse";
             $this->renderer->render("registroForm.mustache", $data);
         }
-
 
     }
 }

@@ -1,0 +1,58 @@
+{{> header}}
+
+<div class="w3-sidebar w3-bar-block w3-light-grey" style="z-index: 0">
+    <h3 class="w3-bar-item">Administrador</h3>
+    <a href="/admin/productos" class="w3-bar-item w3-button w3-hover-teal">Productos</a>
+    <a href="/admin/usuarios" class="w3-bar-item w3-button w3-hover-teal">Usuarios</a>
+    <a href="/admin/reportes" class="w3-bar-item w3-button w3-hover-teal">Reportes</a>
+</div>
+
+<div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px; min-height: 70vh" id="band">
+
+    {{#productos}}
+        {{> AdminProductos}}
+    {{/productos}}
+    {{#usuarios}}
+        {{> AdminUsuarios}}
+    {{/usuarios}}
+    {{#formAltaUsuarios}}
+        {{> formAltaUsuarios}}
+    {{/formAltaUsuarios}}
+    {{#reportes}}
+        {{> AdminReportes}}
+    {{/reportes}}
+
+<!--    <h1>Administrador</h1>-->
+<!--    <div class="accesos">-->
+<!--        <div>-->
+<!--            <a href="/admin/productos">-->
+<!--                <button class="w3-button w3-teal botonAdmin">-->
+<!--                    Productos-->
+<!--                </button>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <a href="/admin/contenidistas">-->
+<!--                <button class="w3-button w3-teal botonAdmin">-->
+<!--                    Contenidistas y Editores-->
+<!--                </button>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <a href="/admin/usuarios">-->
+<!--                <button class="w3-button w3-teal botonAdmin">-->
+<!--                    Usuarios-->
+<!--                </button>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <a href="/admin/reportes">-->
+<!--                <button class="w3-button w3-teal botonAdmin">-->
+<!--                    Reportes-->
+<!--                </button>-->
+<!--            </a>-->
+<!--        </div>-->
+    </div>
+</div>
+
+{{> footer}}
