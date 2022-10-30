@@ -15,13 +15,19 @@ class LoginModel
 
         $result = $this->database->query($sql);
 
-        $mailAcomparar = $result[0]['mail'];
-        $passAcomparar = $result[0]['clave'];
-        $roleAcomparar = $result[0]['role'];
+        if(count($result) > 0){
+            $mailAcomparar = $result[0]['mail'];
+            $passAcomparar = $result[0]['clave'];
+            $roleAcomparar = $result[0]['role'];
 
             if($mailAcomparar == $mail && $this->getPasswordValido($passAcomparar, $password)){
                 $_SESSION['usuario'] = $roleAcomparar;
+                return true;
             }
+        }
+
+        return false;
+
     }
 
     public function getPasswordValido($hash, $valid){

@@ -1,0 +1,61 @@
+<?php
+
+class AdminModel
+{
+    private $database;
+    private $roles = [];
+
+    public function __construct($database)
+    {
+        $this->database = $database;
+    }
+
+    public function getUsuarios(){
+        $usuarios = [];
+        $sql = "SELECT * FROM usuarios";
+
+        foreach($this->database->query($sql) as $usuario){
+            // para traducir el rol
+            $usuario['role'] = $this->getRole($usuario['role']);
+            array_push($usuarios, $usuario);
+        }
+
+        return $usuarios;
+    }
+
+    public function getRole($id){
+        if(!$this->roles){
+            $sql = "SELECT * FROM role";
+            $this->roles = $this->database->query($sql);
+        }
+
+        foreach($this->roles as $rol){
+            if($rol['id'] == $id) {
+                return $rol['descripcion'];
+            };
+        }
+    }
+
+    public function altaUsuario($name, $mail, $password, $ubicacion, $role){
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $mailValido = "SELECT * FROM usuarios WHERE mail = '$mail'";
+
+        $mailRes = $this->database->query($mailValido);
+
+        if(count($mailRes) > 0){
+            return false;
+        }
+
+        $sqlPassword = "INSERT INTO passwords (clave, verificado, vencimiento) VALUES('$hash', '', '')";
+
+        $passId = $this->database->insert($sqlPassword);
+
+        $sql = "INSERT INTO usuarios (nombre, mail, password, ubicacion, role, estado) VALUES('$name', '$mail', '$passId', '$ubicacion', '$role', 0)";
+
+        return $this->database->execute($sql);
+
+    }
+
+}

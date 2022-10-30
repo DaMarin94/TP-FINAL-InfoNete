@@ -1,0 +1,17 @@
+.accesos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.botonAdmin {
+    height: 60px;
+    width: 230px;
+}
+
+.contAddUser {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+}
