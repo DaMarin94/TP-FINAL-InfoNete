@@ -13,7 +13,7 @@ class RegistroModel
 
         //CREAMOS UN HASH PARA QUE LA CONTRASEÑA SEA SEGURA
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $rol = $this->getRole();
+        $role = $this->getRole();
 
         //chequeo mail ya existente
         $mailValido = "SELECT * FROM usuarios WHERE mail = '$mail'";
@@ -28,7 +28,7 @@ class RegistroModel
         
         $passId = $this->database->insert($sqlPassword);
 
-        $sql = "INSERT INTO usuarios (mail, password,ubicacion, role, estado) VALUES('$mail', '$passId', '$residencia', '$rol', 0)";
+        $sql = "INSERT INTO usuarios (nombre, mail, password,ubicacion, role, estado) VALUES('$name', '$mail', '$passId', '$residencia', '$role', 0)";
 
         return $this->database->execute($sql);
 
@@ -36,7 +36,7 @@ class RegistroModel
 
     private function getRole(){
         //DEFINIMOS EL ROL PARA CUALQUIER USUARIO NUEVO
-        return 'lector';
+        return 4;
     }
 
 }

@@ -14,5 +14,10 @@
         <button type="submit">Iniciar sesion</button>
 
     </form>
+    {{#error}}
+        <div class="w3-panel w3-pale-red w3-border w3-round w3-animate-bottom w3-display-bottommiddle" style='width: 50%;'>
+            <p class="w3-text-red">{{error}}</p>
+        </div>
+    {{/error}}
 </div>
 {{> footer}}

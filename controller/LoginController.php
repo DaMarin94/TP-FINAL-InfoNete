@@ -20,22 +20,27 @@ class LoginController{
         $username = $_POST["username"];
         $password  = $_POST["password"];
 
-        $this->model->alta($username, $password);
+        if($this->model->alta($username, $password)) {
+            if ($_SESSION['usuario'] == 4) {
+                Redirect::redirect('/noticias');
+            }
 
-        if($_SESSION['usuario'] == 'lector'){
-            Redirect::redirect('/noticias');
+            if ($_SESSION['usuario'] == 3) {
+                Redirect::redirect('/');
+            }
+
+            if ($_SESSION['usuario'] == 2) {
+                Redirect::redirect('/');
+            }
+
+            if ($_SESSION['usuario'] == 1) {
+                Redirect::redirect('/admin');
+            }
+        } else {
+            $data['error'] = "Revisa los datos de logueo";
+            $this->renderer->render("loginForm.mustache", $data);
         }
 
-        if($_SESSION['usuario'] == 'administrador'){
-            Redirect::redirect('/');
-        }
 
-        if($_SESSION['usuario'] == 'contenidista'){
-            Redirect::redirect('/');
-        }
-
-        if($_SESSION['usuario'] == 'editor'){
-            Redirect::redirect('/');
-        }
     }
 }

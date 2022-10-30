@@ -6,14 +6,14 @@ include_once("helper/Render.php");
 
 include_once("model/LoginModel.php");
 include_once("model/RegistroModel.php");
-include_once("model/NoticiasModel.php");
 include_once("model/ContenidistaModel.php");
+include_once("model/AdminModel.php");
 
 include_once("controller/InfoneteController.php");
 include_once("controller/LoginController.php");
 include_once("controller/RegistroController.php");
-include_once("controller/NoticiasController.php");
 include_once("controller/ContenidistaController.php");
+include_once("controller/AdminController.php");
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
@@ -40,12 +40,12 @@ class Configuration{
         return new RegistroController($this->view, $this->getRegistroModel());
     }
 
-    public function getNoticiasController(){
-        return new NoticiasController($this->view, $this->getNoticiasModel());
-    }
-
     public function getContenidistaController(){
         return new ContenidistaController($this->view, $this->getContenidistaModel());
+    }
+
+    public function getAdminController(){
+        return new AdminController($this->view, $this->getAdminModel());
     }
 
     public function getLoginModel(){
@@ -56,12 +56,12 @@ class Configuration{
         return new RegistroModel($this->database);
     }
 
-    public function getNoticiasModel(){
-        return new NoticiasModel($this->database);
-    }
-
     public function getContenidistaModel(){
         return new ContenidistaModel($this->database);
+    }
+
+    public function getAdminModel(){
+        return new AdminModel($this->database);
     }
 
     public function getRouter(){

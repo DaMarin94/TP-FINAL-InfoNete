@@ -10,4 +10,9 @@ class InfoneteController{
         $this->renderer->render('infonete.mustache');
     }
 
+    public function cerrarSesion(){
+        $_SESSION['usuario'] = null;
+        Redirect::redirect('/');
+    }
+
 }
