@@ -30,8 +30,9 @@ class ContenidistaController
         $imagen  = $_POST["imagen"];
         $contenido  = $_POST["contenido"];
 
+
         if($this->model->alta($titulo, $subtitulo, $imagen, $contenido)){
-            echo "bien";
+            Redirect::redirect("/infonete");
         };
     }
 }

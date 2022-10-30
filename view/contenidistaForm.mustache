@@ -1,26 +1,26 @@
 {{> header}}
 
-<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-    <h1>Nueva</h1>
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
+    <h1>Nueva Publicacion</h1>
     <form action="/contenidista/procesarAlta"  method="post">
         <div>
             <label for="titulo">Título:</label>
-            <input type="text" name="titulo">
+            <input class="w3-input w3-light-grey" type="text" name="titulo">
         </div>
-        <div>
+        <div class=>
             <label for="subtitulo">Subtítulo:</label>
-            <input type="text" name="subtitulo">
+            <input class="w3-input w3-light-grey" type="text" name="subtitulo">
         </div>
         <div>
             <label for="imagen">Imagen:</label>
-            <input type="file" name="imagen">
+            <input class="w3-input w3-center" type="file" name="imagen">
         </div>
         <div>
             <label for="contenido">Contenido:</label>
-            <textarea rows="4" cols="50" name="contenido"></textarea>
+            <textarea class="w3-input w3-light-grey" rows="4" cols="50" name="contenido"></textarea>
         </div>
 
-        <button type="submit">Enviar</button>
+        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
     </form>
 </div>
 
