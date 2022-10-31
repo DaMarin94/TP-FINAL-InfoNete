@@ -58,4 +58,19 @@ class AdminModel
 
     }
 
+    public function getUsuario($id){
+        $sql = "SELECT * FROM usuarios u JOIN passwords p ON u.password = p.id WHERE u.id = '$id'";
+        return $this->database->query($sql);
+    }
+
+    public function editUsuario($id, $name, $mail, $ubicacion, $role){
+        $sql = "UPDATE usuarios SET nombre = '$name', mail = '$mail', ubicacion = '$ubicacion', role = '$role' WHERE id = '$id'";
+        return $this->database->execute($sql);
+    }
+
+    public function deleteUsuario($id){
+        $sql = "DELETE FROM usuarios WHERE id = '$id'";
+        return $this->database->execute($sql);
+    }
+
 }
