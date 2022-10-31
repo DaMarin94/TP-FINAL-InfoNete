@@ -1,0 +1,21 @@
+{{> header}}
+
+<div class="w3-sidebar w3-bar-block w3-light-grey" style="z-index: 0">
+    <h3 class="w3-bar-item">Contenidista</h3>
+    <a href="/contenidista/producto" class="w3-bar-item w3-button w3-hover-teal">Crear producto</a>
+    <a href="/contenidista/seccion" class="w3-bar-item w3-button w3-hover-teal">Crear seccion</a>
+    <a href="/contenidista/edicion" class="w3-bar-item w3-button w3-hover-teal">Crear edicion</a>
+    <a href="/contenidista/noticia" class="w3-bar-item w3-button w3-hover-teal">Crear noticia</a>
+    <a href="/infonete/cerrarSesion" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-center w3-text-white w3-black">Cerrar Sesión</a>
+</div>
+
+<div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px; min-height: 70vh" id="band">
+
+        {{#formAltaProducto}}
+            {{> formAltaProducto}}
+        {{/formAltaProducto}}
+
+    </div>
+</div>
+
+{{> footer}}
