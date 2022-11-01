@@ -1,0 +1,23 @@
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
+    <h1>Agrega Seccion</h1>
+    <form action="/contenidista/procesarSeccion"  method="post">
+        <div>
+            <label for="edicion">Elegi una edicion:</label>
+            <select name="edicion" class="w3-input w3-light-grey w3-margin-top">
+              {{#listaEdiciones}}
+              <option value="{{id}}">{{edicion}}</option>
+              {{/listaEdiciones}}
+            </select>
+        </div>
+        <div class="w3-margin-top">
+            <label for="seccion">Elegi una seccion:</label>
+            <select name="seccion" class="w3-input w3-light-grey w3-margin-top">
+              {{#listaSecciones}}
+              <option value="{{id}}">{{descripcion}}</option>
+              {{/listaSecciones}}
+            </select>
+        </div>
+
+        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
+    </form>
+</div>

@@ -1,44 +1,19 @@
-<h1>Agregar nuevo usuario</h1>
-<form action="/contenidista/altaProducto"  method="post">
-<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
+    <h1>Nuevo Producto</h1>
+    <form action="/contenidista/procesarProducto"  method="post">
         <div>
-            <label for="name">Nombre: </label>
-            <input id="name" type="text" name="name" required>
+            <label for="nombre">Nombre:</label>
+            <input class="w3-input w3-light-grey w3-margin-top" type="text" name="nombre">
         </div>
-
-        <div>
-            <label for="username">Email: </label>
-            <input id="username" type="email" name="email" required>
-        </div>
-
-        <div>
-            <label for="password">Password: </label>
-            <input id="password" type="password" name="password" required>
-        </div>
-
-        <div>
-            <label for="ubicacion">Coordenadas de su ubicación: </label>
-            <input id="ubicacion" type="ubicacion" name="ubicacion" required>
-        </div>
-
-        <div>
-            <label for="role">Role</label>
-            <select class="w3-select w3-border" style="width: 50%;" name="role" required>
-                <option value="" disabled selected>Elegir role</option>
-                <option value="1">Administrador</option>
-                <option value="2">Editor</option>
-                <option value="3">Contenidista</option>
-                <option value="4">Lector</option>
+        <div class="w3-margin-top">
+            <label for="tipo">Tipo:</label>
+            <select name="tipo" class="w3-input w3-light-grey w3-margin-top">
+              {{#tipos}}
+              <option value="{{id}}">{{descripcion}}</option>
+              {{/tipos}}
             </select>
         </div>
 
-        <button type="submit">Enviar</button>
-
-        {{#error}}
-            <p>{{error}}</p>
-        {{/error}}
-
-
+        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
+    </form>
 </div>
-</form>

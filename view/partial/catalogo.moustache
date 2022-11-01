@@ -1,0 +1,23 @@
+{{> header}}
+
+    <div class="w3-container w3-center w3-padding-64" id="band">
+
+        <h1> InfoNete S.A.</h1>
+
+        <h1>Noticias</h1>
+
+        <div style="overflow-x:auto;">
+            <table class='w3-table'>
+                {{#contenido}}
+                    <td>
+                        <a class="w3-center" href="contenido?id={{id}}">
+                        <ul><img src="/images/{{imagen}}" width="400" height="400"></ul>
+                        <ul >{{titulo}}</ul>
+                        </a>
+                    </td>
+                {{/contenido}}
+            </table>
+        </div>
+    </div>
+
+{{> footer}}

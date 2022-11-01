@@ -2,20 +2,36 @@
     <h1>Nueva Publicacion</h1>
     <form action="/contenidista/procesarAlta"  method="post">
         <div>
+            <label for="edicion">Escoge la edicion:</label>
+            <select name="edicion" class="w3-input w3-light-grey w3-margin-top">
+              {{#listaEdiciones}}
+              <option value="{{id}}">{{edicion}}</option>
+              {{/listaEdiciones}}
+            </select>
+        </div>
+        <div class="w3-margin-top">
+            <label for="seccion">Seccion a la que pertenece:</label>
+            <select name="seccion" class="w3-input w3-light-grey w3-margin-top">
+              {{#listaSecciones}}
+              <option value="{{id}}">{{descripcion}}</option>
+              {{/listaSecciones}}
+            </select>
+        </div>
+        <div class="w3-margin-top">
             <label for="titulo">Título:</label>
-            <input class="w3-input w3-light-grey" type="text" name="titulo">
+            <input class="w3-input w3-light-grey w3-margin-top" type="text" name="titulo">
         </div>
-        <div class=>
+        <div class="w3-margin-top">
             <label for="subtitulo">Subtítulo:</label>
-            <input class="w3-input w3-light-grey" type="text" name="subtitulo">
+            <input class="w3-input w3-light-grey w3-margin-top" type="text" name="subtitulo">
         </div>
-        <div>
+        <div class="w3-margin-top">
             <label for="imagen">Imagen:</label>
-            <input class="w3-input w3-center" type="file" name="imagen">
+            <input class="w3-input w3-center w3-margin-top" type="file" name="imagen">
         </div>
-        <div>
+        <div class="w3-margin-top">
             <label for="contenido">Contenido:</label>
-            <textarea class="w3-input w3-light-grey" rows="4" cols="50" name="contenido"></textarea>
+            <textarea class="w3-input w3-light-grey w3-margin-top" rows="4" cols="50" name="contenido"></textarea>
         </div>
 
         <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>

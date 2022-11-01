@@ -2,10 +2,12 @@
 
 <div class="w3-sidebar w3-bar-block w3-light-grey" style="z-index: 0">
     <h3 class="w3-bar-item">Contenidista</h3>
-    <a href="/contenidista/producto" class="w3-bar-item w3-button w3-hover-teal">Crear producto</a>
-    <a href="/contenidista/seccion" class="w3-bar-item w3-button w3-hover-teal">Crear seccion</a>
-    <a href="/contenidista/edicion" class="w3-bar-item w3-button w3-hover-teal">Crear edicion</a>
-    <a href="/contenidista/noticia" class="w3-bar-item w3-button w3-hover-teal">Crear noticia</a>
+    <a href="/contenidista/formProducto" class="w3-bar-item w3-button w3-hover-teal">Crear producto</a>
+    <a href="/contenidista/formEdicion" class="w3-bar-item w3-button w3-hover-teal">Crear edicion</a>
+    <a href="/contenidista/formSeccion" class="w3-bar-item w3-button w3-hover-teal">Agregar seccion</a>
+    <a href="/contenidista/formNoticia" class="w3-bar-item w3-button w3-hover-teal">Crear noticia</a>
+    <a href="/contenidista/productos" class="w3-bar-item w3-button w3-hover-teal">Mis productos</a>
+    <a href="/contenidista/noticias" class="w3-bar-item w3-button w3-hover-teal">Mis noticias</a>
     <a href="/infonete/cerrarSesion" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-center w3-text-white w3-black">Cerrar Sesión</a>
 </div>
 
@@ -15,6 +17,29 @@
             {{> formAltaProducto}}
         {{/formAltaProducto}}
 
+        {{#formAgregarSeccion}}
+            {{> formAgregarSeccion}}
+        {{/formAgregarSeccion}}
+
+        {{#formAltaEdicion}}
+            {{> formAltaEdicion}}
+        {{/formAltaEdicion}}
+
+        {{#formAltaNoticia}}
+            {{> contenidistaForm}}
+        {{/formAltaNoticia}}
+
+        {{#productos}}
+            {{> contenidistaProductos}}
+        {{/productos}}
+
+        {{#noticias}}
+            {{> contenidistaNoticias}}
+        {{/noticias}}
+
+        {{#ediciones}}
+            {{> contenidistaEdiciones}}
+        {{/ediciones}}
     </div>
 </div>
 

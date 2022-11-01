@@ -1,0 +1,23 @@
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
+    <h1>Crear Edicion</h1>
+    <form action="/contenidista/procesarEdicion"  method="post">
+        <div>
+            <label for="edicion">Edicion:</label>
+            <input class="w3-input w3-light-grey w3-margin-top" type="text" name="edicion">
+        </div>
+        <div class="w3-margin-top"
+            <label for="precio">precio:</label>
+            <input class="w3-input w3-light-grey w3-margin-top" type="number" name="precio">
+        </div>
+        <div class="w3-margin-top">
+            <label for="producto">Producto:</label>
+            <select name="producto" class="w3-input w3-light-grey w3-margin-top">
+              {{#listaProductos}}
+              <option value="{{id}}">{{nombre}}</option>
+              {{/listaProductos}}
+            </select>
+        </div>
+
+        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
+    </form>
+</div>
