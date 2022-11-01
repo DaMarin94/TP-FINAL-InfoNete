@@ -51,7 +51,7 @@ class ContenidistaController
         $tipo = $_POST["tipo"];
 
         if($this->model->altaProducto($nombre, $tipo)){
-            Redirect::redirect("productos");
+            Redirect::redirect("misproductos");
         }
     }
 
@@ -67,8 +67,7 @@ class ContenidistaController
         $seccion = $_POST["seccion"];
 
         if($this->model->altaSeccion($edicion, $seccion)){
-            $data['exito'] = "Seccion agregada con exito";
-            $this->renderer->render('contenidista.mustache', $data);
+            Redirect::redirect("edicion?id=$edicion");
         }
     }
 
@@ -84,28 +83,39 @@ class ContenidistaController
         $producto = $_POST["producto"];
 
         if($this->model->altaEdicion($edicion, $precio, $producto)){
-            Redirect::redirect("ediciones");
+            Redirect::redirect("producto?id=$producto");
         }
     }
 
-    public function noticias()
+    public function misnoticias()
     {
         $data['noticias'] = true;
         $data['listaNoticias'] = $this->model->getNoticias();
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function productos()
+    public function misproductos()
     {
         $data['productos'] = true;
         $data['listaProductos'] = $this->model->getProductos();
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function ediciones()
+    public function edicion()
+    {
+        $data['edicion'] = true;
+        $idEdicion = $_GET['id'];
+        $data['nombre'] = $this->model->getNombreEdicionById($idEdicion);
+        $data['listaSecciones'] = $this->model->getSeccionesByEdicion($idEdicion);
+        $this->renderer->render('contenidista.mustache', $data);
+    }
+
+    public function producto()
     {
         $data['ediciones'] = true;
-        $data['listaEdiciones'] = $this->model->getEdiciones();
+        $idProducto = $_GET['id'];
+        $data['nombre'] = $this->model->getNombreProductoById($idProducto);
+        $data['listaEdiciones'] = $this->model->getEdicionesByProducto($idProducto);
         $this->renderer->render('contenidista.mustache', $data);
     }
 }

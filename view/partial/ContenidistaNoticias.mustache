@@ -1,9 +1,9 @@
 <div class="contAddUser">
     <h1>Mis noticias</h1>
 </div>
-<table class='w3-table w3-striped w3-hoverable'>
+<table class='w3-table w3-striped'>
     <thead>
-    <tr class="w3-light-grey">
+    <tr class="w3-dark-grey">
         <th>Id</th>
         <th>Titulo</th>
         <th>Estado</th>
@@ -15,7 +15,10 @@
             <td>{{id}}</td>
             <td>{{titulo}}</td>
             <td>{{estado}}</td>
-            <td><a href="../contenido?id={{id}}" class="w3-button w3-right w3-teal">Ver noticia</a></td>
+            <td>
+            <a href="../contenido?id={{id}}" class="w3-button w3-black w3-round-large">Ver noticia</a>
+            <a href="../contenidoEditar?id={{id}}" class="w3-button w3-black w3-round-large">Editar</a>
+            </td>
         </tr>
     {{/listaNoticias}}
 </table>

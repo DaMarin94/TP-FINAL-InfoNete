@@ -52,8 +52,23 @@ class ContenidistaModel
         return $this->database->query($sql);
     }
 
+    public function getNombreProductoById($idProducto){
+        $sql = "SELECT nombre FROM producto WHERE id = '$idProducto'";
+        return $this->database->query($sql);
+    }
+
     public function getEdiciones(){
         $sql = "SELECT * FROM edicion";
+        return $this->database->query($sql);
+    }
+
+    public function getNombreEdicionById($idEdicion){
+        $sql = "SELECT edicion FROM edicion WHERE id = '$idEdicion'";
+        return $this->database->query($sql);
+    }
+
+    public function getEdicionesByProducto($idProducto){
+        $sql = "SELECT * FROM edicion WHERE producto = '$idProducto'";
         return $this->database->query($sql);
     }
 
@@ -61,4 +76,12 @@ class ContenidistaModel
         $sql = "SELECT * FROM seccion";
         return $this->database->query($sql);
     }
+
+    public function getSeccionesByEdicion($idEdicion){
+        $sql = "SELECT s.descripcion FROM seccion s JOIN edicion_seccion es ON s.id = es.seccion 
+                                                    JOIN edicion e ON e.id = es.edicion 
+                                                    WHERE e.id = '$idEdicion'";
+        return $this->database->query($sql);
+    }
+
 }
