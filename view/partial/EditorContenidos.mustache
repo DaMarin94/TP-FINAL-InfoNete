@@ -1,5 +1,5 @@
 <div class="contAddUser">
-    <h1>Mis ediciones</h1>
+    <h1>Contenidos Pendientes</h1>
 </div>
 
         {{#exito}}
@@ -16,17 +16,20 @@
         <th>Subtítulo</th>
         <th>Contenido</th>
         <th>Imagen</th>
+        <th>Estado</th>
         <th>Acciones</th>
     </tr>
     </thead>
-    {{#listaProductos}}
+    {{#listaContenidosPendientes}}
         <tr>
             <td>{{id}}</td>
             <td>{{titulo}}</td>}
             <td>{{subtitulo}}</td>
             <td>{{contenido}}</td>
             <td>{{imagen}}</td>
-            <td><a href="producto?id={{id}}" class="w3-button w3-black w3-round-large">Ver producto</a></td>
+            <td>{{estado}}</td>
+            <td><!--<a href="../contenidoedit?id={{id}}" class="w3-button w3-black w3-round-large">Ver contenido</a>-->
+            <a href="#" class="w3-button w3-black w3-round-large">Ver contenido</a></td>
         </tr>
-    {{/listaProductos}}
+    {{/listaContenidosPendientes}}
 </table>

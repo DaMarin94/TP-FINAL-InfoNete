@@ -14,4 +14,5 @@ class EditorModel
         $sql = "SELECT * FROM contenido";
         return $this->database->query($sql);
     }
+
 }

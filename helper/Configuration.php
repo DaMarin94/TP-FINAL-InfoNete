@@ -83,11 +83,19 @@ class Configuration{
     }
 
     public function getEditorController(){
-        return new EditorController($this->view, $this->getAdminModel());
+        return new EditorController($this->view, $this->getEditorModel());
     }
 
     public function getEditorModel(){
         return new EditorModel($this->database);
+    }
+
+    public function getContenidoeditController(){
+        return new ContenidoEditController($this->view, $this->getContenidoEditModel());
+    }
+
+    public function getContenidoEditModel(){
+        return new ContenidoEditModel($this->database);
     }
 
     public function getRouter(){
