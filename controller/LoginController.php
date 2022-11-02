@@ -17,6 +17,7 @@ class LoginController{
         $password  = $_POST["password"];
 
         if($this->model->alta($username, $password)) {
+
             switch($_SESSION['usuario'][0]['role']){
                 case 4:
                     $_SESSION['usuario']['roleName'] = 'admin';

@@ -1,0 +1,17 @@
+<div class="w3-margin-top">
+    <h1 class="w3-container w3-teal">{{#producto}}{{nombre}}{{/producto}}</h1>
+    <h2 class="w3-black">Ediciones</h2>
+</div>
+
+<div style="overflow-x:auto;">
+    <table class='w3-table w3-display-middle'>
+        {{#listaEdiciones}}
+            <td>
+                <a class="w3-center" href="edicion?id={{id}}&ids=null">
+                <ul class="w3-ul"><img src="/images/{{imagen}}" width="300" height="400"></ul>
+                <ul class="w3-ul w3-padding-top-24">{{edicion}}</ul>
+                </a>
+            </td>
+        {{/listaEdiciones}}
+    </table>
+</div>
