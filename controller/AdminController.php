@@ -10,7 +10,7 @@ class AdminController{
     }
 
     public function list(){
-        if(!Router::checkAuth([1])){
+        if(!Router::checkAuth([4])){
             Redirect::redirect('/');
         };
         $data['productos'] = true;

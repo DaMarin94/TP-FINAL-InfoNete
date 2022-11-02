@@ -14,7 +14,7 @@ class ContenidistaController
 
     public function list()
     {
-        if(!Router::checkAuth([3])){
+        if(!Router::checkAuth([2])){
             Redirect::redirect('/');
         };
         $data['noticias'] = true;

@@ -17,20 +17,20 @@ class LoginController{
         $password  = $_POST["password"];
 
         if($this->model->alta($username, $password)) {
-            switch($_SESSION['usuario']['role']){
-                case 1:
+            switch($_SESSION['usuario'][0]['role']){
+                case 4:
                     $_SESSION['usuario']['roleName'] = 'admin';
                     Redirect::redirect('/admin');
                     break;
-                case 2:
+                case 3:
                     $_SESSION['usuario']['roleName'] = 'editor';
                     Redirect::redirect('/editor');
                     break;
-                case 3:
+                case 2:
                     $_SESSION['usuario']['roleName'] = 'contenidista';
                     Redirect::redirect('/contenidista');
                     break;
-                case 4:
+                case 1:
                     $_SESSION['usuario']['roleName'] = 'lector';
                     Redirect::redirect('/lector');
                     break;

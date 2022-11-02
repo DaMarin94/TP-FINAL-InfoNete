@@ -21,13 +21,16 @@ class LoginModel
             $roleAcomparar = $result[0]['role'];
 
             if($mailAcomparar == $mail && $this->getPasswordValido($passAcomparar, $password)){
-                $_SESSION['usuario']['role'] = $roleAcomparar;
-                $_SESSION['usuario']['id'] = $result[0]['id'];
+                $_SESSION['usuario'] = $result;
                 return true;
             }
         }
 
         return false;
+
+    }
+
+    public function getRoleName($role){
 
     }
 

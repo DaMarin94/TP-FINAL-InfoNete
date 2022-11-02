@@ -15,17 +15,15 @@ class Render{
     }
 
     public function render($viewName , $datos = array() ){
-        $datos['usuario'] = $_SESSION['usuario'];
-        $datos[$this->setSessionData()] = $_SESSION['usuario'];
+        $datos['usuario'] = $this->getSessionData();
         $contentAsString =  file_get_contents($this->viewFolder . $viewName);
         echo $this->mustache->render($contentAsString, $datos);
     }
 
-    public function setSessionData() {
-        if($_SESSION['usuario']){
-            return $_SESSION['usuario']['roleName'];
+    public function getSessionData() {
+        if($_SESSION['usuario'] != null){
+            return $_SESSION['usuario'];
         }
-
         return null;
     }
 }

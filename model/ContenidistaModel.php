@@ -17,9 +17,11 @@ class ContenidistaModel
 
         $idMultimedia = $this->database->insert($multimediasql);
 
-        $sql = "INSERT INTO contenido (titulo, subtitulo, contenido, imagen, estado, seccion, edicion) VALUES('$titulo', '$subtitulo', '$contenido', '$idMultimedia', '$estado', '$seccion', '$edicion')";
+        $sql1 = "INSERT INTO contenido (titulo, subtitulo, contenido, imagen, estado) VALUES('$titulo', '$subtitulo', '$contenido', '$idMultimedia', '$estado')";
+        $noticia = $this->database->insert($sql1);
 
-        return $this->database->execute($sql);
+        $sql2 = "INSERT INTO edicion_seccion_noticia (edicion, seccion, noticia) VALUES('$edicion', '$seccion', '$noticia')";
+        return $this->database->execute($sql2);
     }
 
     public function altaProducto($nombre, $tipo){

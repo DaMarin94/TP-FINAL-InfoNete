@@ -34,7 +34,7 @@ class Router{
     }
 
     public static function checkAuth($autorizados){
-        return in_array($_SESSION['usuario']['role'], $autorizados);
+        return in_array($_SESSION['usuario'][0]['role'], $autorizados);
     }
 
 }

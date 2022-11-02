@@ -12,12 +12,12 @@ class InfoneteController {
     }
 
     public function list() {
-        $data["contenido"] = $this->model->getContenido();
+        $data['contenido'] = $this->model->getContenido();
         $this->renderer->render('infonete.mustache', $data);
     }
 
     public function cerrarSesion(){
-        $_SESSION['usuario'] = null;
+        session_destroy();
         Redirect::redirect('/login');
     }
 

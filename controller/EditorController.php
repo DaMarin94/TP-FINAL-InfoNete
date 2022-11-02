@@ -11,7 +11,7 @@ class EditorController
     }
 
     public function list(){
-        if(!Router::checkAuth([2])){
+        if(!Router::checkAuth([3])){
             Redirect::redirect('/');
         };
         $data['contenidos'] = true;
