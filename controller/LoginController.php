@@ -9,10 +9,6 @@ class LoginController{
         $this->model = $model;
     }
     public function list(){
-        echo "nada";
-    }
-
-    public function alta(){
         echo $this->renderer->render("loginForm.mustache");
     }
 
@@ -21,20 +17,26 @@ class LoginController{
         $password  = $_POST["password"];
 
         if($this->model->alta($username, $password)) {
-            if ($_SESSION['usuario'] == 1) {
-                Redirect::redirect('/lector');
-            }
-
-            if ($_SESSION['usuario'] == 2) {
-                Redirect::redirect('/contenidista');
-            }
-
-            if ($_SESSION['usuario'] == 3) {
-                Redirect::redirect('/editor');
-            }
-
-            if ($_SESSION['usuario'] == 4) {
-                Redirect::redirect('/admin');
+            switch($_SESSION['usuario']['role']){
+                case 1:
+                    $_SESSION['usuario']['roleName'] = 'admin';
+                    Redirect::redirect('/admin');
+                    break;
+                case 2:
+                    $_SESSION['usuario']['roleName'] = 'editor';
+                    Redirect::redirect('/editor');
+                    break;
+                case 3:
+                    $_SESSION['usuario']['roleName'] = 'contenidista';
+                    Redirect::redirect('/contenidista');
+                    break;
+                case 4:
+                    $_SESSION['usuario']['roleName'] = 'lector';
+                    Redirect::redirect('/lector');
+                    break;
+                default:
+                    Redirect::redirect('/');
+                    break;
             }
         } else {
             $data['error'] = "Revisa los datos de logueo";

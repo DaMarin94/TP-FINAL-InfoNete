@@ -1,5 +1,5 @@
 <?php
-include_once ("helper/Redirect.php");
+include_once("helper/Redirect.php");
 include_once("helper/MysqlDatabase.php");
 include_once("helper/Router.php");
 include_once("helper/Render.php");

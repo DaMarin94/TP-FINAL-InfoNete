@@ -18,7 +18,7 @@ class InfoneteController {
 
     public function cerrarSesion(){
         $_SESSION['usuario'] = null;
-        Redirect::redirect('/');
+        Redirect::redirect('/login');
     }
 
 }
