@@ -2,10 +2,10 @@
 
 <div class="w3-sidebar w3-bar-block w3-light-grey" style="z-index: 0">
     <h3 class="w3-bar-item">Contenidista</h3>
-    <a href="/contenidista/formProducto" class="w3-bar-item w3-button w3-hover-teal">Crear producto</a>
-    <a href="/contenidista/formEdicion" class="w3-bar-item w3-button w3-hover-teal">Crear edicion</a>
-    <a href="/contenidista/formSeccion" class="w3-bar-item w3-button w3-hover-teal">Agregar seccion</a>
-    <a href="/contenidista/formNoticia" class="w3-bar-item w3-button w3-hover-teal">Crear noticia</a>
+    <a href="/contenidista/formularioProducto" class="w3-bar-item w3-button w3-hover-teal">Crear producto</a>
+    <a href="/contenidista/formularioEdicion" class="w3-bar-item w3-button w3-hover-teal">Crear edicion</a>
+    <a href="/contenidista/formularioSeccion" class="w3-bar-item w3-button w3-hover-teal">Agregar seccion</a>
+    <a href="/contenidista/formularioNoticia" class="w3-bar-item w3-button w3-hover-teal">Crear noticia</a>
     <a href="/contenidista/misproductos" class="w3-bar-item w3-button w3-hover-teal">Mis productos</a>
     <a href="/contenidista/misnoticias" class="w3-bar-item w3-button w3-hover-teal">Mis noticias</a>
     <a href="/infonete/cerrarSesion" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-center w3-text-white w3-black">Cerrar Sesión</a>
@@ -14,19 +14,19 @@
 <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:70%; min-height: 75vh" id="band">
 
         {{#formAltaProducto}}
-            {{> formAltaProducto}}
+            {{> formularioProducto}}
         {{/formAltaProducto}}
 
         {{#formAgregarSeccion}}
-            {{> formAgregarSeccion}}
+            {{> formularioSeccion}}
         {{/formAgregarSeccion}}
 
         {{#formAltaEdicion}}
-            {{> formAltaEdicion}}
+            {{> formularioEdicion}}
         {{/formAltaEdicion}}
 
         {{#formAltaNoticia}}
-            {{> contenidistaForm}}
+            {{> formularioNoticia}}
         {{/formAltaNoticia}}
 
         {{#productos}}

@@ -22,14 +22,14 @@ class ContenidistaController
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function formNoticia(){
+    public function formularioNoticia(){
         $data['formAltaNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
         $data['listaSecciones'] = $this->model->getSecciones();
         echo $this->renderer->render("contenidista.mustache", $data);
     }
 
-    public function procesarAlta()
+    public function procesarNoticia()
     {
         $titulo = $_POST["titulo"];
         $subtitulo = $_POST["subtitulo"];
@@ -43,7 +43,7 @@ class ContenidistaController
         };
     }
 
-    public function formProducto(){
+    public function formularioProducto(){
         $data['formAltaProducto'] = true;
         $data['tipos'] = $this->model->getTipos();
         $this->renderer->render('contenidista.mustache', $data);
@@ -53,28 +53,19 @@ class ContenidistaController
         $nombre = $_POST["nombre"];
         $tipo = $_POST["tipo"];
 
-        if($this->model->altaProducto($nombre, $tipo)){
+        $imagen =  $_FILES['portada']['name'];
+        $portada = $_FILES['portada']['tmp_name'];
+
+        if(!empty($nombre) && !empty($tipo) && !empty($imagen)){
+            move_uploaded_file($portada, "public/images/".$imagen);
+            $this->model->altaProducto($nombre, $tipo, $imagen);
             Redirect::redirect("misproductos");
+        } else {
+            Redirect::redirect("formularioProducto");
         }
     }
 
-    public function formSeccion(){
-        $data['formAgregarSeccion'] = true;
-        $data['listaEdiciones'] = $this->model->getEdiciones();
-        $data['listaSecciones'] = $this->model->getSecciones();
-        $this->renderer->render('contenidista.mustache', $data);
-    }
-
-    public function procesarSeccion(){
-        $edicion = $_POST["edicion"];
-        $seccion = $_POST["seccion"];
-
-        if($this->model->altaSeccion($edicion, $seccion)){
-            Redirect::redirect("edicion?id=$edicion");
-        }
-    }
-
-    public function formEdicion(){
+    public function formularioEdicion(){
         $data['formAltaEdicion'] = true;
         $data['listaProductos'] = $this->model->getProductos();
         $this->renderer->render('contenidista.mustache', $data);
@@ -85,8 +76,32 @@ class ContenidistaController
         $precio = $_POST["precio"];
         $producto = $_POST["producto"];
 
-        if($this->model->altaEdicion($edicion, $precio, $producto)){
+        $imagen =  $_FILES['portada']['name'];
+        $portada = $_FILES['portada']['tmp_name'];
+
+        if(!empty($edicion) && !empty($precio) && !empty($producto) && !empty($imagen)){
+            move_uploaded_file($portada, "public/images/".$imagen);
+            $this->model->altaEdicion($edicion, $precio, $producto, $imagen);
             Redirect::redirect("producto?id=$producto");
+        } else {
+            Redirect::redirect("formularioEdicion");
+        }
+    }
+
+    public function formularioSeccion(){
+        $data['formAgregarSeccion'] = true;
+        $data['listaEdiciones'] = $this->model->getEdiciones();
+        $data['listaSecciones'] = $this->model->getSecciones();
+        $this->renderer->render('contenidista.mustache', $data);
+    }
+
+    public function procesarSeccion(){
+        $edicion = $_POST["edicion"];
+        $seccion = $_POST["seccion"];
+
+        if(!empty($edicion) && !empty($seccion)){
+            $this->model->altaSeccion($edicion, $seccion);
+            Redirect::redirect("edicion?id=$edicion");
         }
     }
 

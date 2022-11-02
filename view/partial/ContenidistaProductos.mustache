@@ -1,5 +1,5 @@
 <div class="contAddUser">
-    <h1>Mis productos</h1>
+    <h1>Productos</h1>
 </div>
 
         {{#exito}}
@@ -13,6 +13,7 @@
     <tr class="w3-dark-grey">
         <th>Id</th>
         <th>nombre</th>
+        <th>Portada</th>
         <th>Acciones</th>
     </tr>
     </thead>
@@ -20,6 +21,7 @@
         <tr>
             <td>{{id}}</td>
             <td>{{nombre}}</td>
+            <td>{{portada}}</td>
             <td><a href="producto?id={{id}}" class="w3-button w3-black w3-round-large">Ver producto</a></td>
         </tr>
     {{/listaProductos}}

@@ -21,7 +21,7 @@ class Render{
     }
 
     public function getSessionData() {
-        if($_SESSION['usuario'] != null){
+        if(isset($_SESSION['usuario'])){
             return $_SESSION['usuario'];
         }
         return null;

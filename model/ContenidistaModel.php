@@ -24,13 +24,13 @@ class ContenidistaModel
         return $this->database->execute($sql2);
     }
 
-    public function altaProducto($nombre, $tipo){
-        $sql = "INSERT INTO producto (nombre, tipo) VALUES ('$nombre', '$tipo')";
+    public function altaProducto($nombre, $tipo, $portada){
+        $sql = "INSERT INTO producto (nombre, tipo, portada) VALUES ('$nombre', '$tipo', '$portada')";
         return $this->database->execute($sql);
     }
 
-    public function altaEdicion($edicion, $precio, $producto){
-        $sql = "INSERT INTO edicion (edicion, precio, producto) VALUES ('$edicion', '$precio', '$producto')";
+    public function altaEdicion($edicion, $precio, $producto, $portada){
+        $sql = "INSERT INTO edicion (edicion, precio, producto, portada) VALUES ('$edicion', '$precio', '$producto', '$portada')";
         return $this->database->execute($sql);
     }
 
