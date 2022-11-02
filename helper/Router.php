@@ -33,4 +33,8 @@ class Router{
         return "get" . ucfirst($controllerName) . "Controller"; // ucfirst -> convierte la primera letra en mayuscula
     }
 
+    public static function checkAuth($autorizados){
+        return in_array($_SESSION['usuario'][0]['role'], $autorizados);
+    }
+
 }

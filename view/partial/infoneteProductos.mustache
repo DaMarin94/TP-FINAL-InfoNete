@@ -1,0 +1,17 @@
+<div class="w3-margin-top">
+    <h1 class="w3-container w3-teal w3-center">Catalogo</h1>
+    <h2 class="w3-black">Productos</h2>
+</div>
+
+    <div style="overflow-x:auto;">
+        <table class='w3-table w3-display-middle'>
+            {{#listaProductos}}
+                <td>
+                    <a class="w3-center" href="infonete/producto?id={{id}}">
+                    <ul class="w3-ul"><img src="/images/{{imagen}}" width="300" height="400"></ul>
+                    <ul class="w3-ul w3-padding-top-24">{{nombre}}</ul>
+                    </a>
+                </td>
+            {{/listaProductos}}
+        </table>
+    </div>

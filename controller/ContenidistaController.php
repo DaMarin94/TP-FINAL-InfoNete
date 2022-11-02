@@ -14,6 +14,9 @@ class ContenidistaController
 
     public function list()
     {
+        if(!Router::checkAuth([2])){
+            Redirect::redirect('/');
+        };
         $data['noticias'] = true;
         $data['listaNoticias'] = $this->model->getNoticias();
         $this->renderer->render('contenidista.mustache', $data);
