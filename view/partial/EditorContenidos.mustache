@@ -1,0 +1,32 @@
+<div class="contAddUser">
+    <h1>Mis ediciones</h1>
+</div>
+
+        {{#exito}}
+        <div class="w3-panel w3-pale-green w3-border w3-round w3-animate-bottom w3-display-bottommiddle" style='width: 50%;'>
+            <p class="w3-text-green">{{exito}}</p>
+        </div>
+        {{/exito}}
+
+<table class='w3-table w3-striped'>
+    <thead>
+    <tr class="w3-dark-grey">
+        <th>Id</th>
+        <th>Titulo</th>
+        <th>Subtítulo</th>
+        <th>Contenido</th>
+        <th>Imagen</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    {{#listaProductos}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{titulo}}</td>}
+            <td>{{subtitulo}}</td>
+            <td>{{contenido}}</td>
+            <td>{{imagen}}</td>
+            <td><a href="producto?id={{id}}" class="w3-button w3-black w3-round-large">Ver producto</a></td>
+        </tr>
+    {{/listaProductos}}
+</table>
