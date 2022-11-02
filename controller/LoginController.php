@@ -22,7 +22,7 @@ class LoginController{
 
         if($this->model->alta($username, $password)) {
             if ($_SESSION['usuario'] == 1) {
-                Redirect::redirect('/lector');
+                Redirect::redirect('/catalogo/productos');
             }
 
             if ($_SESSION['usuario'] == 2) {
