@@ -33,7 +33,10 @@ class ContenidistaController
     {
         $titulo = $_POST["titulo"];
         $subtitulo = $_POST["subtitulo"];
-        $imagen  = $_POST["imagen"];
+
+        $imagen =  $_FILES['portada']['name'];
+        $portada = $_FILES['portada']['tmp_name'];
+
         $contenido  = $_POST["contenido"];
         $seccion = $_POST["seccion"];
         $edicion = $_POST["edicion"];

@@ -38,6 +38,26 @@ class InfoneteController {
         $this->renderer->render('infonete.mustache', $data);
     }
 
+    public function iraPerfil(){
+        switch($_SESSION['usuario'][0]['role']){
+            case 4:
+                Redirect::redirect('/admin');
+                break;
+            case 3:
+                Redirect::redirect('/editor');
+                break;
+            case 2:
+                Redirect::redirect('/contenidista');
+                break;
+            case 1:
+                Redirect::redirect('/lector');
+                break;
+            default:
+                Redirect::redirect('/');
+                break;
+        }
+    }
+
     public function cerrarSesion(){
         session_destroy();
         Redirect::redirect('/login');

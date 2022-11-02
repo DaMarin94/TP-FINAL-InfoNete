@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2022 a las 22:06:25
+-- Tiempo de generación: 03-11-2022 a las 00:30:02
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -61,8 +61,24 @@ CREATE TABLE `edicion` (
   `id` int(7) NOT NULL,
   `edicion` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `precio` double NOT NULL,
-  `producto` int(7) NOT NULL
+  `producto` int(7) NOT NULL,
+  `portada` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `edicion`
+--
+
+INSERT INTO `edicion` (`id`, `edicion`, `precio`, `producto`, `portada`) VALUES
+(1, 'Edicion 43', 700, 1, 'edicion123232.jpg'),
+(2, 'Edicion 26', 900, 1, 'edicion45434.jpg'),
+(3, 'Edicion 45', 400, 1, 'edicion12232443.jpg'),
+(4, 'Edicion 2', 450, 2, 'nacion.750.jpg'),
+(5, 'Edicion 3', 250, 2, 'CANqr6uU8AAjcsk.jpg'),
+(6, 'Edicion 4', 580, 2, 'nacion.7450 (1).jpg'),
+(7, 'Edicion 2', 500, 3, '62aa1caa563bc.png'),
+(8, 'Edicion 6', 660, 3, '62aa8c7361a7d.jpeg'),
+(9, 'Edicion 1', 990, 3, '62e395a6a9ecb.png');
 
 -- --------------------------------------------------------
 
@@ -74,6 +90,17 @@ CREATE TABLE `edicion_seccion` (
   `edicion` int(7) NOT NULL,
   `seccion` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `edicion_seccion`
+--
+
+INSERT INTO `edicion_seccion` (`edicion`, `seccion`) VALUES
+(1, 5),
+(1, 1),
+(1, 2),
+(1, 4),
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -119,8 +146,18 @@ INSERT INTO `passwords` (`id`, `clave`, `verificado`, `vencimiento`) VALUES
 CREATE TABLE `producto` (
   `id` int(7) NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `tipo` int(7) NOT NULL
+  `tipo` int(7) NOT NULL,
+  `portada` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre`, `tipo`, `portada`) VALUES
+(1, 'Clarin', 1, 'clarin.jpg'),
+(2, 'La nacion', 1, 'lanacion.jpg'),
+(3, 'Pronto', 2, 'pronto.png');
 
 -- --------------------------------------------------------
 
@@ -308,7 +345,7 @@ ALTER TABLE `contenido_multimedia`
 -- AUTO_INCREMENT de la tabla `edicion`
 --
 ALTER TABLE `edicion`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `passwords`
@@ -320,7 +357,7 @@ ALTER TABLE `passwords`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `role`
