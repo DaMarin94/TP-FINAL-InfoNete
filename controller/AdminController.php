@@ -10,6 +10,9 @@ class AdminController{
     }
 
     public function list(){
+        if(!Router::checkAuth([1])){
+            Redirect::redirect('/');
+        };
         $data['productos'] = true;
         $this->renderer->render('admin.mustache', $data);
     }
@@ -83,7 +86,7 @@ class AdminController{
     public function deleteUsuario(){
         $id = $_GET["id"];
 
-//        $this->model->deleteUsuario($id);
+        $this->model->deleteUsuario($id);
 
         Redirect::redirect('/admin/usuarios');
     }

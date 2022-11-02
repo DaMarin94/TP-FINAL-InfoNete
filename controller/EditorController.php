@@ -11,6 +11,9 @@ class EditorController
     }
 
     public function list(){
+        if(!Router::checkAuth([3])){
+            Redirect::redirect('/');
+        };
         $data['contenidos'] = true;
         $data['listaContenidosPendientes'] = $this->model->getContenidos();
         $this->renderer->render("editor.mustache", $data);
