@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2022 a las 00:30:02
+-- Tiempo de generación: 05-11-2022 a las 02:20:26
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -36,6 +36,14 @@ CREATE TABLE `contenido` (
   `estado` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `contenido`
+--
+
+INSERT INTO `contenido` (`id`, `titulo`, `subtitulo`, `contenido`, `imagen`, `estado`) VALUES
+(1, 'Boca vs Racing por el Trofeo de Campeones: cuándo y dónde se juega la última final del año', 'La Academia le ganó a Tigre y definirá el torneo contra el Xeneize, en una especie de revancha a 10 ', 'Boca y Racing definirán el Trofeo de Campeones. La Academia le ganó a Tigre en la cancha de Huracán por 3-2 luego de irse al entretiempo 0-2, en una remontada que terminó de completarse en el segundo tiempo del alargue, gracias a un cabezazo heroico de Gabriel Hauche.', 1, 'pendiente'),
+(2, 'El Gobierno dijo que eliminar las PASO no es prioridad y Alberto Fernández avisa que no incluirá el ', 'La portavoz Gabriela Cerruti dijo que \"hay una ley vigente, que es buena\" y que el Ejecutivo quiere ', 'En la previa a lo que será el discurso de Cristina Kirchner y de la cumbre de Máximo Kirchner con el peronismo bonaerense, Alberto Fernández reafirmó su postura en torno a la eliminación de las PASO. A través de la portavoz Gabriela Cerruti, defendió la ley impulsada en 2009 por Néstor Kirchner y promulgada por la actual vicepresidenta y advirtió que no es una \"prioridad\" suspenderlas.\r\n\r\nEsto último no sólo implica una dura respuesta al kirchnerismo, al que le pidió que en el Congreso aprueba el proyecto de Renta Inesperada, agitado por el oficialismo con el supuesto objetivo de redistribuir las riquezas obtenidas por las empresas debido a la pandemia y la invasión de Rusia a Ucrania, sino un aviso clave de cara a lo que resta del año legislativo: aunque no lo hizo público, el Presidente ya tomó la decisión de no incluir la iniciativa para suspender las primarias dentro del temario previsto para las sesiones extraordinarias.', 2, 'pendiente');
+
 -- --------------------------------------------------------
 
 --
@@ -44,12 +52,20 @@ CREATE TABLE `contenido` (
 
 CREATE TABLE `contenido_multimedia` (
   `id` int(7) NOT NULL,
-  `multimedia` varchar(150) DEFAULT NULL,
-  `multimedia2` varchar(150) DEFAULT NULL,
-  `multimedia3` varchar(150) DEFAULT NULL,
-  `multimedia4` varchar(150) DEFAULT NULL,
-  `multimedia5` varchar(150) DEFAULT NULL
+  `imagen1` varchar(150) DEFAULT NULL,
+  `imagen2` varchar(150) DEFAULT NULL,
+  `imagen3` varchar(150) DEFAULT NULL,
+  `audio` varchar(150) DEFAULT NULL,
+  `video` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `contenido_multimedia`
+--
+
+INSERT INTO `contenido_multimedia` (`id`, `imagen1`, `imagen2`, `imagen3`, `audio`, `video`) VALUES
+(1, '/imagen.png', '', '', '', ''),
+(2, 'maxresdefault (1).jpg', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -113,6 +129,14 @@ CREATE TABLE `edicion_seccion_noticia` (
   `seccion` int(11) NOT NULL,
   `noticia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `edicion_seccion_noticia`
+--
+
+INSERT INTO `edicion_seccion_noticia` (`edicion`, `seccion`, `noticia`) VALUES
+(1, 1, 1),
+(1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -333,13 +357,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `contenido`
 --
 ALTER TABLE `contenido`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `contenido_multimedia`
 --
 ALTER TABLE `contenido_multimedia`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `edicion`

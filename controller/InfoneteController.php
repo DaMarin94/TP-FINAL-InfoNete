@@ -31,9 +31,12 @@ class InfoneteController {
 
         $data['idEdicion'] = $idEdicion;
         $data['edicion'] = $this->model->getEdicionPorId($idEdicion);
+        $data['contenido'] = $this->model->getContenidoPorEdicionSeccion($idEdicion, $idSeccion);
         $data['listaSecciones'] = $this->model->getSeccionesPorEdicion($idEdicion);
 
-        $data['contenido'] = $this->model->getContenidoPorEdicionSeccion($idEdicion, $idSeccion);
+        if($data['contenido'] != null){
+            $data['multimedia'] = $this->model->getMultimedia($data['contenido'][0]['imagen']);
+        }
 
         $this->renderer->render('infonete.mustache', $data);
     }
