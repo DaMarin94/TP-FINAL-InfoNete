@@ -392,11 +392,7 @@ ALTER TABLE `contenido`
 -- AUTO_INCREMENT de la tabla `contenido_multimedia`
 --
 ALTER TABLE `contenido_multimedia`
-<<<<<<< HEAD:config/infonete (2).sql
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-=======
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
->>>>>>> 17c17c4c9fb3ca07c847e0671140e4b17130e4a4:config/infonete.sql
 
 --
 -- AUTO_INCREMENT de la tabla `edicion`

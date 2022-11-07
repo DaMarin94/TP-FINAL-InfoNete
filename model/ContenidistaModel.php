@@ -11,7 +11,7 @@ class ContenidistaModel
     }
 
     public function altaNoticia($titulo, $subtitulo, $imagen, $contenido, $seccion, $edicion){
-        $estado = "pendiente";
+        $estado = 2;
         $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video) VALUES('$imagen', '', '', '', '')";
         $idMultimedia = $this->database->insert($multimediasql);
 
