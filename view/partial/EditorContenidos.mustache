@@ -1,12 +1,6 @@
 <div class="contAddUser">
-    <h1>Contenidos Pendientes</h1>
+    <h1>Nuevos Contenidos</h1>
 </div>
-
-        {{#exito}}
-        <div class="w3-panel w3-pale-green w3-border w3-round w3-animate-bottom w3-display-bottommiddle" style='width: 50%;'>
-            <p class="w3-text-green">{{exito}}</p>
-        </div>
-        {{/exito}}
 
 <table class='w3-table w3-striped'>
     <thead>
@@ -22,14 +16,13 @@
     </thead>
     {{#listaContenidosPendientes}}
         <tr>
-            <td>{{id}}</td>
+            <td>{{id}}</td> <!--ME ESTA TRAYENDO EL ID DE ESTADO, NO DEL CONTENIDO-->
             <td>{{titulo}}</td>}
             <td>{{subtitulo}}</td>
             <td>{{contenido}}</td>
             <td>{{imagen}}</td>
-            <td>{{estado}}</td>
-            <td><!--<a href="../contenidoedit?id={{id}}" class="w3-button w3-black w3-round-large">Ver contenido</a>-->
-            <a href="#" class="w3-button w3-black w3-round-large">Ver contenido</a></td>
+            <td>{{descripcion}}</td>
+            <td><a href="../contenidoedit?id={{id}}" class="w3-button w3-black w3-round-large">Ver contenido</a>
         </tr>
     {{/listaContenidosPendientes}}
 </table>

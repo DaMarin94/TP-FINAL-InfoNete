@@ -11,6 +11,7 @@ include_once("model/AdminModel.php");
 include_once("model/InfoneteModel.php");
 include_once("model/ContenidoModel.php");
 include_once("model/EditorModel.php");
+include_once("model/ContenidoEditModel.php");
 
 include_once("controller/InfoneteController.php");
 include_once("controller/LoginController.php");
@@ -19,6 +20,7 @@ include_once("controller/ContenidistaController.php");
 include_once("controller/AdminController.php");
 include_once("controller/ContenidoController.php");
 include_once("controller/EditorController.php");
+include_once("controller/ContenidoEditController.php");
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 

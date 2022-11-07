@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2022 a las 00:30:02
+-- Tiempo de generación: 07-11-2022 a las 02:50:58
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Versión de PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,8 +33,16 @@ CREATE TABLE `contenido` (
   `subtitulo` varchar(100) NOT NULL,
   `contenido` text NOT NULL,
   `imagen` int(7) NOT NULL,
-  `estado` varchar(30) NOT NULL
+  `estado` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `contenido`
+--
+
+INSERT INTO `contenido` (`id`, `titulo`, `subtitulo`, `contenido`, `imagen`, `estado`) VALUES
+(1, 'TEST 1', 'TEST 1', 'TEST 1', 1, 1),
+(2, 'TEST 2', 'TEST 2', 'TEST 2', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -50,6 +58,13 @@ CREATE TABLE `contenido_multimedia` (
   `multimedia4` varchar(150) DEFAULT NULL,
   `multimedia5` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `contenido_multimedia`
+--
+
+INSERT INTO `contenido_multimedia` (`id`, `multimedia`, `multimedia2`, `multimedia3`, `multimedia4`, `multimedia5`) VALUES
+(1, 'imagen.jpg', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -113,6 +128,26 @@ CREATE TABLE `edicion_seccion_noticia` (
   `seccion` int(11) NOT NULL,
   `noticia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado`
+--
+
+CREATE TABLE `estado` (
+  `id` int(7) NOT NULL,
+  `descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estado`
+--
+
+INSERT INTO `estado` (`id`, `descripcion`) VALUES
+(1, 'Nuevo'),
+(2, 'Verificado'),
+(3, 'Revision');
 
 -- --------------------------------------------------------
 
@@ -256,7 +291,8 @@ INSERT INTO `usuarios` (`id`, `nombre`, `mail`, `password`, `ubicacion`, `estado
 --
 ALTER TABLE `contenido`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `imagen` (`imagen`);
+  ADD KEY `imagen` (`imagen`),
+  ADD KEY `estado` (`estado`);
 
 --
 -- Indices de la tabla `contenido_multimedia`
@@ -285,6 +321,12 @@ ALTER TABLE `edicion_seccion_noticia`
   ADD KEY `fk_edicion` (`edicion`),
   ADD KEY `fk_seccion` (`seccion`),
   ADD KEY `fk_noticia` (`noticia`);
+
+--
+-- Indices de la tabla `estado`
+--
+ALTER TABLE `estado`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `passwords`
@@ -333,19 +375,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `contenido`
 --
 ALTER TABLE `contenido`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `contenido_multimedia`
 --
 ALTER TABLE `contenido_multimedia`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `edicion`
 --
 ALTER TABLE `edicion`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `estado`
+--
+ALTER TABLE `estado`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `passwords`
@@ -391,7 +439,8 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `contenido`
 --
 ALTER TABLE `contenido`
-  ADD CONSTRAINT `contenido_ibfk_1` FOREIGN KEY (`imagen`) REFERENCES `contenido_multimedia` (`id`);
+  ADD CONSTRAINT `contenido_ibfk_1` FOREIGN KEY (`imagen`) REFERENCES `contenido_multimedia` (`id`),
+  ADD CONSTRAINT `contenido_ibfk_2` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`);
 
 --
 -- Filtros para la tabla `edicion`

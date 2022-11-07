@@ -19,4 +19,11 @@ class ContenidoEditModel
         $sql = "SELECT * FROM contenido WHERE id = '".$id."' ";
         return $this->database->query($sql);
     }
+
+    public function alta($id, $estado) {
+
+        $sql = "UPDATE contenido SET estado = '$estado' WHERE id='$id'";
+
+        return $this->database->execute($sql);
+    }
 }
