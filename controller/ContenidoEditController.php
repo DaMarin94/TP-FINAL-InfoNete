@@ -16,4 +16,13 @@ class ContenidoEditController
         $data["contenidoEdit"] = $this->model->getContenidoPorId($id);
         $this->renderer->render('contenidoedit.mustache', $data);
     }
+
+    public function alta() {
+        $id = $_GET["id"];
+        $estado = $_GET["estado"];
+
+        if($this->model->alta($id, $estado)) {
+            Redirect::redirect('/editor/misContenidos');
+        }
+    }
 }

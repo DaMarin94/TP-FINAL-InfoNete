@@ -1,11 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+
 -- Tiempo de generación: 05-11-2022 a las 02:20:26
+
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Versión de PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +35,7 @@ CREATE TABLE `contenido` (
   `subtitulo` varchar(100) NOT NULL,
   `contenido` text NOT NULL,
   `imagen` int(7) NOT NULL,
-  `estado` varchar(30) NOT NULL
+  `estado` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -41,8 +43,8 @@ CREATE TABLE `contenido` (
 --
 
 INSERT INTO `contenido` (`id`, `titulo`, `subtitulo`, `contenido`, `imagen`, `estado`) VALUES
-(1, 'Boca vs Racing por el Trofeo de Campeones: cuándo y dónde se juega la última final del año', 'La Academia le ganó a Tigre y definirá el torneo contra el Xeneize, en una especie de revancha a 10 ', 'Boca y Racing definirán el Trofeo de Campeones. La Academia le ganó a Tigre en la cancha de Huracán por 3-2 luego de irse al entretiempo 0-2, en una remontada que terminó de completarse en el segundo tiempo del alargue, gracias a un cabezazo heroico de Gabriel Hauche.', 1, 'pendiente'),
-(2, 'El Gobierno dijo que eliminar las PASO no es prioridad y Alberto Fernández avisa que no incluirá el ', 'La portavoz Gabriela Cerruti dijo que \"hay una ley vigente, que es buena\" y que el Ejecutivo quiere ', 'En la previa a lo que será el discurso de Cristina Kirchner y de la cumbre de Máximo Kirchner con el peronismo bonaerense, Alberto Fernández reafirmó su postura en torno a la eliminación de las PASO. A través de la portavoz Gabriela Cerruti, defendió la ley impulsada en 2009 por Néstor Kirchner y promulgada por la actual vicepresidenta y advirtió que no es una \"prioridad\" suspenderlas.\r\n\r\nEsto último no sólo implica una dura respuesta al kirchnerismo, al que le pidió que en el Congreso aprueba el proyecto de Renta Inesperada, agitado por el oficialismo con el supuesto objetivo de redistribuir las riquezas obtenidas por las empresas debido a la pandemia y la invasión de Rusia a Ucrania, sino un aviso clave de cara a lo que resta del año legislativo: aunque no lo hizo público, el Presidente ya tomó la decisión de no incluir la iniciativa para suspender las primarias dentro del temario previsto para las sesiones extraordinarias.', 2, 'pendiente');
+(1, 'Boca vs Racing por el Trofeo de Campeones: cuándo y dónde se juega la última final del año', 'La Academia le ganó a Tigre y definirá el torneo contra el Xeneize, en una especie de revancha a 10 ', 'Boca y Racing definirán el Trofeo de Campeones. La Academia le ganó a Tigre en la cancha de Huracán por 3-2 luego de irse al entretiempo 0-2, en una remontada que terminó de completarse en el segundo tiempo del alargue, gracias a un cabezazo heroico de Gabriel Hauche.', 1, 2),
+(2, 'El Gobierno dijo que eliminar las PASO no es prioridad y Alberto Fernández avisa que no incluirá el ', 'La portavoz Gabriela Cerruti dijo que \"hay una ley vigente, que es buena\" y que el Ejecutivo quiere ', 'En la previa a lo que será el discurso de Cristina Kirchner y de la cumbre de Máximo Kirchner con el peronismo bonaerense, Alberto Fernández reafirmó su postura en torno a la eliminación de las PASO. A través de la portavoz Gabriela Cerruti, defendió la ley impulsada en 2009 por Néstor Kirchner y promulgada por la actual vicepresidenta y advirtió que no es una \"prioridad\" suspenderlas.\r\n\r\nEsto último no sólo implica una dura respuesta al kirchnerismo, al que le pidió que en el Congreso aprueba el proyecto de Renta Inesperada, agitado por el oficialismo con el supuesto objetivo de redistribuir las riquezas obtenidas por las empresas debido a la pandemia y la invasión de Rusia a Ucrania, sino un aviso clave de cara a lo que resta del año legislativo: aunque no lo hizo público, el Presidente ya tomó la decisión de no incluir la iniciativa para suspender las primarias dentro del temario previsto para las sesiones extraordinarias.', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -137,6 +139,26 @@ CREATE TABLE `edicion_seccion_noticia` (
 INSERT INTO `edicion_seccion_noticia` (`edicion`, `seccion`, `noticia`) VALUES
 (1, 1, 1),
 (1, 2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado`
+--
+
+CREATE TABLE `estado` (
+  `id` int(7) NOT NULL,
+  `descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estado`
+--
+
+INSERT INTO `estado` (`id`, `descripcion`) VALUES
+(1, 'Nuevo'),
+(2, 'Verificado'),
+(3, 'Revision');
 
 -- --------------------------------------------------------
 
@@ -280,7 +302,8 @@ INSERT INTO `usuarios` (`id`, `nombre`, `mail`, `password`, `ubicacion`, `estado
 --
 ALTER TABLE `contenido`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `imagen` (`imagen`);
+  ADD KEY `imagen` (`imagen`),
+  ADD KEY `estado` (`estado`);
 
 --
 -- Indices de la tabla `contenido_multimedia`
@@ -309,6 +332,12 @@ ALTER TABLE `edicion_seccion_noticia`
   ADD KEY `fk_edicion` (`edicion`),
   ADD KEY `fk_seccion` (`seccion`),
   ADD KEY `fk_noticia` (`noticia`);
+
+--
+-- Indices de la tabla `estado`
+--
+ALTER TABLE `estado`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `passwords`
@@ -363,13 +392,23 @@ ALTER TABLE `contenido`
 -- AUTO_INCREMENT de la tabla `contenido_multimedia`
 --
 ALTER TABLE `contenido_multimedia`
+<<<<<<< HEAD:config/infonete (2).sql
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+=======
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+>>>>>>> 17c17c4c9fb3ca07c847e0671140e4b17130e4a4:config/infonete.sql
 
 --
 -- AUTO_INCREMENT de la tabla `edicion`
 --
 ALTER TABLE `edicion`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `estado`
+--
+ALTER TABLE `estado`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `passwords`
@@ -415,7 +454,8 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `contenido`
 --
 ALTER TABLE `contenido`
-  ADD CONSTRAINT `contenido_ibfk_1` FOREIGN KEY (`imagen`) REFERENCES `contenido_multimedia` (`id`);
+  ADD CONSTRAINT `contenido_ibfk_1` FOREIGN KEY (`imagen`) REFERENCES `contenido_multimedia` (`id`),
+  ADD CONSTRAINT `contenido_ibfk_2` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`);
 
 --
 -- Filtros para la tabla `edicion`

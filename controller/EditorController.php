@@ -15,18 +15,19 @@ class EditorController
             Redirect::redirect('/');
         };
         $data['contenidos'] = true;
-        $data['listaContenidosPendientes'] = $this->model->getContenidos();
+        $data['listaContenidos'] = $this->model->getContenidos();
         $this->renderer->render("editor.mustache", $data);
     }
 
     public function misContenidos(){
-        $data['contenidos'] = true;
-        $data['listaContenidosPendientes'] = $this->model->getContenidos();
+        $data['miscontenidos'] = true;
+        $data['listaContenidosPendientes'] = $this->model->getContenidosNuevos();
         $this->renderer->render('editor.mustache', $data);
     }
 
     public function reportes(){
         $data['reportes'] = true;
-        echo $this->renderer->render('editor.mustache', $data);
+        $data['listaContenidosReportes'] = $this->model->getContenidosReportados();
+        $this->renderer->render('editor.mustache', $data);
     }
 }
