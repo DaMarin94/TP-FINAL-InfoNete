@@ -13,7 +13,12 @@ class ContenidoEditController
 
     public function list() {
         $id = $_GET["id"];
+        $data['contenidoEdit'] = true;
+        $data['reportesEdit'] = true;
+        $data['tipos'] = true;
         $data["contenidoEdit"] = $this->model->getContenidoPorId($id);
+        $data["reportesEdit"] = $this->model->getReportesEdit($id);
+        $data['tipos'] = $this->model->getTipos();
         $this->renderer->render('contenidoedit.mustache', $data);
     }
 

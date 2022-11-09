@@ -33,10 +33,10 @@
                                 <th>Estado</th>
                                 <td>
                                     <select name="estado" id="estado">
-                                        <option value="">Seleccione</option>
-                                        <option value="1">Sin publicar</option>
-                                        <option value="2">Publicado</option>
-                                        <option value="3">Revision</option>
+                                        {{#tipos}}
+                                            <option value="{{id}}">{{descripcion}}</option>
+                                        {{/tipos}}
+
                                     </select>
                                 </td>
                              </tr>
@@ -44,7 +44,9 @@
                                 <th>Comentarios</th>
                                     <td>
                                         <textarea name="comentario" rows="7" cols="50">
-
+                                            {{#reportesEdit}}
+                                                {{comentarios}}
+                                            {{/reportesEdit}}
                                         </textarea>
                                     </td>
                              </tr>
