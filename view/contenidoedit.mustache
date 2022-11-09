@@ -7,6 +7,7 @@
 
                <form action="contenidoedit/alta">
                    <input id="id" name="id" type="hidden" value="{{id}}">
+                   <input id="id" name="contenidista" type="hidden" value="{{c_id}}">
                    <table class="w3-table w3-grey">
                            <tr>
                                <th>Titulo</th>
@@ -22,18 +23,30 @@
                             </tr>
                              <tr>
                                 <th>Imagen</th>
-                                <td>{{imagen}}</td>
+                                <td><img src="../public/images/{{imagen}}" width="400" height="300"/></td>
                              </tr>
+                             <tr>
+                                <th>Contenidista</th>
+                                <td>{{contenidista}}</td>
+                            </tr>
                              <tr>
                                 <th>Estado</th>
                                 <td>
                                     <select name="estado" id="estado">
                                         <option value="">Seleccione</option>
-                                        <option value="1">Nueva</option>
-                                        <option value="2">Verificado</option>
+                                        <option value="1">Sin publicar</option>
+                                        <option value="2">Publicado</option>
                                         <option value="3">Revision</option>
                                     </select>
                                 </td>
+                             </tr>
+                             <tr>
+                                <th>Comentarios</th>
+                                    <td>
+                                        <textarea name="comentario" rows="7" cols="50">
+
+                                        </textarea>
+                                    </td>
                              </tr>
                    </table>
                    <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>

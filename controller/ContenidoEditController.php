@@ -20,9 +20,13 @@ class ContenidoEditController
     public function alta() {
         $id = $_GET["id"];
         $estado = $_GET["estado"];
+        $comentario = $_GET["comentario"];
+        $contenidista = $_GET["contenidista"];
 
-        if($this->model->alta($id, $estado)) {
+        if($this->model->alta($id, $contenidista, $comentario, $estado)){
             Redirect::redirect('/editor/misContenidos');
+        }else{
+            Redirect::redirect('/editor');
         }
     }
 }
