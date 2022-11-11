@@ -2,11 +2,21 @@
 
 <div class="w3-sidebar w3-bar-block w3-light-grey" style="z-index: 0">
     <h3 class="w3-bar-item">Administrador</h3>
-    <a href="/admin/productos" class="w3-bar-item w3-button w3-hover-teal">Productos</a>
+    <button class="w3-button w3-block w3-left-align" onclick="myAccFunc()">
+        Contenido <i class="fa fa-caret-down"></i>
+    </button>
+    <div id="demoAcc" class="w3-hide w3-white w3-card">
+        <a href="/admin/productos" class="w3-bar-item w3-button w3-hover-grey">Productos</a>
+        <a href="/admin/ediciones" class="w3-bar-item w3-button w3-hover-grey">Ediciones</a>
+        <a href="/admin/contenidos" class="w3-bar-item w3-button w3-hover-grey">Contenidos</a>
+    </div>
     <a href="/admin/usuarios" class="w3-bar-item w3-button w3-hover-teal">Usuarios</a>
     <a href="/admin/reportes" class="w3-bar-item w3-button w3-hover-teal">Reportes</a>
     <a href="/infonete/cerrarSesion" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-center w3-text-white w3-black">Cerrar Sesión</a>
 </div>
+
+<!-- Page content -->
+<div class="w3-content contentWrap" style="max-width:2000px; padding-left: 200px">
 
 <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:800px; min-height: 70vh" id="band">
 
@@ -23,37 +33,35 @@
         {{> AdminReportes}}
     {{/reportes}}
 
-<!--    <h1>Administrador</h1>-->
-<!--    <div class="accesos">-->
-<!--        <div>-->
-<!--            <a href="/admin/productos">-->
-<!--                <button class="w3-button w3-teal botonAdmin">-->
-<!--                    Productos-->
-<!--                </button>-->
-<!--            </a>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <a href="/admin/contenidistas">-->
-<!--                <button class="w3-button w3-teal botonAdmin">-->
-<!--                    Contenidistas y Editores-->
-<!--                </button>-->
-<!--            </a>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <a href="/admin/usuarios">-->
-<!--                <button class="w3-button w3-teal botonAdmin">-->
-<!--                    Usuarios-->
-<!--                </button>-->
-<!--            </a>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <a href="/admin/reportes">-->
-<!--                <button class="w3-button w3-teal botonAdmin">-->
-<!--                    Reportes-->
-<!--                </button>-->
-<!--            </a>-->
-<!--        </div>-->
     </div>
 </div>
+
+<script>
+
+    //funciones para Acordeon del menu
+    function myAccFunc() {
+        var x = document.getElementById("demoAcc");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-teal";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+            x.previousElementSibling.className =
+                    x.previousElementSibling.className.replace(" w3-teal", "");
+        }
+    }
+
+    function myDropFunc() {
+        var x = document.getElementById("demoDrop");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-green";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+            x.previousElementSibling.className =
+                    x.previousElementSibling.className.replace(" w3-green", "");
+        }
+    }
+</script>
 
 {{> footer}}

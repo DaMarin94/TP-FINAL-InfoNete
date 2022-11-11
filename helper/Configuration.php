@@ -3,6 +3,7 @@ include_once("helper/Redirect.php");
 include_once("helper/MysqlDatabase.php");
 include_once("helper/Router.php");
 include_once("helper/Render.php");
+include_once('helper/PdfGen.php');
 
 include_once("model/LoginModel.php");
 include_once("model/RegistroModel.php");
@@ -21,7 +22,6 @@ include_once("controller/AdminController.php");
 include_once("controller/ContenidoController.php");
 include_once("controller/EditorController.php");
 include_once("controller/ContenidoEditController.php");
-
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
 
@@ -29,10 +29,12 @@ class Configuration{
 
     private $database;
     private $view;
+    private $pdfGenerator;
 
     public function __construct(){
         $this->database = new MysqlDatabase();
         $this->view = new Render("view/", "view/partial/");
+        $this->pdfGenerator = new PdfGen();
     }
 
     public function getInfoneteController(){
@@ -77,7 +79,7 @@ class Configuration{
     }
 
     public function getAdminController(){
-        return new AdminController($this->view, $this->getAdminModel());
+        return new AdminController($this->view, $this->getAdminModel(), $this->pdfGenerator);
     }
 
     public function getAdminModel(){

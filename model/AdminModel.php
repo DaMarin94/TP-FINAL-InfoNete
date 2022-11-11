@@ -10,6 +10,11 @@ class AdminModel
         $this->database = $database;
     }
 
+    public function getProductos(){
+        $sql = "SELECT p.id, p. nombre, p.portada, t.descripcion as tipo FROM producto p join tipo t on p.tipo = t.id";
+        return $this->database->query($sql);
+    }
+
     public function getUsuarios(){
         $usuarios = [];
         $sql = "SELECT * FROM usuarios";
@@ -34,6 +39,16 @@ class AdminModel
                 return $rol['descripcion'];
             };
         }
+    }
+
+    public function getRoles(){
+        $sql = "SELECT * FROM role";
+        return $this->database->query($sql);
+    }
+
+    public function getContenidistas(){
+        $sql = "SELECT * FROM usuarios WHERE role = 2";
+        return $this->database->query($sql);
     }
 
     public function altaUsuario($name, $mail, $password, $ubicacion, $role){
