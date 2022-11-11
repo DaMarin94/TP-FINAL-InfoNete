@@ -24,12 +24,8 @@
 
         <div>
             <label for="role">Role</label>
-            <select class="w3-select w3-light-grey" name="role" required>
+            <select class="w3-select w3-light-grey" name="role" id="roles" required>
                 <option value="" disabled selected>Elegir role</option>
-                <option value="1">Administrador</option>
-                <option value="2">Editor</option>
-                <option value="3">Contenidista</option>
-                <option value="4">Lector</option>
             </select>
         </div>
 
@@ -42,3 +38,20 @@
 
 </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        muestraRoles()
+    });
+
+    function muestraRoles() {
+        $.ajax({
+            url:   '/admin/loadRoles',
+            type:  'get',
+            success:  function (response) {
+                // console.log(response);
+                $("#roles").append(response);
+            }
+        });
+    }
+</script>

@@ -26,4 +26,9 @@ class Render{
         }
         return null;
     }
+
+    public function getHtml($viewName , $datos = array() ){
+        $contentAsString =  file_get_contents($this->viewFolder . $viewName);
+        return $this->mustache->render($contentAsString, $datos);
+    }
 }

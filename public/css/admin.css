@@ -15,3 +15,13 @@
     padding: 10px;
     justify-content: space-between;
 }
+
+.w3-table td {
+    vertical-align: unset!important;
+}
+
+.botonReportes {
+    width: 100%;
+    height: 60px;
+    padding: 18px 0px;
+}
