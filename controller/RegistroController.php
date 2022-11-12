@@ -20,11 +20,10 @@ class RegistroController{
         $name = $_POST["name"];
         $email = $_POST["email"];
         $password  = $_POST["password"];
-        $residencia  = $_POST["residencia"];
+        $latitud = $_POST["latitud"];
+        $longitud = $_POST["longitud"];
 
-//         $this->model->alta($name, $email, $password, $residencia);
-
-        if($this->model->alta($name, $email, $password, $residencia)){
+        if($this->model->alta($name, $email, $password, $latitud, $longitud)){
             Redirect::redirect('/');
         }else{
             $data['error'] = "Error al registrarse";
@@ -32,4 +31,5 @@ class RegistroController{
         }
 
     }
+
 }
