@@ -36,7 +36,14 @@ class RegistroModel
 
     private function getRole(){
         //DEFINIMOS EL ROL PARA CUALQUIER USUARIO NUEVO
-        return 4;
+        return 1;
+    }
+
+    public function altaCorreo($email){
+
+        $sql = "update usuarios set estado = 1 where mail = '$email' ";
+
+        return $this->database->execute($sql);
     }
 
 }
