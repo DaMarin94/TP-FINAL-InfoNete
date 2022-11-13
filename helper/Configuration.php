@@ -13,6 +13,7 @@ include_once("model/InfoneteModel.php");
 include_once("model/ContenidoModel.php");
 include_once("model/EditorModel.php");
 include_once("model/ContenidoEditModel.php");
+include_once("model/LectorModel.php");
 
 include_once("controller/InfoneteController.php");
 include_once("controller/LoginController.php");
@@ -22,6 +23,8 @@ include_once("controller/AdminController.php");
 include_once("controller/ContenidoController.php");
 include_once("controller/EditorController.php");
 include_once("controller/ContenidoEditController.php");
+include_once("controller/LectorController.php");
+
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
 
@@ -100,6 +103,14 @@ class Configuration{
 
     public function getContenidoEditModel(){
         return new ContenidoEditModel($this->database);
+    }
+
+    public function getLectorController(){
+        return new LectorController($this->view, $this->getLectorModel());
+    }
+
+    public function getLectorModel(){
+        return new LectorModel($this->database);
     }
 
     public function getRouter(){

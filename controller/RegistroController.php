@@ -68,7 +68,7 @@ class RegistroController
         //Definimos el remitente (dirección y, opcionalmente, nombre)
         $mail->SetFrom('infonete@gmail.com', 'Infonete');
         //Y, ahora sí, definimos el destinatario (dirección y, opcionalmente, nombre)
-        $mail->AddAddress('progweb2.2022@gmail.com', 'usuario');
+        $mail->AddAddress('matias.abuin17@gmail.com', 'usuario');
         //Definimos el tema del email
         $mail->Subject = 'Infonete: Verificacion de correo';
         //Definimos el cuerpo como html

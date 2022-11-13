@@ -56,4 +56,10 @@ class InfoneteModel {
         $sql = "SELECT * FROM contenido WHERE id = '$idContenido' ";
         return $this->database->query($sql);
     }
+
+    public function suscribirseProducto($idProducto,$usuario) {
+        $sql = "INSERT INTO suscripcion(usuario_id, producto_id, fechaVencimiento)
+                VALUES($usuario, $idProducto, NOW() + INTERVAL 1  MONTH)";
+        return $this->database->query($sql);
+    }
 }

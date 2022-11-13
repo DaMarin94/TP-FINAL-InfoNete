@@ -24,6 +24,13 @@ class InfoneteController {
         $this->renderer->render('infonete.mustache', $data);
     }
 
+    public function suscribirse(){
+        $idProducto = $_GET['id'];
+        $usuario = $_SESSION['id_user'];
+
+        $this->model->suscribirseProducto($idProducto,$usuario);
+    }
+
     public function edicion(){
         $data['edicion'] = true;
         $idEdicion = $_GET['id'];
