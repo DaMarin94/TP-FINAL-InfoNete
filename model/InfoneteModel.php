@@ -34,10 +34,25 @@ class InfoneteModel {
         return $this->database->query($sql);
     }
 
-    public function getContenidoPorEdicionSeccion($idSeccion, $idEdicion) {
+    public function getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion) {
         $sql = "SELECT * FROM contenido c JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                        JOIN edicion e ON e.id = esn.edicion
+                                         JOIN suscripcion s ON s.producto_id = e.producto
+                                         JOIN usuarios u ON s.usuario_id = u.id
                 WHERE esn.edicion = '$idEdicion' 
-                AND esn.seccion = '$idSeccion'";
+                AND esn.seccion = '$idSeccion'
+                AND s.usuario_id = $usuario";
+        return $this->database->query($sql);
+    }
+
+    public function getContenidoCompradoPorEdicionSeccion($usuario, $idSeccion, $idEdicion) {
+        $sql = "SELECT * FROM contenido c JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                        JOIN edicion e ON e.id = esn.edicion
+                                         JOIN compra co ON co.edicion_id = e.id
+                                         JOIN usuarios u ON co.usuario_id = u.id
+                WHERE esn.edicion = '$idEdicion' 
+                AND esn.seccion = '$idSeccion'
+                AND co.usuario_id = $usuario";
         return $this->database->query($sql);
     }
 

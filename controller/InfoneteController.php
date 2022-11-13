@@ -36,12 +36,15 @@ class InfoneteController {
         $data['edicion'] = true;
         $idEdicion = $_GET['id'];
         $idSeccion= $_GET['ids'];
+        $usuario = $_SESSION['id_user'];
 
         $data['idEdicion'] = $idEdicion;
         $data['edicion'] = $this->model->getEdicionPorId($idEdicion);
         $data['listaSecciones'] = $this->model->getSeccionesPorEdicion($idEdicion);
 
-        $data['contenido'] = $this->model->getContenidoPorEdicionSeccion($idSeccion, $idEdicion);
+        $data['contenido'] = $this->model->getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
+
+        $data['contenido'] = $this->model->getContenidoCompradoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
 
         $this->renderer->render('infonete.mustache', $data);
     }
