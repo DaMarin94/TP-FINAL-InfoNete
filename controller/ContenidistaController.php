@@ -108,6 +108,19 @@ class ContenidistaController
         }
     }
 
+    public function ajaxSecciones(){
+        $edicion = $_GET["edicion"];
+        $seccionesDisponibles =  $this->model->getSeccionesFaltantesByEdicion($edicion);
+
+        echo "<label for='seccion'>Elegi una seccion:</label>";
+        echo "<select name='seccion' class='w3-input w3-light-grey w3-margin-top'>";
+        while($fila = mysqli_fetch_array($seccionesDisponibles))
+        {
+            echo "<option value='" . $fila["id"].  "'>" . $fila["descripcion"] . "</option>";
+        }
+        echo "</select>";
+    }
+
     public function misnoticias()
     {
         $data['noticias'] = true;

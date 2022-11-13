@@ -85,4 +85,11 @@ class ContenidistaModel
                                                     WHERE e.id = '$idEdicion'";
         return $this->database->query($sql);
     }
+
+    public function getSeccionesFaltantesByEdicion($idEdicion){
+        $sql = "SELECT * FROM seccion s JOIN edicion_seccion es ON s.id = es.seccion 
+                                                    JOIN edicion e ON e.id = es.edicion 
+                                                    WHERE e.id != '$idEdicion'";
+        return $this->database->query($sql);
+    }
 }
