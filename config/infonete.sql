@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2022 at 06:16 PM
+-- Generation Time: Nov 13, 2022 at 07:00 PM
 -- Server version: 8.0.29
 -- PHP Version: 8.1.6
 
@@ -31,7 +31,7 @@ CREATE TABLE `compra` (
   `id` int NOT NULL,
   `usuario_id` int NOT NULL,
   `edicion_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `compra`
@@ -48,13 +48,13 @@ INSERT INTO `compra` (`id`, `usuario_id`, `edicion_id`) VALUES
 
 CREATE TABLE `contenido` (
   `id` int NOT NULL,
-  `titulo` varchar(100) NOT NULL,
-  `subtitulo` varchar(100) NOT NULL,
-  `contenido` text NOT NULL,
+  `titulo` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `subtitulo` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `contenido` text COLLATE utf8mb4_general_ci NOT NULL,
   `imagen` int NOT NULL,
   `estado` int NOT NULL,
   `contenidista` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contenido`
@@ -73,12 +73,12 @@ INSERT INTO `contenido` (`id`, `titulo`, `subtitulo`, `contenido`, `imagen`, `es
 
 CREATE TABLE `contenido_multimedia` (
   `id` int NOT NULL,
-  `multimedia` varchar(150) DEFAULT NULL,
-  `multimedia2` varchar(150) DEFAULT NULL,
-  `multimedia3` varchar(150) DEFAULT NULL,
-  `multimedia4` varchar(150) DEFAULT NULL,
-  `multimedia5` varchar(150) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `multimedia` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `multimedia2` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `multimedia3` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `multimedia4` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `multimedia5` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contenido_multimedia`
@@ -96,12 +96,12 @@ INSERT INTO `contenido_multimedia` (`id`, `multimedia`, `multimedia2`, `multimed
 
 CREATE TABLE `edicion` (
   `id` int NOT NULL,
-  `edicion` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `edicion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `precio` double NOT NULL,
   `producto` int NOT NULL,
-  `portada` varchar(60) NOT NULL,
+  `portada` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `edicion`
@@ -127,7 +127,7 @@ INSERT INTO `edicion` (`id`, `edicion`, `precio`, `producto`, `portada`, `fecha`
 CREATE TABLE `edicion_seccion` (
   `edicion` int NOT NULL,
   `seccion` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `edicion_seccion`
@@ -151,7 +151,7 @@ CREATE TABLE `edicion_seccion_noticia` (
   `edicion` int NOT NULL,
   `seccion` int NOT NULL,
   `noticia` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `edicion_seccion_noticia`
@@ -171,8 +171,8 @@ INSERT INTO `edicion_seccion_noticia` (`edicion`, `seccion`, `noticia`) VALUES
 
 CREATE TABLE `estado` (
   `id` int NOT NULL,
-  `descripcion` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `descripcion` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `estado`
@@ -191,10 +191,10 @@ INSERT INTO `estado` (`id`, `descripcion`) VALUES
 
 CREATE TABLE `passwords` (
   `id` int NOT NULL,
-  `clave` char(60) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `verificado` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `clave` char(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `verificado` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `vencimiento` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `passwords`
@@ -249,10 +249,10 @@ INSERT INTO `passwords` (`id`, `clave`, `verificado`, `vencimiento`) VALUES
 
 CREATE TABLE `producto` (
   `id` int NOT NULL,
-  `nombre` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tipo` int NOT NULL,
-  `portada` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `portada` varchar(60) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `producto`
@@ -274,10 +274,10 @@ CREATE TABLE `reportes_editor` (
   `contenido` int NOT NULL,
   `id_contenidista` int NOT NULL,
   `id_editor` int NOT NULL,
-  `comentarios` text,
+  `comentarios` text COLLATE utf8mb4_general_ci,
   `estado` int NOT NULL,
   `fecha` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reportes_editor`
@@ -296,8 +296,8 @@ INSERT INTO `reportes_editor` (`id`, `contenido`, `id_contenidista`, `id_editor`
 
 CREATE TABLE `role` (
   `id` int NOT NULL,
-  `descripcion` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `descripcion` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role`
@@ -317,8 +317,8 @@ INSERT INTO `role` (`id`, `descripcion`) VALUES
 
 CREATE TABLE `seccion` (
   `id` int NOT NULL,
-  `descripcion` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `descripcion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `seccion`
@@ -343,7 +343,7 @@ CREATE TABLE `suscripcion` (
   `producto_id` int NOT NULL,
   `fechaAdquirido` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fechaVencimiento` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `suscripcion`
@@ -351,7 +351,8 @@ CREATE TABLE `suscripcion` (
 
 INSERT INTO `suscripcion` (`id`, `usuario_id`, `producto_id`, `fechaAdquirido`, `fechaVencimiento`) VALUES
 (49, 2, 1, '2022-11-01 16:20:38', '2022-12-13 16:20:38'),
-(50, 2, 2, '2022-11-13 16:24:11', '2022-12-13 16:24:11');
+(50, 2, 2, '2022-11-13 16:24:11', '2022-12-13 16:24:11'),
+(51, 2, 1, '2022-11-13 18:00:06', '2022-12-13 18:00:06');
 
 -- --------------------------------------------------------
 
@@ -361,8 +362,8 @@ INSERT INTO `suscripcion` (`id`, `usuario_id`, `producto_id`, `fechaAdquirido`, 
 
 CREATE TABLE `tipo` (
   `id` int NOT NULL,
-  `descripcion` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `descripcion` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tipo`
@@ -380,14 +381,14 @@ INSERT INTO `tipo` (`id`, `descripcion`) VALUES
 
 CREATE TABLE `usuarios` (
   `id` int NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `mail` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` int NOT NULL,
   `estado` int NOT NULL DEFAULT '0',
   `role` int NOT NULL,
   `latitud` double NOT NULL,
   `longitud` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usuarios`
@@ -579,7 +580,7 @@ ALTER TABLE `seccion`
 -- AUTO_INCREMENT for table `suscripcion`
 --
 ALTER TABLE `suscripcion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `tipo`
