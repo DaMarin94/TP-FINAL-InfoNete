@@ -22,6 +22,10 @@ class LectorController
 
         $data['ediciones'] = true;
         $data['listaEdicionesCompradas'] = $this->model->getEdicionesCompradas($usuario);
+
+        $data['comprasEdiciones'] = true;
+        $data['listaCompras'] = $this->model->getCompras($usuario);
+
         $this->renderer->render('lector.mustache', $data);
     }
 
@@ -45,9 +49,12 @@ class LectorController
         $usuario = $_SESSION['id_user'];
 
         $data['noticias'] = true;
+        $data['listaNoticiasSuscrito'] = $this->model->getNoticiasSuscrito($usuario);
+
+        $data['comprasNoticias'] = true;
         $data['listaNoticiasCompradas'] = $this->model->getNoticiasCompradas($usuario);
+
         $this->renderer->render('lector.mustache', $data);
     }
-
 
 }

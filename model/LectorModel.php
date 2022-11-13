@@ -25,7 +25,7 @@ class LectorModel
                                                 WHERE s.producto_id = p.id
                                                 AND p.id = e.producto
                                                 AND s.usuario_id = '$usuario'
-                                                AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento));";
+                                                AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento))";
         return $this->database->query($sql);
     }
 
@@ -36,7 +36,7 @@ class LectorModel
         return $this->database->query($sql);
     }
 
-    public function getNoticiasCompradas($usuario){
+    public function getNoticiasSuscrito($usuario){
 
         $sql = "SELECT * FROM contenido c JOIN edicion_seccion_noticia esn on esn.noticia = c.id
                                         JOIN edicion e ON e.id = esn.edicion
@@ -44,6 +44,26 @@ class LectorModel
                                         JOIN suscripcion s ON s.producto_id = p.id
                                         JOIN usuarios u ON u.id = s.usuario_id
                                         WHERE u.id = '$usuario'";
+        return $this->database->query($sql);
+    }
+
+    public function getNoticiasCompradas($usuario){
+
+        $sql = "SELECT * FROM contenido c JOIN edicion_seccion_noticia esn on esn.noticia = c.id
+                                        JOIN edicion e ON e.id = esn.edicion
+                                        JOIN compra co ON co.edicion_id = e.id
+                                        JOIN usuarios u ON u.id = co.usuario_id
+                                        WHERE u.id = '$usuario'";
+        return $this->database->query($sql);
+    }
+
+    public function getCompras($usuario){
+
+        $sql = "SELECT * FROM Edicion e
+                WHERE  EXISTS (SELECT 1
+                                FROM compra c
+                                WHERE c.edicion_id = e.id
+                                AND c.usuario_id = '$usuario')";
         return $this->database->query($sql);
     }
 }

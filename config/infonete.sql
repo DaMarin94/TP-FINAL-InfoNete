@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2022 at 03:33 PM
+-- Generation Time: Nov 13, 2022 at 06:16 PM
 -- Server version: 8.0.29
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `infonete`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compra`
+--
+
+CREATE TABLE `compra` (
+  `id` int NOT NULL,
+  `usuario_id` int NOT NULL,
+  `edicion_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `compra`
+--
+
+INSERT INTO `compra` (`id`, `usuario_id`, `edicion_id`) VALUES
+(1, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -89,7 +108,7 @@ CREATE TABLE `edicion` (
 --
 
 INSERT INTO `edicion` (`id`, `edicion`, `precio`, `producto`, `portada`, `fecha`) VALUES
-(1, 'Edicion 43', 700, 1, 'edicion123232.jpg', '2022-11-13 11:22:20'),
+(1, 'Edicion 43', 700, 1, 'edicion123232.jpg', '2022-11-01 11:22:20'),
 (2, 'Edicion 26', 900, 1, 'edicion45434.jpg', '2022-11-13 11:22:20'),
 (3, 'Edicion 45', 400, 1, 'edicion12232443.jpg', '2022-11-13 11:22:20'),
 (4, 'Edicion 2', 450, 2, 'nacion.750.jpg', '2022-11-13 11:22:20'),
@@ -119,7 +138,8 @@ INSERT INTO `edicion_seccion` (`edicion`, `seccion`) VALUES
 (1, 1),
 (1, 2),
 (1, 4),
-(1, 3);
+(1, 3),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -330,9 +350,8 @@ CREATE TABLE `suscripcion` (
 --
 
 INSERT INTO `suscripcion` (`id`, `usuario_id`, `producto_id`, `fechaAdquirido`, `fechaVencimiento`) VALUES
-(2, 2, 1, '2022-11-01 11:56:42', '2022-11-30 11:56:29'),
-(3, 2, 2, '2022-11-08 12:30:30', '2022-11-30 12:30:30'),
-(5, 37, 1, '2022-11-01 13:33:38', '2022-11-23 13:33:38');
+(49, 2, 1, '2022-11-01 16:20:38', '2022-12-13 16:20:38'),
+(50, 2, 2, '2022-11-13 16:24:11', '2022-12-13 16:24:11');
 
 -- --------------------------------------------------------
 
@@ -378,16 +397,19 @@ INSERT INTO `usuarios` (`id`, `nombre`, `mail`, `password`, `estado`, `role`, `l
 (1, 'admin', 'admin@admin', 2, 1, 4, 0, 0),
 (2, 'usuario', 'usuario@usuario.com', 3, 1, 1, 0, 0),
 (3, 'contenidista', 'contenidista@contenidista.com', 4, 1, 2, 0, 0),
-(4, 'editor', 'editor@editor', 5, 1, 3, 0, 0),
-(34, 'dsa', 'asdsad@dasasd.asasd', 35, 1, 4, -34.67214177645196, -58.56352314580046),
-(36, 'matias', 'masd@asd.asd', 37, 0, 1, -34.67567520156301, -58.56498814782136),
-(37, 'asd', 'asdasd@asda.asda', 38, 0, 1, -34.67320060375633, -58.56348023045622),
-(38, 'matias', 'asdasdasd@asdasdasd.asdasd', 39, 1, 1, -34.67017670523619, -58.56223854880055),
-(39, 'asdasd', 'asdasdasd@dasasd.asdasd', 40, 0, 1, -34.675212338344934, -58.560862394457686);
+(4, 'editor', 'editor@editor', 5, 1, 3, 0, 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `compra`
+--
+ALTER TABLE `compra`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `usuario` (`usuario_id`),
+  ADD KEY `edicion` (`edicion_id`);
 
 --
 -- Indexes for table `contenido`
@@ -494,6 +516,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT for table `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `contenido`
 --
 ALTER TABLE `contenido`
@@ -503,7 +531,7 @@ ALTER TABLE `contenido`
 -- AUTO_INCREMENT for table `contenido_multimedia`
 --
 ALTER TABLE `contenido_multimedia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `edicion`
@@ -551,7 +579,7 @@ ALTER TABLE `seccion`
 -- AUTO_INCREMENT for table `suscripcion`
 --
 ALTER TABLE `suscripcion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tipo`
@@ -568,6 +596,13 @@ ALTER TABLE `usuarios`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `compra`
+--
+ALTER TABLE `compra`
+  ADD CONSTRAINT `edicion` FOREIGN KEY (`edicion_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `contenido`
