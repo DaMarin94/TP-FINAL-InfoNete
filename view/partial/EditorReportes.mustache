@@ -3,22 +3,22 @@
 <table class='w3-table w3-striped'>
     <thead>
     <tr class="w3-dark-grey">
-        <th>Id</th>
-        <th>Titulo</th>
-        <th>Subtítulo</th>
-        <th>Contenido</th>
-        <th>Imagen</th>
+        <th>Reporte N°</th>
+        <th>Contenido N°</th>
+        <th>Contenidista</th>
+        <th>Comentarios</th>
         <th>Estado</th>
+        <th>Fecha</th>
     </tr>
     </thead>
     {{#listaContenidosReportes}}
         <tr>
-            <td>{{id}}</td>
-            <td>{{titulo}}</td>}
-            <td>{{subtitulo}}</td>
-            <td>{{contenido}}</td>
-            <td>{{imagen}}</td>
-            <td>{{descripcion}}</td>
+            <td>{{reporte}}</td>
+            <td>{{contenido}}</td>}
+            <td>{{mail}}</td>
+            <td>{{comentarios}}</td>
+            <td>{{estado}}</td>
+            <td>{{fecha}}</td>
         </tr>
     {{/listaContenidosReportes}}
 </table>

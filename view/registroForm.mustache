@@ -1,6 +1,7 @@
 {{> header}}
+<body onload="loadMap()">
 
-<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
+<div class="w3-container w3-content w3-center" style="max-width:500px ; height: 1100px" id="band">
     <h1>Registro</h1>
     <form action="/registro/procesarAlta"  method="post">
         <div>
@@ -17,10 +18,16 @@
           <label for="password">Password: </label>
           <input class="w3-input w3-light-grey" id="password" type="password" name="password" required>
         </div>
-
         <div>
-            <label for="ubicacion">Coordenadas de su ubicación: </label>
-            <input class="w3-input w3-light-grey" id="ubicacion" type="ubicacion" name="residencia" required>
+            <label  for="ubicacion">Click derecho en tu ubicacion: </label>
+            <div id="mapa" style="width:470px; height:400px;"></div>
+            <label  for="latitud">Latitud: </label>
+            <input type="text" class="w3-input w3-light-grey" id="latitud" name="latitud"
+                   pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" required>
+            <label  for="longitud">Longitud: </label>
+            <input type="text"  class="w3-input w3-light-grey" id="longitud" name="longitud"
+                   pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" required>
+
         </div>
 
         <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>

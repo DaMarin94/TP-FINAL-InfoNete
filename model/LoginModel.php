@@ -14,8 +14,8 @@ class LoginModel
         $sql = "SELECT u.id, u.mail, u.role, p.clave FROM usuarios u LEFT JOIN passwords p ON u.password = p.id WHERE u.mail = '$mail'";
 
         $result = $this->database->query($sql);
-
         if(count($result) > 0){
+            $_SESSION["id_user"] = $result[0]['id'];
             $mailAcomparar = $result[0]['mail'];
             $passAcomparar = $result[0]['clave'];
             $roleAcomparar = $result[0]['role'];

@@ -33,16 +33,15 @@ class ContenidistaController
     {
         $titulo = $_POST["titulo"];
         $subtitulo = $_POST["subtitulo"];
-        $imagen =  $_FILES['imagen']['name'];
-        $portada = $_FILES['imagen']['tmp_name'];
-        $contenido  = $_POST["contenido"];
 
+        $imagen =  $_FILES['portada']['name'];
+        $portada = $_FILES['portada']['tmp_name'];
+
+        $contenido  = $_POST["contenido"];
         $seccion = $_POST["seccion"];
         $edicion = $_POST["edicion"];
 
-        if(!empty($titulo) && !empty($subtitulo) && !empty($imagen) && !empty($contenido) && !empty($seccion) && !empty($edicion)){
-            move_uploaded_file($portada, "public/images/".$imagen);
-            $this->model->altaNoticia($titulo, $subtitulo, $imagen, $contenido, $seccion, $edicion);
+        if($this->model->altaNoticia($titulo, $subtitulo, $imagen, $contenido, $seccion, $edicion)){
             Redirect::redirect("noticias");
         };
     }
@@ -141,5 +140,3 @@ class ContenidistaController
         $this->renderer->render('contenidista.mustache', $data);
     }
 }
-
-

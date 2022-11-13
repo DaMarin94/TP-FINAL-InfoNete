@@ -56,9 +56,4 @@ class InfoneteModel {
         $sql = "SELECT * FROM contenido WHERE id = '$idContenido' ";
         return $this->database->query($sql);
     }
-
-    public function getMultimedia($idMultimedia){
-        $sql = "SELECT * FROM contenido_multimedia WHERE id = '$idMultimedia'" ;
-        return $this->database->query($sql);
-    }
 }

@@ -30,4 +30,10 @@ class EditorController
         $data['listaContenidosReportes'] = $this->model->getContenidosReportados();
         $this->renderer->render('editor.mustache', $data);
     }
+
+    public function verificar(){
+        $data['verificar'] = true;
+        $data['listaContenidosVerificar'] = $this->model->getVerificar();
+        $this->renderer->render('editor.mustache', $data);
+    }
 }

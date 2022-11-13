@@ -9,7 +9,7 @@ class RegistroModel
         $this->database = $database;
     }
 
-    public function alta($name, $mail, $password, $residencia){
+    public function alta($name, $mail, $password, $latitud, $longitud){
 
         //CREAMOS UN HASH PARA QUE LA CONTRASEÑA SEA SEGURA
         $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -28,7 +28,7 @@ class RegistroModel
         
         $passId = $this->database->insert($sqlPassword);
 
-        $sql = "INSERT INTO usuarios (nombre, mail, password,ubicacion, role, estado) VALUES('$name', '$mail', '$passId', '$residencia', '$role', 0)";
+        $sql = "INSERT INTO usuarios (nombre, mail, password, latitud, longitud, role, estado) VALUES('$name', '$mail', '$passId', '$latitud','$longitud', '$role', 0)";
 
         return $this->database->execute($sql);
 
@@ -36,7 +36,14 @@ class RegistroModel
 
     private function getRole(){
         //DEFINIMOS EL ROL PARA CUALQUIER USUARIO NUEVO
-        return 4;
+        return 1;
+    }
+
+    public function altaCorreo($email){
+
+        $sql = "update usuarios set estado = 1 where mail = '$email' ";
+
+        return $this->database->execute($sql);
     }
 
 }
