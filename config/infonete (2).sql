@@ -54,18 +54,18 @@ INSERT INTO `contenido` (`id`, `titulo`, `subtitulo`, `contenido`, `imagen`, `es
 
 CREATE TABLE `contenido_multimedia` (
   `id` int NOT NULL,
-  `multimedia` varchar(150) DEFAULT NULL,
-  `multimedia2` varchar(150) DEFAULT NULL,
-  `multimedia3` varchar(150) DEFAULT NULL,
-  `multimedia4` varchar(150) DEFAULT NULL,
-  `multimedia5` varchar(150) DEFAULT NULL
+  `imagen1` varchar(150) DEFAULT NULL,
+  `imagen2` varchar(150) DEFAULT NULL,
+  `imagen3` varchar(150) DEFAULT NULL,
+  `audio` varchar(150) DEFAULT NULL,
+  `video` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `contenido_multimedia`
 --
 
-INSERT INTO `contenido_multimedia` (`id`, `multimedia`, `multimedia2`, `multimedia3`, `multimedia4`, `multimedia5`) VALUES
+INSERT INTO `contenido_multimedia` (`id`, `imagen1`, `imagen2`, `imagen3`, `audio`, `video`) VALUES
 (1, '2cwwEDkT3_1256x620__1.jpg', NULL, NULL, NULL, NULL),
 (2, 'clarin.jpg', NULL, NULL, NULL, NULL);
 
@@ -186,40 +186,6 @@ INSERT INTO `passwords` (`id`, `clave`, `verificado`, `vencimiento`) VALUES
 (4, '$2y$10$Y4lCjNjDoFVOPsrEXuUxPOlAH1bL5oFQpaagFdq9ED.GzxLQZj7BS', '', '0000-00-00 00:00:00'),
 (5, '$2y$10$TXIFTVBwjdLZe5tH4ooOSuWLGzxJKSwPz5EIwM5/dl4RjeByPpLbe', '', '0000-00-00 00:00:00'),
 (6, '$2y$10$1AowJacGb8KioQ15IMHU0OK1gHDMEAFRarDfn4e.0GMv9oHc70/zO', '', '0000-00-00 00:00:00'),
-(7, '$2y$10$XIHF1n0pnSfHdb5qO8hF2ukc//4NJM/4NmLvvbQbGwf7lY5dm466m', '', '0000-00-00 00:00:00'),
-(8, '$2y$10$aXr/Fqvcc1q7cMu3T1lf..2xW7Jt3HfbkzjvUOZA4tdAbn09xtKvu', '', '0000-00-00 00:00:00'),
-(9, '$2y$10$CxeciIL9TSQo6Rp34Hj.1.Cu2vXFPBYtoTGOfob/iUZIBj4O6kPw.', '', '0000-00-00 00:00:00'),
-(10, '$2y$10$VJup581MPOnVe6tST0t18eDOUN393F48aSWiOXtpevA7mbmgm5u.y', '', '0000-00-00 00:00:00'),
-(11, '$2y$10$5Dr1jtQskH/Tlnbp6ADsI.vDPw13B9sdoJv/Z7XCSkAKzLHMt1AHa', '', '0000-00-00 00:00:00'),
-(12, '$2y$10$Yyba9JoesA9SZivRHwE1jOa53uikCrZxtUb35DowKxs3CNfi7/YXa', '', '0000-00-00 00:00:00'),
-(13, '$2y$10$8vLkzAa95IYfH8f8Sv61W.NRlbUWkldC6SXZgYP2BCYUVHENA3nM2', '', '0000-00-00 00:00:00'),
-(14, '$2y$10$k2NILLV67CGd7u8aLEOHmug8yJIREm9alc8M6/6rg5MoX0c8YUtAW', '', '0000-00-00 00:00:00'),
-(15, '$2y$10$.kBOClJBI4t80WyZJ9rJtOZb4keVJZIS6o/W3a/tkXxg4mbwuP/G.', '', '0000-00-00 00:00:00'),
-(16, '$2y$10$nmKHCqdrdhJedQJB8lq2zeDh/VARlrLzfczCHLQ2Tb.kDkZ0UoG4.', '', '0000-00-00 00:00:00'),
-(17, '$2y$10$tLCpFkxwsj9bptsYDRUVbOVs/EDgECnX4eKidgHU47FpVIAdXkwHa', '', '0000-00-00 00:00:00'),
-(18, '$2y$10$Ab6dfaKs7SMDunM55.s7Kun61XTGJffElkzDVM.cTa5cO500Bhuhe', '', '0000-00-00 00:00:00'),
-(19, '$2y$10$EF1AV6aI3L.GBH3c3que6Ox23kiOLvBREOk3HHoF.6.gOO.DtlVhW', '', '0000-00-00 00:00:00'),
-(20, '$2y$10$ZyXkxtrCRLPRPpYhrxviueAOuQ8NjP/EzaJ7NYJ/2tTDga0VsDyW.', '', '0000-00-00 00:00:00'),
-(21, '$2y$10$5TsJVrdgfDgg68rGApiaHuyaHMmCyQD5tuSOvL8Zdx.AfJlV6WppK', '', '0000-00-00 00:00:00'),
-(22, '$2y$10$LBpUdC3oGswSXmDtVZFsGOO01Rhh.bJE5v6n59oFSS8O5wjaI1/yS', '', '0000-00-00 00:00:00'),
-(23, '$2y$10$YFzMFSRezmrVRyceb6rr8.9xN6upCUFxuwkP31kImeRQwaDAPwdMm', '', '0000-00-00 00:00:00'),
-(24, '$2y$10$f4jNQHws.KhiFKXwE.YppOvIe5I0OyePNgiJCqPyHfjQDy8J1im0q', '', '0000-00-00 00:00:00'),
-(25, '$2y$10$9jZquBNW7WOchBNlKFr.CupIsPJ.14jph0OnrtPm0Wl9SwnUABO.y', '', '0000-00-00 00:00:00'),
-(26, '$2y$10$5DENiG8CPynmKUG6mrR45O5ANbwZESOx9OivTwXTwZaPwP1XTlbnO', '', '0000-00-00 00:00:00'),
-(27, '$2y$10$/SKCguiDuVeQzwhlesPVq.rX5fWhuoPokvSi9EsQ2JczKFGDt0/92', '', '0000-00-00 00:00:00'),
-(28, '$2y$10$F3A1XmNm3Y9h7DWRj4D.neF9U/amFNI5rbv.HtAOk/87ah2iMYShC', '', '0000-00-00 00:00:00'),
-(29, '$2y$10$alxrmy7r/3V7otBtjO6Jpepi.K4V7Hfh1duCUWxEKIFcNpp8/xrH2', '', '0000-00-00 00:00:00'),
-(30, '$2y$10$8osZb29mJcXT0c82dtVs5O4qSKZxngQss022Y1OHiriif68tKw8NK', '', '0000-00-00 00:00:00'),
-(31, '$2y$10$Vy1EKyqoQLNWPzmsYwp/A.lk8562Hud66NzxkJBdljEs.TMSBEJIS', '', '0000-00-00 00:00:00'),
-(32, '$2y$10$HL.IPhMTK9cXokAG4BZqxOUOXj3uwN.GGvXYUuzFApKxG0iIsMLIq', '', '0000-00-00 00:00:00'),
-(33, '$2y$10$kDvV8lo.HsPJSC8zdh.VqeTLLuD2FJxp1bgy.S.iXsTBLy6jwY0Ba', '', '0000-00-00 00:00:00'),
-(34, '$2y$10$ERiVBiraSDrY53fD/7V5yOjNgObx0eiTKZtZJ.kAoOmab0aMqAgTO', '', '0000-00-00 00:00:00'),
-(35, '$2y$10$fe1lLbXVieLl94VQbKdaoesG55A2ReZMb7VX3EpfOl./uVFnjecnO', '', '0000-00-00 00:00:00'),
-(36, '$2y$10$yZL5Bh6pSNzZbV4dMkk9t.wJPJJrqARhP7C6RRkkSJcL57JUowA3G', '', '0000-00-00 00:00:00'),
-(37, '$2y$10$/KwF2fvMZO7ktJlOZPvzaOp6WfzfFXax12JtDjUGH7UuFMV7j3Zj.', '', '0000-00-00 00:00:00'),
-(38, '$2y$10$95GIH6ITdBo66FwfJbUtU.H6fuJxAeadNu5nVC5WlysaT5L/Beofu', '', '0000-00-00 00:00:00'),
-(39, '$2y$10$vl6kqNpBACaT5UxK3Mmiiebm7oeWbaJUL04eJOBizH9opwLnN/Yim', '', '0000-00-00 00:00:00'),
-(40, '$2y$10$V5O5hujPn69X1DxxsourUeJS18V5vesr81DJW3G4eW/RaKTrDWq86', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -378,12 +344,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `mail`, `password`, `estado`, `role`, `l
 (1, 'admin', 'admin@admin', 2, 1, 4, 0, 0),
 (2, 'usuario', 'usuario@usuario.com', 3, 1, 1, 0, 0),
 (3, 'contenidista', 'contenidista@contenidista.com', 4, 1, 2, 0, 0),
-(4, 'editor', 'editor@editor', 5, 1, 3, 0, 0),
-(34, 'dsa', 'asdsad@dasasd.asasd', 35, 1, 4, -34.67214177645196, -58.56352314580046),
-(36, 'matias', 'masd@asd.asd', 37, 0, 1, -34.67567520156301, -58.56498814782136),
-(37, 'asd', 'asdasd@asda.asda', 38, 0, 1, -34.67320060375633, -58.56348023045622),
-(38, 'matias', 'asdasdasd@asdasdasd.asdasd', 39, 1, 1, -34.67017670523619, -58.56223854880055),
-(39, 'asdasd', 'asdasdasd@dasasd.asdasd', 40, 0, 1, -34.675212338344934, -58.560862394457686);
+(4, 'editor', 'editor@editor', 5, 1, 3, 0, 0)
 
 --
 -- Indexes for dumped tables
