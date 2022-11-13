@@ -1,0 +1,20 @@
+<div class="contAddUser">
+    <h1>Suscripciones</h1>
+</div>
+
+<table class='w3-table w3-striped'>
+    <thead>
+    <tr class="w3-dark-grey">
+        <th>Producto</th>
+        <th>Fecha adquirido</th>
+        <th>Fecha vencimiento</th>
+    </tr>
+    </thead>
+    {{#listaSuscripciones}}
+        <tr>
+            <td>{{producto_id}}</td>
+            <td>{{fechaAdquirido}}</td>
+            <td>{{fechaVencimiento}}</td>
+        </tr>
+    {{/listaSuscripciones}}
+</table>

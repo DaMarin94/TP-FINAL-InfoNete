@@ -11,6 +11,12 @@
                     <ul class="w3-ul"><img src="/public/images/{{portada}}" width="300" height="400"></ul>
                     <ul class="w3-ul w3-padding-top-24">{{nombre}}</ul>
                     </a>
+                    <ul class="w3-ul w3-center">
+                    <form action="/infonete/suscribirseProducto/" method="post">
+                        <input type="hidden" id="id_producto" name="id_producto" value="{{id}}">
+                        <button class="w3-button w3-black w3-margin-top" type="submit">Suscribirse</button>
+                    </form>
+                    </ul>
                 </td>
             {{/listaProductos}}
         </table>

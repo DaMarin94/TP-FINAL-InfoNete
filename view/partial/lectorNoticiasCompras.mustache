@@ -1,0 +1,21 @@
+<div class="contAddUser">
+    <h1>Noticias compradas</h1>
+</div>
+
+<table class='w3-table w3-striped'>
+    <thead>
+    <tr class="w3-dark-grey">
+        <th>Producto</th>
+        <th>Numero edicion</th>
+        <th>Portada</th>
+    </tr>
+    </thead>
+    {{#listaNoticiasCompradas}}
+        <tr>
+            <td>{{titulo}}</td>
+            <td>{{edicion}}</td>
+            <td>{{portada}}</td>
+        </tr>
+    {{/listaNoticiasCompradas}}
+
+</table>

@@ -33,7 +33,7 @@ class LoginController{
                     break;
                 case 1:
                     $_SESSION['usuario']['roleName'] = 'lector';
-                    Redirect::redirect('/lector');
+                    Redirect::redirect('/');
                     break;
                 default:
                     Redirect::redirect('/');

@@ -24,6 +24,14 @@ class InfoneteController {
         $this->renderer->render('infonete.mustache', $data);
     }
 
+    public function suscribirseProducto(){
+        $idProducto = $_POST['id_producto'];
+        $usuario = $_SESSION['id_user'];
+
+        $this->model->suscribirseProducto($idProducto, $usuario);
+        Redirect::redirect('/');
+    }
+
     public function edicion(){
         $data['edicion'] = true;
         $idEdicion = $_GET['id'];
@@ -36,6 +44,14 @@ class InfoneteController {
         $data['contenido'] = $this->model->getContenidoPorEdicionSeccion($idSeccion, $idEdicion);
 
         $this->renderer->render('infonete.mustache', $data);
+    }
+
+    public function comprarEdicion(){
+        $idEdicion = $_POST['id_edicion'];
+        $usuario = $_SESSION['id_user'];
+
+        $this->model->comprarEdicion($idEdicion, $usuario);
+        Redirect::redirect('/');
     }
 
     public function iraPerfil(){
@@ -62,5 +78,4 @@ class InfoneteController {
         session_destroy();
         Redirect::redirect('/login');
     }
-
 }
