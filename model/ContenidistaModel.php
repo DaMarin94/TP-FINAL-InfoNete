@@ -120,9 +120,9 @@ class ContenidistaModel
     }
 
     public function getAjaxSeccionesByEdicion($idEdicion){
-        $sql = "SELECT * FROM seccion s JOIN edicion_seccion es ON s.id = es.seccion 
-                                                    JOIN edicion e ON e.id = es.edicion 
-                                                    WHERE e.id = '$idEdicion'";
+        $sql = "SELECT s.id, s.descripcion FROM seccion s JOIN edicion_seccion es ON s.id = es.seccion 
+                                                          JOIN edicion e ON e.id = es.edicion 
+                                                          WHERE e.id = '$idEdicion'";
         return $this->database->query($sql);
     }
 

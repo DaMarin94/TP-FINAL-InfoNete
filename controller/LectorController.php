@@ -17,23 +17,23 @@ class LectorController
         $this->misProductos();
     }
 
-    public function misEdiciones(){
-        $usuario = $_SESSION['id_user'];
-
-        $data['ediciones'] = true;
-        $data['listaEdicionesCompradas'] = $this->model->getEdicionesCompradas($usuario);
-
-        $data['comprasEdiciones'] = true;
-        $data['listaCompras'] = $this->model->getCompras($usuario);
-
-        $this->renderer->render('lector.mustache', $data);
-    }
-
     public function misProductos(){
         $usuario = $_SESSION['id_user'];
 
-        $data['productos'] = true;
-        $data['listaProductosComprados'] = $this->model->getProductosComprados($usuario);
+        $data['productosSuscrito'] = true;
+        $data['listaProductosSuscrito'] = $this->model->getProductosSuscrito($usuario);
+        $this->renderer->render('lector.mustache', $data);
+    }
+
+    public function misEdiciones(){
+        $usuario = $_SESSION['id_user'];
+
+        $data['edicionesSuscrito'] = true;
+        $data['listaEdicionesSuscrito'] = $this->model->getEdicionesSuscrito($usuario);
+
+        $data['edicionesCompradas'] = true;
+        $data['listaEdicionesCompradas'] = $this->model->getEdicionesCompradas($usuario);
+
         $this->renderer->render('lector.mustache', $data);
     }
 
@@ -48,10 +48,10 @@ class LectorController
     public function misNoticias(){
         $usuario = $_SESSION['id_user'];
 
-        $data['noticias'] = true;
+        $data['noticiasSuscrito'] = true;
         $data['listaNoticiasSuscrito'] = $this->model->getNoticiasSuscrito($usuario);
 
-        $data['comprasNoticias'] = true;
+        $data['noticiasCompradas'] = true;
         $data['listaNoticiasCompradas'] = $this->model->getNoticiasCompradas($usuario);
 
         $this->renderer->render('lector.mustache', $data);

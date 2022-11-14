@@ -15,9 +15,16 @@
                     <form action="/infonete/suscribirseProducto/" method="post">
                         <input type="hidden" id="id_producto" name="id_producto" value="{{id}}">
                         <button class="w3-button w3-black w3-margin-top" type="submit">Suscribirse</button>
-                    </form>
-                    </ul>
-                </td>
-            {{/listaProductos}}
+                        {{!<ul class="w3-ul w3-center w3-margin-top">
+                         <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                                 data-preference-id="<?php echo $preference->id; ?>"></script>
+                         </ul>}}
+                     </form>
+                     </ul>
+                 </td>
+             {{/listaProductos}}
         </table>
     </div>
+
+
+

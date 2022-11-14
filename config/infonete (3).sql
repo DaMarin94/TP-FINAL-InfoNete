@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 13, 2022 at 07:00 PM
--- Server version: 8.0.29
--- PHP Version: 8.1.6
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-11-2022 a las 22:02:20
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,93 +18,97 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `infonete`
+-- Base de datos: `infonete`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compra`
+-- Estructura de tabla para la tabla `compra`
 --
 
 CREATE TABLE `compra` (
-  `id` int NOT NULL,
-  `usuario_id` int NOT NULL,
-  `edicion_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `edicion_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `compra`
+-- Volcado de datos para la tabla `compra`
 --
 
 INSERT INTO `compra` (`id`, `usuario_id`, `edicion_id`) VALUES
-(1, 2, 4);
+(21, 3, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contenido`
+-- Estructura de tabla para la tabla `contenido`
 --
 
 CREATE TABLE `contenido` (
-  `id` int NOT NULL,
-  `titulo` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `subtitulo` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `contenido` text COLLATE utf8mb4_general_ci NOT NULL,
-  `imagen` int NOT NULL,
-  `estado` int NOT NULL,
-  `contenidista` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `titulo` varchar(200) NOT NULL,
+  `subtitulo` varchar(200) NOT NULL,
+  `contenido` text NOT NULL,
+  `multimedia` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `contenidista` int(11) NOT NULL,
+  `latitud` double NOT NULL,
+  `longitud` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `contenido`
+-- Volcado de datos para la tabla `contenido`
 --
 
-INSERT INTO `contenido` (`id`, `titulo`, `subtitulo`, `contenido`, `imagen`, `estado`, `contenidista`) VALUES
-(1, 'TEST', 'TEST 1', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 1, 2, 3),
-(2, 'TEST 2', 'TEST 2', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 1, 3, 3),
-(3, 'Nuevo contenido', 'Nuevo contenido', 'Nuevo contenido test multimedia.', 2, 3, 3);
+INSERT INTO `contenido` (`id`, `titulo`, `subtitulo`, `contenido`, `multimedia`, `estado`, `contenidista`, `latitud`, `longitud`) VALUES
+(11, 'El entrenamiento de la Selección Argentina: ovación a Messi y el probable equipo para el último amistoso previo al Mundial de Qatar 2022', 'El capitán fue el más solicitado por los miles de fanáticos que estuvieron en la práctica abierta en Abu Dhabi. El miércoles, los dirigidos por Lionel Scaloni juegan ante Emiratos Árabes Unidos. Mirá ', 'La Selección Argentina empezó el Mundial. Lionel Scaloni reunió a los 14 jugadores con los que contaba para el entrenamiento a puertas abiertas en la asfixiante atmósfera de Abu Dhabi y ahí, en el círculo central del estadio Al-Nahyan, dio inicio a los ensayos mundialistas. En primera fila, escuchando atentamente, estaba el capitán Lionel Messi, que arribó en la mañana de este lunes (la madrugada de la Argentina) luego de jugar el domingo con el París Saint-Germain y que trataba de concentrarse en medio de las ovaciones que el fascinado público emiratí le regalaba sin parar.\r\n\r\nLa Scaloneta, o gran parte de ella, ya se mueve al compás de la Copa del Mundo. Después de tanto esperar. Después de tanto clavo cortado por los lesionados. Después del lamento por la baja de Giovani Lo Celso. Al fin el conjunto nacional se reencuentra en suelo árabe para comenzar a transitar el camino más soñado.', 50, 1, 3, -34.67215942368461, -58.56189638603293),
+(12, 'Atentado contra Cristina Kirchner: con un duro escrito, la vicepresidenta recusó a la jueza Capuchetti', 'El mismo día en que el fiscal Luciani cerró la acusación en su contra, la ex presidenta lo compartió en redes sociales, donde volvió a atacar a la magistrada: \"Ni sabe ni quiere investigar\".', 'A través de un duro escrito difundido en sus redes sociales minutos despúes de que el fiscal Diego Luciani terminara su última intervención en el juicio en el que ella está acusada por corrupción, Cristina Kirchner recusó este lunes a la jueza María Eugenia Capuchetti por la supuesta \"inacción\" en la investigación de la causa abierta tras la tentativa de homicidio del pasado 1° de septiembre en la puerta de su departamento en Recoleta.\r\n\r\nDesde su cuenta de la red social Twitter, la vicepresidenta confirmó la presentación realizada este lunes por sus abogados y compartió el escrito en el que detallaron las presuntas anomalías que consideraron que fueron cometidas en el marco de la investigación.  ', 51, 1, 3, -34.672194718138634, -58.56713205803),
+(13, 'Más presión sobre las reservas: el Central vendió US$ 100 millones y perdió más de US$ 860 millones en el mes', 'Se trata del segundo registro de ventas más alto del año. La demanda de dólares no cede, a pesar de los mayores controles', 'El Banco Central continúa con su posición vendedora en el mercado de cambios, como una manera de evitar un salto del dólar oficial, ante una demanda que no logra ceder. Luego de haber vendido más de US$ 500 millones la semana pasada, el organismo se desprendió este lunes de US$ 100 millones, con lo que acumula ventas por US$ 863 millones en lo que va del mes.\r\n\r\nEs una marca alta, si se toma en cuenta que en todo noviembre del año pasado, el organismo vendió US$ 900 millones, en un mes que suele ser deficitario para el Central. Pero incluso, en aquel momento, el cepo era mucho mas laxo que el que rige en la actualidad.', 52, 1, 3, -34.67491234593611, -58.56009394157492);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contenido_multimedia`
+-- Estructura de tabla para la tabla `contenido_multimedia`
 --
 
 CREATE TABLE `contenido_multimedia` (
-  `id` int NOT NULL,
-  `multimedia` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `multimedia2` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `multimedia3` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `multimedia4` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `multimedia5` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `imagen1` varchar(150) DEFAULT NULL,
+  `imagen2` varchar(150) DEFAULT NULL,
+  `imagen3` varchar(150) DEFAULT NULL,
+  `audio` varchar(150) DEFAULT NULL,
+  `video` varchar(150) DEFAULT NULL,
+  `url` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `contenido_multimedia`
+-- Volcado de datos para la tabla `contenido_multimedia`
 --
 
-INSERT INTO `contenido_multimedia` (`id`, `multimedia`, `multimedia2`, `multimedia3`, `multimedia4`, `multimedia5`) VALUES
-(1, '2cwwEDkT3_1256x620__1.jpg', NULL, NULL, NULL, NULL),
-(2, 'clarin.jpg', NULL, NULL, NULL, NULL);
+INSERT INTO `contenido_multimedia` (`id`, `imagen1`, `imagen2`, `imagen3`, `audio`, `video`, `url`) VALUES
+(50, 'rWTrXTFaz_1256x620__2.jpg', '', '', '', '', ''),
+(51, '-0t4QxOpB_1256x620__1.jpg', '', '', '', '', ''),
+(52, 'wEQ-_71H7_1256x620__1.jpg', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `edicion`
+-- Estructura de tabla para la tabla `edicion`
 --
 
 CREATE TABLE `edicion` (
-  `id` int NOT NULL,
-  `edicion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `edicion` varchar(100) NOT NULL,
   `precio` double NOT NULL,
-  `producto` int NOT NULL,
-  `portada` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `producto` int(11) NOT NULL,
+  `portada` varchar(60) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `edicion`
+-- Volcado de datos para la tabla `edicion`
 --
 
 INSERT INTO `edicion` (`id`, `edicion`, `precio`, `producto`, `portada`, `fecha`) VALUES
@@ -121,61 +125,57 @@ INSERT INTO `edicion` (`id`, `edicion`, `precio`, `producto`, `portada`, `fecha`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `edicion_seccion`
+-- Estructura de tabla para la tabla `edicion_seccion`
 --
 
 CREATE TABLE `edicion_seccion` (
-  `edicion` int NOT NULL,
-  `seccion` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `edicion` int(11) NOT NULL,
+  `seccion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `edicion_seccion`
+-- Volcado de datos para la tabla `edicion_seccion`
 --
 
 INSERT INTO `edicion_seccion` (`edicion`, `seccion`) VALUES
-(1, 5),
-(1, 1),
-(1, 2),
-(1, 4),
-(1, 3),
-(1, 2);
+(2, 1),
+(2, 4),
+(2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `edicion_seccion_noticia`
+-- Estructura de tabla para la tabla `edicion_seccion_noticia`
 --
 
 CREATE TABLE `edicion_seccion_noticia` (
-  `edicion` int NOT NULL,
-  `seccion` int NOT NULL,
-  `noticia` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `edicion` int(11) NOT NULL,
+  `seccion` int(11) NOT NULL,
+  `noticia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `edicion_seccion_noticia`
+-- Volcado de datos para la tabla `edicion_seccion_noticia`
 --
 
 INSERT INTO `edicion_seccion_noticia` (`edicion`, `seccion`, `noticia`) VALUES
-(9, 3, 3),
-(9, 3, 3),
-(1, 1, 3),
-(1, 1, 3);
+(2, 1, 11),
+(2, 2, 12),
+(2, 4, 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estado`
+-- Estructura de tabla para la tabla `estado`
 --
 
 CREATE TABLE `estado` (
-  `id` int NOT NULL,
-  `descripcion` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `estado`
+-- Volcado de datos para la tabla `estado`
 --
 
 INSERT INTO `estado` (`id`, `descripcion`) VALUES
@@ -186,18 +186,18 @@ INSERT INTO `estado` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `passwords`
+-- Estructura de tabla para la tabla `passwords`
 --
 
 CREATE TABLE `passwords` (
-  `id` int NOT NULL,
-  `clave` char(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `verificado` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `vencimiento` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `clave` char(60) NOT NULL,
+  `verificado` varchar(50) DEFAULT NULL,
+  `vencimiento` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `passwords`
+-- Volcado de datos para la tabla `passwords`
 --
 
 INSERT INTO `passwords` (`id`, `clave`, `verificado`, `vencimiento`) VALUES
@@ -205,57 +205,23 @@ INSERT INTO `passwords` (`id`, `clave`, `verificado`, `vencimiento`) VALUES
 (3, '$2y$10$9ijihR7KDJRXDrAVUfnrHOx7zOXAhF.SQZ2qMiUXLZgN2TAVpZbqS', '', '0000-00-00 00:00:00'),
 (4, '$2y$10$Y4lCjNjDoFVOPsrEXuUxPOlAH1bL5oFQpaagFdq9ED.GzxLQZj7BS', '', '0000-00-00 00:00:00'),
 (5, '$2y$10$TXIFTVBwjdLZe5tH4ooOSuWLGzxJKSwPz5EIwM5/dl4RjeByPpLbe', '', '0000-00-00 00:00:00'),
-(6, '$2y$10$1AowJacGb8KioQ15IMHU0OK1gHDMEAFRarDfn4e.0GMv9oHc70/zO', '', '0000-00-00 00:00:00'),
-(7, '$2y$10$XIHF1n0pnSfHdb5qO8hF2ukc//4NJM/4NmLvvbQbGwf7lY5dm466m', '', '0000-00-00 00:00:00'),
-(8, '$2y$10$aXr/Fqvcc1q7cMu3T1lf..2xW7Jt3HfbkzjvUOZA4tdAbn09xtKvu', '', '0000-00-00 00:00:00'),
-(9, '$2y$10$CxeciIL9TSQo6Rp34Hj.1.Cu2vXFPBYtoTGOfob/iUZIBj4O6kPw.', '', '0000-00-00 00:00:00'),
-(10, '$2y$10$VJup581MPOnVe6tST0t18eDOUN393F48aSWiOXtpevA7mbmgm5u.y', '', '0000-00-00 00:00:00'),
-(11, '$2y$10$5Dr1jtQskH/Tlnbp6ADsI.vDPw13B9sdoJv/Z7XCSkAKzLHMt1AHa', '', '0000-00-00 00:00:00'),
-(12, '$2y$10$Yyba9JoesA9SZivRHwE1jOa53uikCrZxtUb35DowKxs3CNfi7/YXa', '', '0000-00-00 00:00:00'),
-(13, '$2y$10$8vLkzAa95IYfH8f8Sv61W.NRlbUWkldC6SXZgYP2BCYUVHENA3nM2', '', '0000-00-00 00:00:00'),
-(14, '$2y$10$k2NILLV67CGd7u8aLEOHmug8yJIREm9alc8M6/6rg5MoX0c8YUtAW', '', '0000-00-00 00:00:00'),
-(15, '$2y$10$.kBOClJBI4t80WyZJ9rJtOZb4keVJZIS6o/W3a/tkXxg4mbwuP/G.', '', '0000-00-00 00:00:00'),
-(16, '$2y$10$nmKHCqdrdhJedQJB8lq2zeDh/VARlrLzfczCHLQ2Tb.kDkZ0UoG4.', '', '0000-00-00 00:00:00'),
-(17, '$2y$10$tLCpFkxwsj9bptsYDRUVbOVs/EDgECnX4eKidgHU47FpVIAdXkwHa', '', '0000-00-00 00:00:00'),
-(18, '$2y$10$Ab6dfaKs7SMDunM55.s7Kun61XTGJffElkzDVM.cTa5cO500Bhuhe', '', '0000-00-00 00:00:00'),
-(19, '$2y$10$EF1AV6aI3L.GBH3c3que6Ox23kiOLvBREOk3HHoF.6.gOO.DtlVhW', '', '0000-00-00 00:00:00'),
-(20, '$2y$10$ZyXkxtrCRLPRPpYhrxviueAOuQ8NjP/EzaJ7NYJ/2tTDga0VsDyW.', '', '0000-00-00 00:00:00'),
-(21, '$2y$10$5TsJVrdgfDgg68rGApiaHuyaHMmCyQD5tuSOvL8Zdx.AfJlV6WppK', '', '0000-00-00 00:00:00'),
-(22, '$2y$10$LBpUdC3oGswSXmDtVZFsGOO01Rhh.bJE5v6n59oFSS8O5wjaI1/yS', '', '0000-00-00 00:00:00'),
-(23, '$2y$10$YFzMFSRezmrVRyceb6rr8.9xN6upCUFxuwkP31kImeRQwaDAPwdMm', '', '0000-00-00 00:00:00'),
-(24, '$2y$10$f4jNQHws.KhiFKXwE.YppOvIe5I0OyePNgiJCqPyHfjQDy8J1im0q', '', '0000-00-00 00:00:00'),
-(25, '$2y$10$9jZquBNW7WOchBNlKFr.CupIsPJ.14jph0OnrtPm0Wl9SwnUABO.y', '', '0000-00-00 00:00:00'),
-(26, '$2y$10$5DENiG8CPynmKUG6mrR45O5ANbwZESOx9OivTwXTwZaPwP1XTlbnO', '', '0000-00-00 00:00:00'),
-(27, '$2y$10$/SKCguiDuVeQzwhlesPVq.rX5fWhuoPokvSi9EsQ2JczKFGDt0/92', '', '0000-00-00 00:00:00'),
-(28, '$2y$10$F3A1XmNm3Y9h7DWRj4D.neF9U/amFNI5rbv.HtAOk/87ah2iMYShC', '', '0000-00-00 00:00:00'),
-(29, '$2y$10$alxrmy7r/3V7otBtjO6Jpepi.K4V7Hfh1duCUWxEKIFcNpp8/xrH2', '', '0000-00-00 00:00:00'),
-(30, '$2y$10$8osZb29mJcXT0c82dtVs5O4qSKZxngQss022Y1OHiriif68tKw8NK', '', '0000-00-00 00:00:00'),
-(31, '$2y$10$Vy1EKyqoQLNWPzmsYwp/A.lk8562Hud66NzxkJBdljEs.TMSBEJIS', '', '0000-00-00 00:00:00'),
-(32, '$2y$10$HL.IPhMTK9cXokAG4BZqxOUOXj3uwN.GGvXYUuzFApKxG0iIsMLIq', '', '0000-00-00 00:00:00'),
-(33, '$2y$10$kDvV8lo.HsPJSC8zdh.VqeTLLuD2FJxp1bgy.S.iXsTBLy6jwY0Ba', '', '0000-00-00 00:00:00'),
-(34, '$2y$10$ERiVBiraSDrY53fD/7V5yOjNgObx0eiTKZtZJ.kAoOmab0aMqAgTO', '', '0000-00-00 00:00:00'),
-(35, '$2y$10$fe1lLbXVieLl94VQbKdaoesG55A2ReZMb7VX3EpfOl./uVFnjecnO', '', '0000-00-00 00:00:00'),
-(36, '$2y$10$yZL5Bh6pSNzZbV4dMkk9t.wJPJJrqARhP7C6RRkkSJcL57JUowA3G', '', '0000-00-00 00:00:00'),
-(37, '$2y$10$/KwF2fvMZO7ktJlOZPvzaOp6WfzfFXax12JtDjUGH7UuFMV7j3Zj.', '', '0000-00-00 00:00:00'),
-(38, '$2y$10$95GIH6ITdBo66FwfJbUtU.H6fuJxAeadNu5nVC5WlysaT5L/Beofu', '', '0000-00-00 00:00:00'),
-(39, '$2y$10$vl6kqNpBACaT5UxK3Mmiiebm7oeWbaJUL04eJOBizH9opwLnN/Yim', '', '0000-00-00 00:00:00'),
-(40, '$2y$10$V5O5hujPn69X1DxxsourUeJS18V5vesr81DJW3G4eW/RaKTrDWq86', '', '0000-00-00 00:00:00');
+(6, '$2y$10$1AowJacGb8KioQ15IMHU0OK1gHDMEAFRarDfn4e.0GMv9oHc70/zO', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto`
+-- Estructura de tabla para la tabla `producto`
 --
 
 CREATE TABLE `producto` (
-  `id` int NOT NULL,
-  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `tipo` int NOT NULL,
-  `portada` varchar(60) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `portada` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `producto`
+-- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`id`, `nombre`, `tipo`, `portada`) VALUES
@@ -266,41 +232,32 @@ INSERT INTO `producto` (`id`, `nombre`, `tipo`, `portada`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reportes_editor`
+-- Estructura de tabla para la tabla `reportes_editor`
 --
 
 CREATE TABLE `reportes_editor` (
-  `id` int NOT NULL,
-  `contenido` int NOT NULL,
-  `id_contenidista` int NOT NULL,
-  `id_editor` int NOT NULL,
-  `comentarios` text COLLATE utf8mb4_general_ci,
-  `estado` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `contenido` int(11) NOT NULL,
+  `id_contenidista` int(11) NOT NULL,
+  `id_editor` int(11) NOT NULL,
+  `comentarios` text DEFAULT NULL,
+  `estado` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reportes_editor`
---
-
-INSERT INTO `reportes_editor` (`id`, `contenido`, `id_contenidista`, `id_editor`, `comentarios`, `estado`, `fecha`) VALUES
-(15, 2, 3, 4, 'revisar puntuaciones                                                                       \r\n                                        \r\n                                        \r\n                                        \r\n                                        ', 3, '2022-11-09 20:18:14'),
-(16, 1, 3, 4, 'Finish                  \r\n                                        \r\n                                        \r\n                                        \r\n                                        \r\n                                        \r\n                                        \r\n                                        ', 2, '2022-11-09 20:18:52'),
-(17, 3, 3, 4, 'Revisar contenido                              ', 3, '2022-11-09 20:15:47');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Estructura de tabla para la tabla `role`
 --
 
 CREATE TABLE `role` (
-  `id` int NOT NULL,
-  `descripcion` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `role`
+-- Volcado de datos para la tabla `role`
 --
 
 INSERT INTO `role` (`id`, `descripcion`) VALUES
@@ -312,16 +269,16 @@ INSERT INTO `role` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `seccion`
+-- Estructura de tabla para la tabla `seccion`
 --
 
 CREATE TABLE `seccion` (
-  `id` int NOT NULL,
-  `descripcion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `seccion`
+-- Volcado de datos para la tabla `seccion`
 --
 
 INSERT INTO `seccion` (`id`, `descripcion`) VALUES
@@ -334,39 +291,30 @@ INSERT INTO `seccion` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `suscripcion`
+-- Estructura de tabla para la tabla `suscripcion`
 --
 
 CREATE TABLE `suscripcion` (
-  `id` int NOT NULL,
-  `usuario_id` int NOT NULL,
-  `producto_id` int NOT NULL,
-  `fechaAdquirido` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `fechaVencimiento` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `suscripcion`
---
-
-INSERT INTO `suscripcion` (`id`, `usuario_id`, `producto_id`, `fechaAdquirido`, `fechaVencimiento`) VALUES
-(49, 2, 1, '2022-11-01 16:20:38', '2022-12-13 16:20:38'),
-(50, 2, 2, '2022-11-13 16:24:11', '2022-12-13 16:24:11'),
-(51, 2, 1, '2022-11-13 18:00:06', '2022-12-13 18:00:06');
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `fechaAdquirido` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fechaVencimiento` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo`
+-- Estructura de tabla para la tabla `tipo`
 --
 
 CREATE TABLE `tipo` (
-  `id` int NOT NULL,
-  `descripcion` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tipo`
+-- Volcado de datos para la tabla `tipo`
 --
 
 INSERT INTO `tipo` (`id`, `descripcion`) VALUES
@@ -376,22 +324,22 @@ INSERT INTO `tipo` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` int NOT NULL,
-  `estado` int NOT NULL DEFAULT '0',
-  `role` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `password` int(11) NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT 0,
+  `role` int(11) NOT NULL,
   `latitud` double NOT NULL,
   `longitud` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `mail`, `password`, `estado`, `role`, `latitud`, `longitud`) VALUES
@@ -401,11 +349,11 @@ INSERT INTO `usuarios` (`id`, `nombre`, `mail`, `password`, `estado`, `role`, `l
 (4, 'editor', 'editor@editor', 5, 1, 3, 0, 0);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `compra`
+-- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`id`) USING BTREE,
@@ -413,36 +361,36 @@ ALTER TABLE `compra`
   ADD KEY `edicion` (`edicion_id`);
 
 --
--- Indexes for table `contenido`
+-- Indices de la tabla `contenido`
 --
 ALTER TABLE `contenido`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `imagen` (`imagen`),
+  ADD KEY `imagen` (`multimedia`),
   ADD KEY `estado` (`estado`),
   ADD KEY `contenidista` (`contenidista`);
 
 --
--- Indexes for table `contenido_multimedia`
+-- Indices de la tabla `contenido_multimedia`
 --
 ALTER TABLE `contenido_multimedia`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `edicion`
+-- Indices de la tabla `edicion`
 --
 ALTER TABLE `edicion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `producto` (`producto`);
 
 --
--- Indexes for table `edicion_seccion`
+-- Indices de la tabla `edicion_seccion`
 --
 ALTER TABLE `edicion_seccion`
   ADD KEY `edicion` (`edicion`),
   ADD KEY `seccion` (`seccion`);
 
 --
--- Indexes for table `edicion_seccion_noticia`
+-- Indices de la tabla `edicion_seccion_noticia`
 --
 ALTER TABLE `edicion_seccion_noticia`
   ADD KEY `fk_edicion` (`edicion`),
@@ -450,26 +398,26 @@ ALTER TABLE `edicion_seccion_noticia`
   ADD KEY `fk_noticia` (`noticia`);
 
 --
--- Indexes for table `estado`
+-- Indices de la tabla `estado`
 --
 ALTER TABLE `estado`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `passwords`
+-- Indices de la tabla `passwords`
 --
 ALTER TABLE `passwords`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `producto`
+-- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tipo` (`tipo`);
 
 --
--- Indexes for table `reportes_editor`
+-- Indices de la tabla `reportes_editor`
 --
 ALTER TABLE `reportes_editor`
   ADD PRIMARY KEY (`id`),
@@ -479,19 +427,19 @@ ALTER TABLE `reportes_editor`
   ADD KEY `estado` (`estado`);
 
 --
--- Indexes for table `role`
+-- Indices de la tabla `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `seccion`
+-- Indices de la tabla `seccion`
 --
 ALTER TABLE `seccion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `suscripcion`
+-- Indices de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
   ADD PRIMARY KEY (`id`),
@@ -499,13 +447,13 @@ ALTER TABLE `suscripcion`
   ADD KEY `producto_id` (`producto_id`);
 
 --
--- Indexes for table `tipo`
+-- Indices de la tabla `tipo`
 --
 ALTER TABLE `tipo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
@@ -513,121 +461,121 @@ ALTER TABLE `usuarios`
   ADD KEY `role` (`role`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `compra`
+-- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `contenido`
+-- AUTO_INCREMENT de la tabla `contenido`
 --
 ALTER TABLE `contenido`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `contenido_multimedia`
+-- AUTO_INCREMENT de la tabla `contenido_multimedia`
 --
 ALTER TABLE `contenido_multimedia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT for table `edicion`
+-- AUTO_INCREMENT de la tabla `edicion`
 --
 ALTER TABLE `edicion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `estado`
+-- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `passwords`
+-- AUTO_INCREMENT de la tabla `passwords`
 --
 ALTER TABLE `passwords`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT for table `producto`
+-- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `reportes_editor`
+-- AUTO_INCREMENT de la tabla `reportes_editor`
 --
 ALTER TABLE `reportes_editor`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `role`
+-- AUTO_INCREMENT de la tabla `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `seccion`
+-- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `suscripcion`
+-- AUTO_INCREMENT de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
--- AUTO_INCREMENT for table `tipo`
+-- AUTO_INCREMENT de la tabla `tipo`
 --
 ALTER TABLE `tipo`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `compra`
+-- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
   ADD CONSTRAINT `edicion` FOREIGN KEY (`edicion_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `contenido`
+-- Filtros para la tabla `contenido`
 --
 ALTER TABLE `contenido`
-  ADD CONSTRAINT `contenido_ibfk_1` FOREIGN KEY (`imagen`) REFERENCES `contenido_multimedia` (`id`),
+  ADD CONSTRAINT `contenido_ibfk_1` FOREIGN KEY (`multimedia`) REFERENCES `contenido_multimedia` (`id`),
   ADD CONSTRAINT `contenido_ibfk_2` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`),
   ADD CONSTRAINT `contenido_ibfk_3` FOREIGN KEY (`contenidista`) REFERENCES `usuarios` (`id`);
 
 --
--- Constraints for table `edicion`
+-- Filtros para la tabla `edicion`
 --
 ALTER TABLE `edicion`
   ADD CONSTRAINT `edicion_ibfk_1` FOREIGN KEY (`producto`) REFERENCES `producto` (`id`);
 
 --
--- Constraints for table `edicion_seccion`
+-- Filtros para la tabla `edicion_seccion`
 --
 ALTER TABLE `edicion_seccion`
   ADD CONSTRAINT `edicion_seccion_ibfk_1` FOREIGN KEY (`edicion`) REFERENCES `edicion` (`id`),
   ADD CONSTRAINT `edicion_seccion_ibfk_2` FOREIGN KEY (`seccion`) REFERENCES `seccion` (`id`);
 
 --
--- Constraints for table `edicion_seccion_noticia`
+-- Filtros para la tabla `edicion_seccion_noticia`
 --
 ALTER TABLE `edicion_seccion_noticia`
   ADD CONSTRAINT `fk_edicion` FOREIGN KEY (`edicion`) REFERENCES `edicion` (`id`),
@@ -635,13 +583,13 @@ ALTER TABLE `edicion_seccion_noticia`
   ADD CONSTRAINT `fk_seccion` FOREIGN KEY (`seccion`) REFERENCES `seccion` (`id`);
 
 --
--- Constraints for table `producto`
+-- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`tipo`) REFERENCES `tipo` (`id`);
 
 --
--- Constraints for table `reportes_editor`
+-- Filtros para la tabla `reportes_editor`
 --
 ALTER TABLE `reportes_editor`
   ADD CONSTRAINT `reportes_editor_ibfk_1` FOREIGN KEY (`id_contenidista`) REFERENCES `usuarios` (`id`),
@@ -650,14 +598,14 @@ ALTER TABLE `reportes_editor`
   ADD CONSTRAINT `reportes_editor_ibfk_4` FOREIGN KEY (`estado`) REFERENCES `estado` (`id`);
 
 --
--- Constraints for table `suscripcion`
+-- Filtros para la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
   ADD CONSTRAINT `producto_id` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `usuarios`
+-- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`password`) REFERENCES `passwords` (`id`),

@@ -140,6 +140,7 @@ class ContenidistaController
 
         echo "<label for='seccion'>Seccion a la que pertenece:</label>";
         echo "<select name='seccion' class='w3-input w3-light-grey w3-margin-top'>";
+        var_dump($seccionesEncontradas);
         foreach ($seccionesEncontradas as $seccion){
             echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";
         }

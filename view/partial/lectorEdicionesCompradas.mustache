@@ -1,0 +1,21 @@
+<div class="contAddUser">
+    <h1>Ediciones compradas</h1>
+</div>
+
+<table class='w3-table w3-striped'>
+    <thead>
+    <tr class="w3-dark-grey">
+        <th>Numero edicion</th>
+        <th>Producto</th>
+        <th></th>
+    </tr>
+    </thead>
+    {{#listaEdicionesCompradas}}
+        <tr>
+            <td>{{edicion}}</td>
+            <td>{{producto}}</td>
+            <td><a class ="w3-button w3-black w3-small"href="/infonete/edicion?id={{id}}&ids=null">Ver</a></td>
+        </tr>
+    {{/listaEdicionesCompradas}}
+
+</table>
