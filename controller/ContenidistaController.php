@@ -18,7 +18,7 @@ class ContenidistaController
             Redirect::redirect('/');
         };
         $data['noticias'] = true;
-        $data['listaNoticias'] = $this->model->getNoticias();
+        $data['listaNoticias'] = $this->model->getNoticiasByAutor($_SESSION['usuario'][0]['id']);
         $this->renderer->render('contenidista.mustache', $data);
     }
 
@@ -34,16 +34,30 @@ class ContenidistaController
         $titulo = $_POST["titulo"];
         $subtitulo = $_POST["subtitulo"];
 
-        $imagen =  $_FILES['portada']['name'];
-        $portada = $_FILES['portada']['tmp_name'];
-
         $contenido  = $_POST["contenido"];
         $seccion = $_POST["seccion"];
         $edicion = $_POST["edicion"];
 
-        if($this->model->altaNoticia($titulo, $subtitulo, $imagen, $contenido, $seccion, $edicion)){
+        $latitud = $_POST["latitud"];
+        $longitud = $_POST["longitud"];
+
+        if($this->validarNoticia()) {
+            $idMultimedia = $this->model->procesarMultimedia();
+            $this->model->altaNoticia($titulo, $subtitulo, $idMultimedia, $contenido, $seccion, $edicion, $latitud, $longitud);
             Redirect::redirect("noticias");
-        };
+        } else {
+            Redirect::redirect("formularioNoticias");
+        }
+    }
+
+    public function editarNoticia(){
+        $noticia = $_GET["id"];
+        $data['editarNoticia'] = true;
+        $data['listaEdiciones'] = $this->model->getEdiciones();
+        $data['listaSecciones'] = $this->model->getSecciones();
+        $data['datosNoticia'] = $this->model->getDatosNoticia($noticia);
+        $data['datosMultimedia'] = $this->model->getMultimediaByNoticia($noticia);
+        echo $this->renderer->render("contenidista.mustache", $data);
     }
 
     public function formularioProducto(){
@@ -114,9 +128,20 @@ class ContenidistaController
 
         echo "<label for='seccion'>Elegi una seccion:</label>";
         echo "<select name='seccion' class='w3-input w3-light-grey w3-margin-top'>";
-        while($fila = mysqli_fetch_array($seccionesDisponibles))
-        {
-            echo "<option value='" . $fila["id"].  "'>" . $fila["descripcion"] . "</option>";
+        foreach ($seccionesDisponibles as $seccion){
+            echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";
+        }
+        echo "</select>";
+    }
+
+    public function ajaxSeccionesPorEdicion(){
+        $edicion = $_GET["edicion"];
+        $seccionesEncontradas =  $this->model->getAjaxSeccionesByEdicion($edicion);
+
+        echo "<label for='seccion'>Seccion a la que pertenece:</label>";
+        echo "<select name='seccion' class='w3-input w3-light-grey w3-margin-top'>";
+        foreach ($seccionesEncontradas as $seccion){
+            echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";
         }
         echo "</select>";
     }
@@ -124,7 +149,8 @@ class ContenidistaController
     public function misnoticias()
     {
         $data['noticias'] = true;
-        $data['listaNoticias'] = $this->model->getNoticias();
+        $idContenidista = $_SESSION['usuario'][0]['id'];
+        $data['listaNoticias'] = $this->model->getNoticiasByAutor($idContenidista);
         $this->renderer->render('contenidista.mustache', $data);
     }
 
@@ -151,5 +177,21 @@ class ContenidistaController
         $data['nombre'] = $this->model->getNombreProductoById($idProducto);
         $data['listaEdiciones'] = $this->model->getEdicionesByProducto($idProducto);
         $this->renderer->render('contenidista.mustache', $data);
+    }
+
+    public function validarNoticia(){
+        $titulo = $_POST["titulo"];
+        $subtitulo = $_POST["subtitulo"];
+        $imagen1 = $_FILES['imagen1']['tmp_name'];
+        $contenido  = $_POST["contenido"];
+        $seccion = $_POST["seccion"];
+        $edicion = $_POST["edicion"];
+        $latitud = $_POST["latitud"];
+        $longitud = $_POST["longitud"];
+
+        if(!empty($titulo) && !empty($subtitulo) && !empty($imagen1) && !empty($contenido) && !empty($seccion) && !empty($edicion) && !empty($latitud) && !empty($longitud)){
+            return true;
+        }
+        return false;
     }
 }

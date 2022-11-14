@@ -10,18 +10,51 @@ class ContenidistaModel
         $this->database = $database;
     }
 
-    public function altaNoticia($titulo, $subtitulo, $imagen, $contenido, $seccion, $edicion){
-        $imagen = '/imagen.png';
-        $estado = "pendiente";
-        $multimediasql = "INSERT INTO contenido_multimedia (multimedia, multimedia2, multimedia3, multimedia4, multimedia5) VALUES('$imagen', '', '', '', '')";
-
-        $idMultimedia = $this->database->insert($multimediasql);
-
-        $sql1 = "INSERT INTO contenido (titulo, subtitulo, contenido, imagen, estado) VALUES('$titulo', '$subtitulo', '$contenido', '$idMultimedia', '$estado')";
+    public function altaNoticia($titulo, $subtitulo, $idMultimedia, $contenido, $seccion, $edicion, $latitud, $longitud){
+        $estado = 1;
+        $contenidista = $_SESSION['usuario'][0]['id'];
+        $sql1 = "INSERT INTO contenido (titulo, subtitulo, contenido, multimedia, estado, latitud, longitud, contenidista) VALUES('$titulo', '$subtitulo', '$contenido', '$idMultimedia', '$estado', '$latitud', '$longitud', '$contenidista')";
         $noticia = $this->database->insert($sql1);
-
         $sql2 = "INSERT INTO edicion_seccion_noticia (edicion, seccion, noticia) VALUES('$edicion', '$seccion', '$noticia')";
         return $this->database->execute($sql2);
+    }
+
+    public function procesarMultimedia()
+    {
+        $imagenName1 = $_FILES['imagen1']['name'];
+        $imagenTmp1 = $_FILES['imagen1']['tmp_name'];
+        if (!is_null($imagenTmp1)) {
+            move_uploaded_file($imagenTmp1, "public/images/" . $imagenName1);
+        }
+
+        $imagenName2 = $_FILES['imagen2']['name'];
+        $imagenTmp2 = $_FILES['imagen2']['tmp_name'];
+        if (!is_null($imagenTmp2)) {
+            move_uploaded_file($imagenTmp2, "public/images/" . $imagenName2);
+        }
+
+        $imagenName3 = $_FILES['imagen3']['name'];
+        $imagenTmp3 = $_FILES['imagen3']['tmp_name'];
+        if (!is_null($imagenTmp3)) {
+            move_uploaded_file($imagenTmp3, "public/images/" . $imagenName3);
+        }
+
+        $video = $_FILES['video']['tmp_name'];
+        if (!is_null($video)) {
+            $videoName = uniqid().".mp4";
+            move_uploaded_file($video, "public/multimedia/" . $videoName);
+        }
+
+        $audio = $_FILES['audio']['tmp_name'];
+        if (!is_null($audio)){
+           $audioName = uniqid().".webm";
+           move_uploaded_file($audio, "public/multimedia/" . $audioName);
+        }
+
+        $url = $_POST['url'];
+
+        $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video, url) VALUES('$imagenName1', '$imagenName2', '$imagenName3', '$videoName', '$audioName', '$url')";
+        return $this->database->insert($multimediasql);
     }
 
     public function altaProducto($nombre, $tipo, $portada){
@@ -44,8 +77,8 @@ class ContenidistaModel
         return $this->database->query($sql);
     }
 
-    public function getNoticias(){
-        $sql = "SELECT * FROM contenido";
+    public function getNoticiasByAutor($idContenidista){
+        $sql = "SELECT * FROM contenido WHERE contenidista = '$idContenidista'";
         return $this->database->query($sql);
     }
 
@@ -86,10 +119,31 @@ class ContenidistaModel
         return $this->database->query($sql);
     }
 
-    public function getSeccionesFaltantesByEdicion($idEdicion){
+    public function getAjaxSeccionesByEdicion($idEdicion){
         $sql = "SELECT * FROM seccion s JOIN edicion_seccion es ON s.id = es.seccion 
                                                     JOIN edicion e ON e.id = es.edicion 
-                                                    WHERE e.id != '$idEdicion'";
+                                                    WHERE e.id = '$idEdicion'";
+        return $this->database->query($sql);
+    }
+
+    public function getSeccionesFaltantesByEdicion($idEdicion){
+        $sql = "SELECT *
+                FROM seccion s
+                WHERE NOT EXISTS (SELECT 1
+				                    FROM edicion e JOIN edicion_seccion es ON e.id = es.edicion
+                                    WHERE e.id = '$idEdicion'
+                                    AND s.id = es.seccion)";
+        return $this->database->query($sql);
+    }
+
+    public function getDatosNoticia($noticia){
+        $sql = "SELECT * FROM contenido WHERE id = '$noticia'";
+        return $this->database->query($sql);
+    }
+
+    public function getMultimediaByNoticia($noticia){
+        $sql = "SELECT * FROM contenido_multimedia cm JOIN contenido c ON c.multimedia = cm.id 
+                                                      WHERE c.id = '$noticia'";
         return $this->database->query($sql);
     }
 }

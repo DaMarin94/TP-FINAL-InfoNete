@@ -49,7 +49,7 @@ class LectorModel
 
     public function getNoticiasCompradas($usuario){
 
-        $sql = "SELECT * FROM contenido c JOIN edicion_seccion_noticia esn on esn.noticia = c.id
+        $sql = "SELECT DISTINCT * FROM contenido c JOIN edicion_seccion_noticia esn on esn.noticia = c.id
                                         JOIN edicion e ON e.id = esn.edicion
                                         JOIN compra co ON co.edicion_id = e.id
                                         JOIN usuarios u ON u.id = co.usuario_id

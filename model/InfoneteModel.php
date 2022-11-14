@@ -34,10 +34,26 @@ class InfoneteModel {
         return $this->database->query($sql);
     }
 
-    public function getContenidoPorEdicionSeccion($idSeccion, $idEdicion) {
-        $sql = "SELECT * FROM contenido c JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+    public function getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion) {
+        $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, cm.imagen1 FROM contenido c 
+                                        JOIN contenido_multimedia cm ON c.multimedia = cm.id
+                                        JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                        JOIN edicion e ON e.id = esn.edicion
+                                         JOIN suscripcion s ON s.producto_id = e.producto
                 WHERE esn.edicion = '$idEdicion' 
-                AND esn.seccion = '$idSeccion'";
+                AND esn.seccion = '$idSeccion'
+                AND s.usuario_id = $usuario";
+        return $this->database->query($sql);
+    }
+
+    public function getContenidoCompradoPorEdicionSeccion($usuario, $idSeccion, $idEdicion) {
+        $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, cm.imagen1 FROM contenido c JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                        JOIN contenido_multimedia cm ON c.multimedia = cm.id
+                                        JOIN edicion e ON e.id = esn.edicion
+                                         JOIN compra co ON co.edicion_id = e.id
+                WHERE esn.edicion = '$idEdicion' 
+                AND esn.seccion = '$idSeccion'
+                AND co.usuario_id = $usuario";
         return $this->database->query($sql);
     }
 
@@ -55,6 +71,11 @@ class InfoneteModel {
     public function getContenidoPorId($idContenido) {
         $sql = "SELECT * FROM contenido WHERE id = '$idContenido' ";
         return $this->database->query($sql);
+    }
+
+    public function getMultimediaByContenido($idContenido){
+        $sql = "SELECT * FROM contenido_multimedia cm JOIN contenido c ON c.multimedia = cm.id 
+                                                      WHERE c.id = '$idContenido'";
     }
 
     public function suscribirseProducto($idProducto,$usuario) {

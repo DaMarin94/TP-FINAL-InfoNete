@@ -1,8 +1,6 @@
-
-
-function muestraSecciones(edicion) {
+function muestraSeccionesPorEdicion(edicion) {
     if (edicion=="") {
-        document.getElementById("secciones").innerHTML="";
+        document.getElementById("seccionesPorEdicion").innerHTML="";
         return;
     }
     if (window.XMLHttpRequest) {
@@ -12,9 +10,9 @@ function muestraSecciones(edicion) {
     }
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
-            document.getElementById("secciones").innerHTML=this.responseText;
+            document.getElementById("seccionesPorEdicion").innerHTML=this.responseText;
         }
     }
-    xmlhttp.open("GET","/contenidista/ajaxSecciones?edicion="+edicion,true);
+    xmlhttp.open("GET","/contenidista/ajaxSeccionesPorEdicion?edicion="+edicion,true);
     xmlhttp.send();
 }
