@@ -5,17 +5,17 @@
 <table class='w3-table w3-striped'>
     <thead>
     <tr class="w3-dark-grey">
-        <th>Producto</th>
         <th>Numero edicion</th>
-        <th>Portada</th>
+        <th>Producto</th>
+        <th></th>
     </tr>
     </thead>
-    {{#listaCompras}}
+    {{#listaEdicionesCompradas}}
         <tr>
-            <td>{{producto}}</td>
             <td>{{edicion}}</td>
-            <td>{{portada}}</td>
+            <td>{{producto}}</td>
+            <td><a class ="w3-button w3-black w3-small"href="/infonete/edicion?id={{id}}&ids=null">Ver</a></td>
         </tr>
-    {{/listaCompras}}
+    {{/listaEdicionesCompradas}}
 
 </table>

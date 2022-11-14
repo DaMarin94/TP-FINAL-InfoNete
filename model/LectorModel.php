@@ -8,14 +8,14 @@ class LectorModel
         $this->database = $database;
     }
 
-    public function getProductosComprados($usuario){
+    public function getProductosSuscrito($usuario){
         $sql = "SELECT * FROM suscripcion s JOIN usuarios u ON s.usuario_id = u.id
                                             JOIN producto p ON s.producto_id = p.id
                                             WHERE u.id = '$usuario'";
         return $this->database->query($sql);
     }
 
-    public function getEdicionesCompradas($usuario){
+    public function getEdicionesSuscrito($usuario){
 
         $sql = "SELECT * FROM Edicion e
                 WHERE  EXISTS (SELECT 1
@@ -57,7 +57,7 @@ class LectorModel
         return $this->database->query($sql);
     }
 
-    public function getCompras($usuario){
+    public function getEdicionesCompradas($usuario){
 
         $sql = "SELECT * FROM Edicion e
                 WHERE  EXISTS (SELECT 1
