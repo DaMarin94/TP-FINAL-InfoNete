@@ -10,14 +10,21 @@ class LectorController
         $this->model = $model;
     }
 
-    public function list(){
+    public function validarRol(){
         if(!Router::checkAuth([1])){
             Redirect::redirect('/');
         };
+    }
+
+    public function list(){
+        $this->validarRol();
+
         $this->misProductos();
     }
 
     public function misProductos(){
+        $this->validarRol();
+
         $usuario = $_SESSION['id_user'];
 
         $data['productosSuscrito'] = true;
@@ -26,6 +33,8 @@ class LectorController
     }
 
     public function misEdiciones(){
+        $this->validarRol();
+
         $usuario = $_SESSION['id_user'];
 
         $data['edicionesSuscrito'] = true;
@@ -38,6 +47,8 @@ class LectorController
     }
 
     public function misSuscripciones(){
+        $this->validarRol();
+
         $usuario = $_SESSION['id_user'];
 
         $data['suscripciones'] = true;
@@ -46,6 +57,8 @@ class LectorController
     }
 
     public function misNoticias(){
+        $this->validarRol();
+
         $usuario = $_SESSION['id_user'];
 
         $data['noticiasSuscrito'] = true;

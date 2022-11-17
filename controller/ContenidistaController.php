@@ -12,25 +12,32 @@ class ContenidistaController
         $this->model = $model;
     }
 
-    public function list()
-    {
+    public function validarRol(){
         if(!Router::checkAuth([2])){
             Redirect::redirect('/');
         };
+    }
+
+    public function list(){
+        $this->validarRol();
+
         $data['noticias'] = true;
         $data['listaNoticias'] = $this->model->getNoticiasByAutor($_SESSION['usuario'][0]['id']);
         $this->renderer->render('contenidista.mustache', $data);
     }
 
     public function formularioNoticia(){
+        $this->validarRol();
+
         $data['formAltaNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
         $data['listaSecciones'] = $this->model->getSecciones();
         echo $this->renderer->render("contenidista.mustache", $data);
     }
 
-    public function procesarNoticia()
-    {
+    public function procesarNoticia(){
+        $this->validarRol();
+
         $titulo = $_POST["titulo"];
         $subtitulo = $_POST["subtitulo"];
 
@@ -51,6 +58,8 @@ class ContenidistaController
     }
 
     public function editarNoticia(){
+        $this->validarRol();
+
         $noticia = $_GET["id"];
         $data['editarNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
@@ -61,12 +70,16 @@ class ContenidistaController
     }
 
     public function formularioProducto(){
+        $this->validarRol();
+
         $data['formAltaProducto'] = true;
         $data['tipos'] = $this->model->getTipos();
         $this->renderer->render('contenidista.mustache', $data);
     }
 
     public function procesarProducto(){
+        $this->validarRol();
+
         $nombre = $_POST["nombre"];
         $tipo = $_POST["tipo"];
 
@@ -83,12 +96,16 @@ class ContenidistaController
     }
 
     public function formularioEdicion(){
+        $this->validarRol();
+
         $data['formAltaEdicion'] = true;
         $data['listaProductos'] = $this->model->getProductos();
         $this->renderer->render('contenidista.mustache', $data);
     }
 
     public function procesarEdicion(){
+        $this->validarRol();
+
         $edicion = $_POST["edicion"];
         $precio = $_POST["precio"];
         $producto = $_POST["producto"];
@@ -106,6 +123,8 @@ class ContenidistaController
     }
 
     public function formularioSeccion(){
+        $this->validarRol();
+
         $data['formAgregarSeccion'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
         $data['listaSecciones'] = $this->model->getSecciones();
@@ -113,6 +132,8 @@ class ContenidistaController
     }
 
     public function procesarSeccion(){
+        $this->validarRol();
+
         $edicion = $_POST["edicion"];
         $seccion = $_POST["seccion"];
 
@@ -123,6 +144,8 @@ class ContenidistaController
     }
 
     public function ajaxSecciones(){
+        $this->validarRol();
+
         $edicion = $_GET["edicion"];
         $seccionesDisponibles =  $this->model->getSeccionesFaltantesByEdicion($edicion);
 
@@ -135,6 +158,8 @@ class ContenidistaController
     }
 
     public function ajaxSeccionesPorEdicion(){
+        $this->validarRol();
+
         $edicion = $_GET["edicion"];
         $seccionesEncontradas =  $this->model->getAjaxSeccionesByEdicion($edicion);
 
@@ -147,23 +172,26 @@ class ContenidistaController
         echo "</select>";
     }
 
-    public function misnoticias()
-    {
+    public function misnoticias(){
+        $this->validarRol();
+
         $data['noticias'] = true;
         $idContenidista = $_SESSION['usuario'][0]['id'];
         $data['listaNoticias'] = $this->model->getNoticiasByAutor($idContenidista);
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function misproductos()
-    {
+    public function misproductos(){
+        $this->validarRol();
+
         $data['productos'] = true;
         $data['listaProductos'] = $this->model->getProductos();
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function edicion()
-    {
+    public function edicion(){
+        $this->validarRol();
+
         $data['edicion'] = true;
         $idEdicion = $_GET['id'];
         $data['nombre'] = $this->model->getNombreEdicionById($idEdicion);
@@ -171,8 +199,9 @@ class ContenidistaController
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function producto()
-    {
+    public function producto(){
+        $this->validarRol();
+
         $data['ediciones'] = true;
         $idProducto = $_GET['id'];
         $data['nombre'] = $this->model->getNombreProductoById($idProducto);
@@ -181,6 +210,8 @@ class ContenidistaController
     }
 
     public function validarNoticia(){
+        $this->validarRol();
+
         $titulo = $_POST["titulo"];
         $subtitulo = $_POST["subtitulo"];
         $imagen1 = $_FILES['imagen1']['tmp_name'];

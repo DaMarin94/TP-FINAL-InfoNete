@@ -15,7 +15,7 @@ class ContenidoEditModel
     }
 
     public function getContenidoPorId($id) {
-        $sql = "SELECT DISTINCT c.id, c.titulo, c.subtitulo, c.contenido, i.multimedia as imagen, c.estado, u.mail as contenidista, u.id as c_id FROM contenido c LEFT JOIN contenido_multimedia i ON c.imagen = i.id LEFT JOIN usuarios u ON c.contenidista = u.id WHERE c.id = '$id'";
+        $sql = "SELECT DISTINCT c.id, c.titulo, c.subtitulo, c.contenido, i.imagen1 as imagen, c.estado, u.mail as contenidista, u.id as c_id FROM contenido c LEFT JOIN contenido_multimedia i ON c.multimedia = i.id LEFT JOIN usuarios u ON c.contenidista = u.id WHERE c.id = '$id'";
         return $this->database->query($sql);
     }
 
