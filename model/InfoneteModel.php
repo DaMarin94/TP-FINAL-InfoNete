@@ -90,7 +90,6 @@ class InfoneteModel {
     }
 
     public function comprarEdicion($idEdicion, $usuario) {
-
         $sql = "INSERT INTO compra(usuario_id, edicion_id)
                 VALUES($usuario, $idEdicion)";
 

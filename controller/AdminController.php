@@ -47,10 +47,11 @@ class AdminController{
         $name = $_POST["name"];
         $email = $_POST["email"];
         $password  = $_POST["password"];
-        $ubicacion  = $_POST["ubicacion"];
+        $latitud  = $_POST["latitud"];
+        $longitud  = $_POST["longitud"];
         $role  = $_POST["role"];
 
-        if($this->model->altaUsuario($name, $email, $password, $ubicacion, $role)){
+        if($this->model->altaUsuario($name, $email, $password, $latitud, $longitud, $role)){
             Redirect::redirect('/admin/usuarios');
         }else{
             $data['error'] = "Error al crear usuario";
@@ -71,7 +72,8 @@ class AdminController{
         $data['name'] = $usuario[0]['nombre'];
         $data['email'] = $usuario[0]['mail'];
         $data['password'] = $usuario[0]['clave'];
-        $data['ubicacion'] = $usuario[0]['ubicacion'];
+        $data['latitud'] = $usuario[0]['latitud'];
+        $data['longitud'] = $usuario[0]['longitud'];
         $data['role'] = $usuario[0]['role'];
 
         $this->renderer->render('admin.mustache', $data);
@@ -82,13 +84,13 @@ class AdminController{
         $id = $_POST["id"];
         $name = $_POST["name"];
         $mail = $_POST["mail"];
-//        $password  = $_POST["password"];
-        $ubicacion  = $_POST["ubicacion"];
+        $latitud  = $_POST["latitud"];
+        $longitud  = $_POST["longitud"];
         $role  = $_POST["role"];
 
         if($_POST["roleEdit"]){ $role  = $_POST["roleEdit"]; }
 
-        $this->model->editUsuario($id, $name, $mail, $ubicacion, $role);
+        $this->model->editUsuario($id, $name, $mail, $latitud, $longitud, $role);
 
         Redirect::redirect('/admin/usuarios');
     }
@@ -108,22 +110,24 @@ class AdminController{
 
     public function getPdfContenidistas() {
         //Sus contenidistas y su información personal
-        $data['contenidistas'] = $this->model->getContenidistas();
+        $data['contenidistas'] = $this->model->getContenidistasReporte();
         $html = $this->renderer->getHtml('reportesPdf/templatePdfContenidistas.mustache', $data);
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-contenidistas');
     }
 
     public function getPdfClientes() {
         //Sus clientes y su información personal y producto adquirido
-        $data['contenidistas'] = $this->model->getContenidistas();
-        $html = $this->renderer->getHtml('reportesPdf/templatePdfContenidistas.mustache', $data);
-        $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-contenidistas');
+        $data['clientes'] = $this->model->getClientesReporte();
+        $html = $this->renderer->getHtml('reportesPdf/templatePdfClientes.mustache', $data);
+        $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-clientes');
     }
 
     public function getPdfProductos() {
         //Sus productos con su información básica, cantidad de vendidos/suscritos y ediciones
-        $data['contenidistas'] = $this->model->getContenidistas();
-        $html = $this->renderer->getHtml('reportesPdf/templatePdfContenidistas.mustache', $data);
+        $data['productos'] = $this->model->getProductosReporte();
+//        $data['ediciones'] = $this->model->getEdicionesReporte();
+//        $this->renderer->render('reportesPdf/templatePdfProductos.mustache', $data);
+        $html = $this->renderer->getHtml('reportesPdf/templatePdfProductos.mustache', $data);
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-contenidistas');
     }
 }

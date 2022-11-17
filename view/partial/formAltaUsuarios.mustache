@@ -18,8 +18,15 @@
         </div>
 
         <div>
-            <label for="ubicacion">Coordenadas de su ubicación: </label>
-            <input class="w3-input w3-light-grey" id="ubicacion" type="ubicacion" name="ubicacion" required>
+            <label  for="ubicacion">Click derecho en tu ubicacion: </label>
+            <div id="mapa" style="width:470px; height:400px;"></div>
+            <label  for="latitud">Latitud: </label>
+            <input type="text" class="w3-input w3-light-grey" id="latitud" name="latitud"
+                   pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" required>
+            <label  for="longitud">Longitud: </label>
+            <input type="text"  class="w3-input w3-light-grey" id="longitud" name="longitud"
+                   pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" required>
+
         </div>
 
         <div>
@@ -42,6 +49,7 @@
 <script>
     $(document).ready(function() {
         muestraRoles()
+        loadMap()
     });
 
     function muestraRoles() {

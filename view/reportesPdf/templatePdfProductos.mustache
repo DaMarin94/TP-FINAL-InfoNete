@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="UTF-8">
+<style rel="stylesheet">
+    body{
+        font-family: "Segoe UI",Arial,sans-serif;
+    }
+
+    .contenedor {
+        margin: 0px 24px;
+    }
+
+    .titulo{
+        font-size: 1.8em!important;
+        font-weight: 400;
+    }
+
+    .tabla{
+        width: 100%;
+        display: table;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .tabla thead {
+        background-color: #f1f1f1!important;
+    }
+    .tabla tbody {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .tabla td, .tabla th {
+        padding: 8px 8px;
+        display: table-cell;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {background: #f1f1f1}
+    tbody tr:nth-child(odd) {background: #FFF}
+
+</style>
+
+<body>
+    <div class="contenedor">
+        <div class="titulo">
+            <h1>Productos</h1>
+        </div>
+        {{#productos}}
+            <h3>{{nombre}}</h3>
+            <table class="tabla" style="margin-bottom: 25px;">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Subscriptos/compras</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{nombre}}</td>
+                        <td>{{tipo}}</td>
+                        <td>{{sub_cant}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="font-weight: 700;">Ediciones</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 700;">Nombre</td>
+                        <td style="font-weight: 700;">Precio</td>
+                        <td style="font-weight: 700;">Fecha</td>
+                        <th></th>
+                    </tr>
+                    {{#edicion}}
+                        <tr>
+
+                            <td>{{nom_edicion}}</td>
+                            <td>${{precio}}</td>
+                            <td>{{fecha}}</td>
+                            <td>{{compras}}</td>
+                        </tr>
+                    {{/edicion}}
+                </tbody>
+            </table>
+            <hr>
+        {{/productos}}
+    </div>
+</body>

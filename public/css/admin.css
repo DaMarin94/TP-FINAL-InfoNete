@@ -20,8 +20,24 @@
     vertical-align: unset!important;
 }
 
+.contBotonReporte {
+    margin: 50px 0px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
 .botonReportes {
     width: 100%;
     height: 60px;
-    padding: 18px 0px;
+    padding: 18px 70px;
+}
+
+@media (max-width: 900px){
+    .contBotonReporte {
+        flex-direction: column;
+    }
+    .botonReportes {
+        margin: 10px 0px;
+    }
 }
