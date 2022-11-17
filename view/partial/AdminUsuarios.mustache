@@ -10,7 +10,8 @@
             <th>Id</th>
             <th>Nombre</th>
             <th>Mail</th>
-            <th>Ubicación</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
             <th>Estado</th>
             <th>Role</th>
             <th></th>
@@ -22,7 +23,8 @@
                 <td>{{id}}</td>
                 <td>{{nombre}}</td>
                 <td>{{mail}}</td>
-                <td>{{ubicacion}}</td>
+                <td>{{latitud}}</td>
+                <td>{{longitud}}</td>
                 <td>{{estado}}</td>
                 <td>{{role}}</td>
                 <td><a href="/admin/editorUsuario?id={{id}}"/><i class="fa fa-pencil w3-large" aria-hidden="true"></i></td>
@@ -50,14 +52,14 @@
                 <input class="w3-input w3-light-grey" type="email" name="mail" value="{{email}}" required>
             </div>
 
-<!--            <div>-->
-<!--                <label for="password">Password: </label>-->
-<!--                <input class="w3-input w3-light-grey" id="password" type="password" name="password">-->
-<!--            </div>-->
+            <div>
+                <label for="latitud">Latitud: </label>
+                <input class="w3-input w3-light-grey" id="latitud" type="text" name="latitud" value="{{latitud}}" required>
+            </div>
 
             <div>
-                <label for="ubicacion">Coordenadas de su ubicación: </label>
-                <input class="w3-input w3-light-grey" id="ubicacion" type="ubicacion" name="ubicacion" value="{{ubicacion}}" required>
+                <label for="longitud">Longitud: </label>
+                <input class="w3-input w3-light-grey" id="longitud" type="text" name="longitud" value="{{longitud}}" required>
             </div>
 
             <div>

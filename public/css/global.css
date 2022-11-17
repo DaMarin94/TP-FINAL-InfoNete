@@ -8,8 +8,12 @@ html body {
 }
 
 #footer {
-    position: absolute;
+    position: absolute!important;
     bottom: 0;
     width: 100%;
     height: 164px;            /* Footer height */
+}
+
+.w3-sidebar {
+    position: absolute!important;
 }
