@@ -1,13 +1,15 @@
 <?php
 
-class LectorController
-{
+class LectorController{
+
     private $renderer;
     private $model;
+    private $pdfGenerator;
 
-    public function __construct($render, $model){
+    public function __construct($render, $model, $pdfGenerator){
         $this->renderer = $render;
         $this->model = $model;
+        $this->pdfGenerator = $pdfGenerator;
     }
 
     public function validarRol(){
@@ -68,6 +70,16 @@ class LectorController
         $data['listaNoticiasCompradas'] = $this->model->getNoticiasCompradas($usuario);
 
         $this->renderer->render('lector.mustache', $data);
+    }
+
+    public function getPdfSuscripciones() {
+        $this->validarRol();
+
+        $usuario = $_SESSION['id_user'];
+        $data['listaSuscripciones'] = $this->model->getSuscripciones($usuario);
+
+        $html = $this->renderer->getHtml('reportesPdf/templatePdfLectorSuscripciones.mustache', $data);
+        $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-suscripciones');
     }
 
 }

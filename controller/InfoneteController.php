@@ -40,6 +40,7 @@ class InfoneteController {
         $idProducto = $_GET['id'];
         $data['producto'] = $this->model->getProductoPorId($idProducto);
         $data['listaEdiciones'] = $this->model->getEdicionesPorProducto($idProducto);
+
         $this->renderer->render('infonete.mustache', $data);
     }
 
@@ -62,7 +63,6 @@ class InfoneteController {
         $data['listaSecciones'] = $this->model->getSeccionesPorEdicion($idEdicion);
 
         $data['contenido'] = $this->model->getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
-
         $data['contenido'] = $this->model->getContenidoCompradoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
 
         /*if($idSeccion != null){
