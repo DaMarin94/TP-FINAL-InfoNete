@@ -44,7 +44,7 @@ class InfoneteModel {
                 WHERE esn.edicion = '$idEdicion' 
                 AND esn.seccion = '$idSeccion'
                 AND s.usuario_id = $usuario
-                AND c.estado = 1";
+                AND c.estado = 2";
         return $this->database->query($sql);
     }
 

@@ -29,8 +29,6 @@ function loadMap() {
 
 function loadMapNoticia(latitud, longitud) {
 
-
-
     //opciones del mapa
     var mapOptions = {
         center:new google.maps.LatLng(latitud,longitud),
