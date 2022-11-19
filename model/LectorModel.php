@@ -30,6 +30,15 @@ class LectorModel
         return $this->database->query($sql);
     }
 
+    public function getSuscripcionesPDF($usuario, $fechaInicio, $fechaFin){
+
+        $sql = "SELECT * FROM suscripcion s JOIN usuarios u on s.usuario_id = u.id
+                                            WHERE u.id = '$usuario'
+                                            AND s.fechaAdquirido BETWEEN '$fechaInicio' AND '$fechaFin'
+                                            OR s.fechaVencimiento BETWEEN '$fechaInicio' AND '$fechaFin'";
+        return $this->database->query($sql);
+    }
+
     public function getNoticiasSuscrito($usuario){
 
         $sql = "SELECT * FROM contenido c JOIN edicion_seccion_noticia esn on esn.noticia = c.id

@@ -75,8 +75,12 @@ class LectorController{
     public function getPdfSuscripciones() {
         $this->validarRol();
 
+        $fechaInicio = $_GET['fechaInicio'];
+        $fechaFin = $_GET['fechaFin'];
+
         $usuario = $_SESSION['id_user'];
-        $data['listaSuscripciones'] = $this->model->getSuscripciones($usuario);
+        $data['listaSuscripciones'] = $this->model->getSuscripcionesPDF($usuario, $fechaInicio, $fechaFin);
+
 
         $html = $this->renderer->getHtml('reportesPdf/templatePdfLectorSuscripciones.mustache', $data);
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-suscripciones');

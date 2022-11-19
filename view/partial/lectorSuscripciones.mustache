@@ -19,10 +19,16 @@
     {{/listaSuscripciones}}
 </table>
 
-<div class="contAddUser w3-padding-top-64">
-    <h1>Reportes</h1>
-</div>
 
     <div class="w3-left-align ">
-        <a href="/lector/getPdfSuscripciones" class="w3-button w3-teal">Suscripciones</a>
+
+        <form action="/lector/getPdfSuscripciones" method="get">
+        <label for="fechaInicio">Desde:</label>
+        <input type="datetime-local" id="fechaInicio" name="fechaInicio">
+        <label for="fechaFin">Hasta:</label>
+        <input type="datetime-local" id="fechaFin" name="fechaFin">
+        <br>
+        <button class="w3-button w3-black w3-margin-top" type="submit">Imprimir</button>
+
+        </form>
     </div>
