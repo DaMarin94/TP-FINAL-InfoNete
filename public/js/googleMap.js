@@ -26,3 +26,26 @@ function loadMap() {
     });
 
 }
+
+function loadMapNoticia(latitud, longitud) {
+
+
+
+    //opciones del mapa
+    var mapOptions = {
+        center:new google.maps.LatLng(latitud,longitud),
+        zoom:15,
+        panControl: false,
+        zoomControl: true,
+        scaleControl: false,
+        mapTypeControl:false,
+        streetViewControl:true,
+        overviewMapControl:true,
+        rotateControl:true,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+    };
+
+    //instanciacion del mapa
+    var map = new google.maps.Map(document.getElementById("mapa"),mapOptions);
+
+}
