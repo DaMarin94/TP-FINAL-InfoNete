@@ -31,6 +31,7 @@ class InfoneteController {
     public function list() {
         $data['productos'] = true;
         $data['listaProductos'] = $this->model->getProductos();
+
         $this->renderer->render('infonete.mustache', $data);
     }
 

@@ -16,16 +16,10 @@ class LectorModel
     }
 
     public function getEdicionesSuscrito($usuario){
-
-        $sql = "SELECT * FROM Edicion e
-                WHERE  EXISTS (SELECT 1
-                                FROM producto p
-                                WHERE  EXISTS (SELECT 1
-                                                FROM suscripcion s
-                                                WHERE s.producto_id = p.id
-                                                AND p.id = e.producto
-                                                AND s.usuario_id = '$usuario'
-                                                AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento))";
+        $sql = "SELECT * FROM edicion e JOIN producto p on e.producto = p.id 
+                                        JOIN suscripcion s ON s.producto_id = p.id
+                                        WHERE s.usuario_id = '$usuario'
+                                        AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento";
         return $this->database->query($sql);
     }
 
@@ -43,7 +37,8 @@ class LectorModel
                                         JOIN producto p ON p.id = e.producto 
                                         JOIN suscripcion s ON s.producto_id = p.id
                                         JOIN usuarios u ON u.id = s.usuario_id
-                                        WHERE u.id = '$usuario'";
+                                        WHERE u.id = '$usuario'
+                                        AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento";
         return $this->database->query($sql);
     }
 
