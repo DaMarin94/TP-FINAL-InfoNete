@@ -33,7 +33,7 @@ class LectorModel
 
     public function getEdicionesCompradas($usuario, $idProducto){
 
-        $sql = "SELECT * FROM Edicion e
+        $sql = "SELECT e.id, e.portada, e.edicion FROM Edicion e
                 WHERE e.producto = '$idProducto'
                 AND EXISTS (SELECT 1
                                 FROM compra c

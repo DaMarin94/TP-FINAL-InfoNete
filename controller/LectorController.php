@@ -49,7 +49,7 @@ class LectorController{
         $data['listaEdicionesCompradas'] = $this->model->getEdicionesCompradas($usuario, $idProducto);
 
         $data ['ediciones'] = true;
-        $data['listaEdiciones'] = array_merge($data['listaEdicionesCompradas'], $data['listaEdicionesSuscrito']);
+        $data['listaEdiciones'] = array_unique(array_merge($data['listaEdicionesCompradas'], $data['listaEdicionesSuscrito']),0);
 
         $this->renderer->render('lector.mustache', $data);
     }
