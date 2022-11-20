@@ -2,11 +2,16 @@
     width: 80%!important;
 }
 
-.w3-row img{
+.catalogo img{
     width: 80%!important;
     height: 25rem;
 }
 
 .contenido{
     width: 100%!important;
+}
+
+.lector img{
+    width: 100%!important;
+    height: 20rem;
 }

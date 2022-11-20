@@ -44,7 +44,7 @@ class InfoneteModel {
                 WHERE esn.edicion = '$idEdicion' 
                 AND esn.seccion = '$idSeccion'
                 AND s.usuario_id = $usuario
-                AND c.estado = 2";
+                AND c.estado = 1";
         return $this->database->query($sql);
     }
 
@@ -99,6 +99,17 @@ class InfoneteModel {
                                                     AND  c.usuario_id = '$usuario'";
         $usuarioYaCompro = $this->database->query($usuarioYaComproVerificacion);
         if(count($usuarioYaCompro) > 0){
+            return false;
+        }
+
+        $usuarioYaSuscritoVerificacion = "SELECT e.id, e.portada, e.edicion FROM edicion e JOIN producto p on e.producto = p.id 
+                                                JOIN suscripcion s ON s.producto_id = p.id
+                                                WHERE s.usuario_id = '$usuario'
+                                                AND s.producto_id =  e.producto
+                                                AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento
+                                                AND e.id = '$idEdicion'";
+        $usuarioYaSuscrito = $this->database->query($usuarioYaSuscritoVerificacion);
+        if(count($usuarioYaSuscrito) > 0){
             return false;
         }
 

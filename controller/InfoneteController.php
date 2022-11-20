@@ -62,8 +62,14 @@ class InfoneteController {
         $data['edicion'] = $this->model->getEdicionPorId($idEdicion);
         $data['listaSecciones'] = $this->model->getSeccionesPorEdicion($idEdicion);
 
-        $data['contenido'] = $this->model->getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
-        $data['contenido'] = $this->model->getContenidoCompradoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
+        if($usuario ==null){
+            Redirect::redirect('/');
+        }
+
+        $data['contenidoSuscrito'] = $this->model->getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
+        $data['contenidoComprado'] = $this->model->getContenidoCompradoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
+
+        $data['contenido'] = array_unique(array_merge($data['contenidoSuscrito'],  $data['contenidoComprado']),0);
 
         /*if($idSeccion != null){
             $idContenido = $data['contenido'][0]['id'];

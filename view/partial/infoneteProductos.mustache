@@ -4,12 +4,13 @@
 </div>
 
 <div style="overflow-x:auto;">
-    <div class="w3-row">
+    <div class="w3-row catalogo">
         {{#listaProductos}}
             <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
                 <a class="w3-center" href="infonete/producto?id={{id}}">
                 <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
                 </a>
+                {{#usuario}}
                 <ul class="w3-ul w3-center">
                     <form action="/infonete/suscribirseProducto/" method="post">
                         <input type="hidden" id="id_producto" name="id_producto" value="{{id}}">
@@ -20,6 +21,7 @@
                          </ul>}}
                     </form>
                 </ul>
+                {{/usuario}}
             </div>
         {{/listaProductos}}
     </div>
