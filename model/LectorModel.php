@@ -44,7 +44,7 @@ class LectorModel
 
     public function getSuscripciones($usuario){
 
-        $sql = "SELECT * FROM suscripcion s JOIN usuarios u on s.usuario_id = u.id
+        $sql = "SELECT p.nombre ,s.fechaAdquirido, s.fechaVencimiento, p.precio FROM suscripcion s JOIN usuarios u on s.usuario_id = u.id
                                             JOIN producto p ON s.producto_id = p.id
                                             WHERE u.id = '$usuario'";
         return $this->database->query($sql);
@@ -52,15 +52,16 @@ class LectorModel
 
     public function getCompras($usuario){
 
-        $sql = "SELECT * FROM compra c JOIN usuarios u on c.usuario_id = u.id
+        $sql = "SELECT p.nombre as nombre, e.edicion, c.fecha, e.precio FROM compra c JOIN usuarios u on c.usuario_id = u.id
                                         JOIN edicion e ON c.edicion_id = e.id
-                                            WHERE u.id = '$usuario'";
+                                        JOIN producto p ON p.id = e.producto
+                                        WHERE u.id = '$usuario'";
         return $this->database->query($sql);
     }
 
     public function getSuscripcionesPDF($usuario, $fechaInicio, $fechaFin){
 
-        $sql = "SELECT * FROM suscripcion s JOIN usuarios u on s.usuario_id = u.id
+        $sql = "SELECT p.nombre ,s.fechaAdquirido, s.fechaVencimiento, p.precio FROM suscripcion s JOIN usuarios u on s.usuario_id = u.id
                                             JOIN producto p ON p.id = s.producto_id
                                             WHERE u.id = '$usuario'
                                             AND s.fechaAdquirido BETWEEN '$fechaInicio' AND '$fechaFin'
@@ -70,10 +71,11 @@ class LectorModel
 
     public function getComprasPDF($usuario, $fechaInicio, $fechaFin){
 
-        $sql = "SELECT * FROM compra c JOIN usuarios u on c.usuario_id = u.id
+        $sql = "SELECT p.nombre as nombre, e.edicion, c.fecha, e.precio FROM compra c JOIN usuarios u on c.usuario_id = u.id
                                         JOIN edicion e ON c.edicion_id = e.id
+                                        JOIN producto p ON p.id = e.producto
                                         WHERE u.id = '$usuario'
-                                        AND c.fechaCompra BETWEEN '$fechaInicio' AND '$fechaFin'";
+                                        AND c.fecha BETWEEN '$fechaInicio' AND '$fechaFin'";
         return $this->database->query($sql);
     }
 

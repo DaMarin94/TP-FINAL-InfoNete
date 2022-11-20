@@ -2,8 +2,8 @@
 
 <div class="w3-sidebar w3-bar-block w3-light-grey" style="z-index: 0">
     <h3 class="w3-bar-item">Lector</h3>
-    <a href="/lector" class="w3-bar-item w3-button w3-hover-teal">Productos</a>
-    <a href="/lector/misCompras" class="w3-bar-item w3-button w3-hover-teal">Compras</a>
+    <a href="/lector" class="w3-bar-item w3-button w3-hover-teal">Mi biblioteca</a>
+    <a href="/lector/misPagos" class="w3-bar-item w3-button w3-hover-teal">Mis pagos</a>
     <a href="/infonete/cerrarSesion" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-center w3-text-white w3-black">Cerrar Sesión</a>
 </div>
 
@@ -13,7 +13,7 @@
     <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:70%; min-height: 75vh" id="band">
 
         {{#productos}}
-            {{> lectorProductos}}
+            {{> lectorBiblioteca}}
         {{/productos}}
 
         {{#compras}}

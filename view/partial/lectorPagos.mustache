@@ -1,5 +1,5 @@
-<div class="contAddUser">
-    <h1>Mis pagos</h1>
+<div class="w3-margin-top">
+    <h2 class="w3-black">Mis pagos</h2>
 </div>
 <div class="contAddUser">
     <h1>Suscripciones</h1>
@@ -9,24 +9,24 @@
     <thead>
     <tr class="w3-dark-grey">
         <th>Producto</th>
-        <th>Fecha adquirido</th>
-        <th>Fecha vencimiento</th>
+        <th>Fecha de compra</th>
+        <th>Fecha de vencimiento</th>
         <th>Monto</th>
     </tr>
     </thead>
     {{#listaSuscripciones}}
         <tr>
-            <td>{{producto_id}}</td>
+            <td>{{nombre}}</td>
             <td>{{fechaAdquirido}}</td>
             <td>{{fechaVencimiento}}</td>
-            <td>{{precioSuscripcion}}</td>
+            <td>{{precio}}</td>
         </tr>
     {{/listaSuscripciones}}
 </table>
 
 
 
-<div class="w3-center-align w3-padding-16">
+<div class="w3-center-align w3-padding-24">
 
     <form action="/lector/getPdfSuscripciones" method="get">
         <label for="fechaInicio">Desde:</label>
@@ -48,21 +48,21 @@
     <tr class="w3-dark-grey">
         <th>Producto</th>
         <th>Edicion</th>
-        <th>Fecha</th>
+        <th>Fecha de compra</th>
         <th>Monto</th>
     </tr>
     </thead>
     {{#listaCompras}}
         <tr>
-            <td>{{producto}}</td>
-            <td>{{edicion_id}}</td>
-            <td>{{fechaCompra}}</td>
+            <td>{{nombre}}</td>
+            <td>{{edicion}}</td>
+            <td>{{fecha}}</td>
             <td>{{precio}}</td>
         </tr>
     {{/listaCompras}}
 </table>
 
-<div class="w3-center-align w3-padding-16">
+<div class="w3-center-align w3-padding-24">
 
     <form action="/lector/getPdfCompras" method="get">
         <label for="fechaInicio">Desde:</label>

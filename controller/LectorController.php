@@ -54,7 +54,7 @@ class LectorController{
         $this->renderer->render('lector.mustache', $data);
     }
 
-    public function misCompras(){
+    public function misPagos(){
         $this->validarRol();
 
         $usuario = $_SESSION['id_user'];
@@ -62,20 +62,6 @@ class LectorController{
         $data['compras'] = true;
         $data['listaSuscripciones'] = $this->model->getSuscripciones($usuario);
         $data['listaCompras'] = $this->model->getCompras($usuario);
-        $this->renderer->render('lector.mustache', $data);
-    }
-
-    public function misNoticias(){
-        $this->validarRol();
-
-        $usuario = $_SESSION['id_user'];
-
-        $data['noticiasSuscrito'] = true;
-        $data['listaNoticiasSuscrito'] = $this->model->getNoticiasSuscrito($usuario);
-
-        $data['noticiasCompradas'] = true;
-        $data['listaNoticiasCompradas'] = $this->model->getNoticiasCompradas($usuario);
-
         $this->renderer->render('lector.mustache', $data);
     }
 
