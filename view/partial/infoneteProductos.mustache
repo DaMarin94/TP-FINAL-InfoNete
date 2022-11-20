@@ -3,28 +3,29 @@
     <h2 class="w3-black">Productos</h2>
 </div>
 
-    <div style="overflow-x:auto;">
-        <table class='w3-table w3-display-middle'>
-            {{#listaProductos}}
-                <td>
-                    <a class="w3-center" href="infonete/producto?id={{id}}">
-                    <ul class="w3-ul"><img src="/public/images/{{portada}}" width="300" height="400"></ul>
-                    <ul class="w3-ul w3-padding-top-24">{{nombre}}</ul>
-                    </a>
-                    <ul class="w3-ul w3-center">
+<div style="overflow-x:auto;">
+    <div class="w3-row catalogo">
+        {{#listaProductos}}
+            <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
+                <a class="w3-center" href="infonete/producto?id={{id}}">
+                <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
+                </a>
+                {{#usuario}}
+                <ul class="w3-ul w3-center">
                     <form action="/infonete/suscribirseProducto/" method="post">
                         <input type="hidden" id="id_producto" name="id_producto" value="{{id}}">
-                        <button class="w3-button w3-black w3-margin-top" type="submit">Suscribirse</button>
+                        <button class="w3-button w3-black botonSuscribirse" type="submit">Suscribirse</button>
                         {{!<ul class="w3-ul w3-center w3-margin-top">
                          <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
                                  data-preference-id="<?php echo $preference->id; ?>"></script>
                          </ul>}}
-                     </form>
-                     </ul>
-                 </td>
-             {{/listaProductos}}
-        </table>
+                    </form>
+                </ul>
+                {{/usuario}}
+            </div>
+        {{/listaProductos}}
     </div>
+</div>
 
 
 

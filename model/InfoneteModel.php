@@ -43,7 +43,9 @@ class InfoneteModel {
                                         JOIN suscripcion s ON s.producto_id = e.producto
                 WHERE esn.edicion = '$idEdicion' 
                 AND esn.seccion = '$idSeccion'
-                AND s.usuario_id = $usuario";
+                AND s.usuario_id = $usuario
+                AND c.estado = 1
+                AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento";
         return $this->database->query($sql);
     }
 
@@ -56,7 +58,8 @@ class InfoneteModel {
                                         JOIN compra co ON co.edicion_id = e.id
                 WHERE esn.edicion = '$idEdicion' 
                 AND esn.seccion = '$idSeccion'
-                AND co.usuario_id = $usuario";
+                AND co.usuario_id = $usuario
+                AND c.estado = 1";
         return $this->database->query($sql);
     }
 
@@ -76,12 +79,14 @@ class InfoneteModel {
         return $this->database->query($sql);
     }
 
-    public function getMultimediaByContenido($idContenido){
-        $sql = "SELECT * FROM contenido_multimedia cm JOIN contenido c ON c.multimedia = cm.id 
-                                                      WHERE c.id = '$idContenido'";
-    }
+    public function suscribirseProducto($idProducto, $usuario) {
 
-    public function suscribirseProducto($idProducto,$usuario) {
+        $usuarioYaSuscritoVerificacion = "SELECT * FROM suscripcion s WHERE s.producto_id = '$idProducto'
+                                                    AND  s.usuario_id = '$usuario'";
+        $usuarioYaSuscrito = $this->database->query($usuarioYaSuscritoVerificacion);
+        if(count($usuarioYaSuscrito) > 0){
+            return false;
+        }
 
         $sql = "INSERT INTO suscripcion(usuario_id, producto_id, fechaVencimiento)
                 VALUES($usuario, $idProducto, NOW() + INTERVAL 1 MONTH)";
@@ -90,9 +95,34 @@ class InfoneteModel {
     }
 
     public function comprarEdicion($idEdicion, $usuario) {
+
+        $usuarioYaComproVerificacion = "SELECT * FROM compra c WHERE c.edicion_id = '$idEdicion'
+                                                    AND  c.usuario_id = '$usuario'";
+        $usuarioYaCompro = $this->database->query($usuarioYaComproVerificacion);
+        if(count($usuarioYaCompro) > 0){
+            return false;
+        }
+
+        $usuarioYaSuscritoVerificacion = "SELECT e.id, e.portada, e.edicion FROM edicion e JOIN producto p on e.producto = p.id 
+                                                JOIN suscripcion s ON s.producto_id = p.id
+                                                WHERE s.usuario_id = '$usuario'
+                                                AND s.producto_id =  e.producto
+                                                AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento
+                                                AND e.id = '$idEdicion'";
+        $usuarioYaSuscrito = $this->database->query($usuarioYaSuscritoVerificacion);
+        if(count($usuarioYaSuscrito) > 0){
+            return false;
+        }
+
         $sql = "INSERT INTO compra(usuario_id, edicion_id)
                 VALUES($usuario, $idEdicion)";
 
         return $this->database->execute($sql);
     }
+
+    public function getProductosSuscrito($usuario) {
+        $sql = "SELECT s.producto_id FROM suscripcion s WHERE s.usuario_id = '$usuario' ";
+        return $this->database->query($sql);
+    }
+
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="UTF-8">
+<style rel="stylesheet">
+    body{
+        font-family: "Segoe UI",Arial,sans-serif;
+    }
+
+    .contenedor {
+        margin: 0px 24px;
+    }
+
+    .titulo{
+        font-size: 1.8em!important;
+        font-weight: 400;
+    }
+
+    .tabla{
+        width: 100%;
+        display: table;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .tabla thead {
+        background-color: #f1f1f1!important;
+    }
+    .tabla tbody {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .tabla td, .tabla th {
+        padding: 8px 8px;
+        display: table-cell;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {background: #f1f1f1}
+    tbody tr:nth-child(odd) {background: #FFF}
+
+</style>
+
+<body>
+
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Suscripciones</h1>
+    </div>
+
+    <table class="tabla">
+        <thead>
+        <tr class="w3-dark-grey">
+            <th>Producto</th>
+            <th>Fecha adquirido</th>
+            <th>Fecha vencimiento</th>
+            <th>Monto</th>
+        </tr>
+        </thead>
+        {{#listaSuscripciones}}
+            <tr>
+                <td>{{producto_id}}</td>
+                <td>{{fechaAdquirido}}</td>
+                <td>{{fechaVencimiento}}</td>
+                <td>{{precioSuscripcion}}</td>
+            </tr>
+        {{/listaSuscripciones}}
+        </tbody>
+    </table>
+</div>
+</body>

@@ -1,7 +1,6 @@
 <?php
 
-class EditorController
-{
+class EditorController{
     private $renderer;
     private $model;
 
