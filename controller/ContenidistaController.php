@@ -21,9 +21,7 @@ class ContenidistaController
     public function list(){
         $this->validarRol();
 
-        $data['noticias'] = true;
-        $data['listaNoticias'] = $this->model->getNoticiasByAutor($_SESSION['usuario'][0]['id']);
-        $this->renderer->render('contenidista.mustache', $data);
+        $this->noticiasBorrador();
     }
 
     public function formularioNoticia(){
@@ -31,7 +29,6 @@ class ContenidistaController
 
         $data['formAltaNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
-        $data['listaSecciones'] = $this->model->getSecciones();
         echo $this->renderer->render("contenidista.mustache", $data);
     }
 
@@ -51,26 +48,42 @@ class ContenidistaController
         if($this->validarNoticia()) {
             $idMultimedia = $this->model->procesarMultimedia();
             $this->model->altaNoticia($titulo, $subtitulo, $idMultimedia, $contenido, $seccion, $edicion, $latitud, $longitud);
-            Redirect::redirect("noticias");
+            Redirect::redirect("noticiasBorrador");
         } else {
             Redirect::redirect("formularioNoticias");
         }
     }
 
+    public function verNoticia(){
+        $this->validarRol();
+
+        $idNoticia = $_GET["id"];
+        $data['datosNoticia'] = $this->model->getNoticia($idNoticia);
+        echo $this->renderer->render("noticia.mustache", $data);
+    }
+
     public function editarNoticia(){
         $this->validarRol();
 
-        $noticia = $_GET["id"];
+        $idNoticia = $_GET["id"];
         $data['editarNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
-        $data['listaSecciones'] = $this->model->getSecciones();
-        $data['datosNoticia'] = $this->model->getDatosNoticia($noticia);
-        $data['datosMultimedia'] = $this->model->getMultimediaByNoticia($noticia);
+        $data['datosNoticia'] = $this->model->getDatosNoticia($idNoticia);
+        $data['datosMultimedia'] = $this->model->getMultimediaByNoticia($idNoticia);
         echo $this->renderer->render("contenidista.mustache", $data);
     }
 
+    public function borrarNoticia(){
+        $idNoticia = $_GET["id"];
+        $this->model->deleteNoticiaById($idNoticia);
+        Redirect::redirect("noticiasBorrador");
+    }
+
+    //Metodos relacionados al formulario de AGREGAR PRODUCTO
     public function formularioProducto(){
         $this->validarRol();
+
+        $data['exito'] = $this->mensajeExitoProducto();
 
         $data['formAltaProducto'] = true;
         $data['tipos'] = $this->model->getTipos();
@@ -89,11 +102,20 @@ class ContenidistaController
         if(!empty($nombre) && !empty($tipo) && !empty($imagen)){
             move_uploaded_file($portada, "public/images/".$imagen);
             $this->model->altaProducto($nombre, $tipo, $imagen);
-            Redirect::redirect("misproductos");
+            Redirect::redirect("formularioProducto?msg=1");
         } else {
-            Redirect::redirect("formularioProducto");
+            Redirect::redirect("formularioProducto?msg=0");
         }
     }
+
+    public function mensajeExitoProducto(){
+        $mensaje = "";
+        if (isset($_GET["msg"]) && $_GET["msg"] == 1){
+            $mensaje = "El producto fue agregado con exito!";
+        }
+        return $mensaje;
+    }
+
 
     public function formularioEdicion(){
         $this->validarRol();
@@ -122,12 +144,15 @@ class ContenidistaController
         }
     }
 
+    //Metodos relacionados a formulario de AGREGAR SECCION
     public function formularioSeccion(){
         $this->validarRol();
 
+        $data['error'] = $this->mensajeErrorSeccion();
+        $data['exito'] = $this->mensajeExitoSeccion();
+
         $data['formAgregarSeccion'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
-        $data['listaSecciones'] = $this->model->getSecciones();
         $this->renderer->render('contenidista.mustache', $data);
     }
 
@@ -139,10 +164,35 @@ class ContenidistaController
 
         if(!empty($edicion) && !empty($seccion)){
             $this->model->altaSeccion($edicion, $seccion);
-            Redirect::redirect("edicion?id=$edicion");
+            Redirect::redirect("formularioSeccion?msg=1");
+        } else {
+            Redirect::redirect("formularioSeccion?msg=0");
         }
     }
 
+    //Se paso por url un parametro para poder mostrar un mensaje en
+    //respuesta al envio del form
+    public function mensajeErrorSeccion(){
+        if (isset($_GET["msg"]) && $_GET["msg"] == 0){
+            if(!isset($_POST["edicion"])) {
+                return "Por favor, seleccione una edicion";
+            }
+
+            if(!isset($_POST["seccion"])){
+                return "Por favor, seleccione una seccion";
+            }
+        }
+    }
+
+    public function mensajeExitoSeccion(){
+        $mensaje = "";
+        if (isset($_GET["msg"]) && $_GET["msg"] == 1){
+            $mensaje = "La seccion fue agregada con exito!";
+        }
+        return $mensaje;
+    }
+
+    //Metodos AJAX para obtener las secciones
     public function ajaxSecciones(){
         $this->validarRol();
 
@@ -151,6 +201,7 @@ class ContenidistaController
 
         echo "<label for='seccion'>Elegi una seccion:</label>";
         echo "<select name='seccion' class='w3-input w3-light-grey w3-margin-top'>";
+        echo "<option value='0'>Seleccione una seccion</option>";
         foreach ($seccionesDisponibles as $seccion){
             echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";
         }
@@ -172,30 +223,31 @@ class ContenidistaController
         echo "</select>";
     }
 
-    public function misnoticias(){
+    //Metodos para obtener las noticias del contenidista segun el estado
+    public function noticiasBorrador(){
         $this->validarRol();
 
-        $data['noticias'] = true;
+        $data['noticiasBorrador'] = true;
         $idContenidista = $_SESSION['usuario'][0]['id'];
-        $data['listaNoticias'] = $this->model->getNoticiasByAutor($idContenidista);
+        $data['listaNoticias'] = $this->model->getNoticiasEnBorradorByAutor($idContenidista);
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function misproductos(){
+    public function noticiasRevision(){
         $this->validarRol();
 
-        $data['productos'] = true;
-        $data['listaProductos'] = $this->model->getProductos();
+        $data['noticiasRevision'] = true;
+        $idContenidista = $_SESSION['usuario'][0]['id'];
+        $data['listaNoticias'] = $this->model->getNoticiasRevisadasByAutor($idContenidista);
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function edicion(){
+    public function noticiasPublicadas(){
         $this->validarRol();
 
-        $data['edicion'] = true;
-        $idEdicion = $_GET['id'];
-        $data['nombre'] = $this->model->getNombreEdicionById($idEdicion);
-        $data['listaSecciones'] = $this->model->getSeccionesByEdicion($idEdicion);
+        $data['noticiasPublicadas'] = true;
+        $idContenidista = $_SESSION['usuario'][0]['id'];
+        $data['listaNoticias'] = $this->model->getNoticiasPublicadasByAutor($idContenidista);
         $this->renderer->render('contenidista.mustache', $data);
     }
 
@@ -226,4 +278,22 @@ class ContenidistaController
         }
         return false;
     }
+
+    /*public function misproductos(){
+    $this->validarRol();
+
+    $data['productos'] = true;
+    $data['listaProductos'] = $this->model->getProductos();
+    $this->renderer->render('contenidista.mustache', $data);
+    }
+
+    public function edicion(){
+        $this->validarRol();
+
+        $data['edicion'] = true;
+        $idEdicion = $_GET['id'];
+        $data['nombre'] = $this->model->getNombreEdicionById($idEdicion);
+        $data['listaSecciones'] = $this->model->getSeccionesByEdicion($idEdicion);
+        $this->renderer->render('contenidista.mustache', $data);
+    }*/
 }

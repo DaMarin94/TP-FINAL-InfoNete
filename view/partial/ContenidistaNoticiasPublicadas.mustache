@@ -1,12 +1,11 @@
 <div class="contAddUser">
-    <h1>Mis noticias</h1>
+    <h1>Publicadas</h1>
 </div>
 <table class='w3-table w3-striped'>
     <thead>
     <tr class="w3-dark-grey">
         <th>Id</th>
         <th>Titulo</th>
-        <th>Estado</th>
         <th>Acciones</th>
     </tr>
     </thead>
@@ -14,10 +13,8 @@
         <tr>
             <td>{{id}}</td>
             <td>{{titulo}}</td>
-            <td>{{estado}}</td>
-            <td>
-            <a href="../contenido?id={{id}}" class="w3-button w3-black w3-round-large">Ver noticia</a>
-            <a href="/contenidista/editarNoticia?id={{id}}" class="w3-button w3-black w3-round-large">Editar</a>
+            <td style="display: flex;">
+            <a href="/contenidista/verNoticia?id={{id}}" class="w3-button w3-black w3-round-large" style="margin-right: 10px;">Ver</a>
             </td>
         </tr>
     {{/listaNoticias}}
