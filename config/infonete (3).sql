@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2022 a las 04:12:02
+-- Tiempo de generación: 21-11-2022 a las 04:21:23
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.28
 
@@ -251,7 +251,8 @@ CREATE TABLE `estado` (
 INSERT INTO `estado` (`id`, `descripcion`) VALUES
 (1, 'Sin publicar'),
 (2, 'Publicado'),
-(3, 'Revision');
+(3, 'Revision'),
+(4, 'Dado de baja');
 
 -- --------------------------------------------------------
 
@@ -591,7 +592,7 @@ ALTER TABLE `edicion`
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `passwords`
