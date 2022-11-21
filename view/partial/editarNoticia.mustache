@@ -4,6 +4,7 @@
     <form action="/contenidista/procesarEditarNoticia"  method="post" enctype="multipart/form-data">
     {{#datosNoticia}}
         <div>
+            <input type="hidden" name="id" value="{{id}}">
             <label for="edicion">Escoge la edicion:</label>
             <select name="edicion" onchange="muestraSeccionesPorEdicion(this.value)" class="w3-input w3-light-grey w3-margin-top">
               {{#listaEdiciones}}

@@ -1,5 +1,11 @@
 <div class="w3-container w3-padding-32" style="display: flex;" id="band">
+
     <div style="padding: 0em 3em;">
+        {{#error}}
+            <div class="w3-panel w3-pale-red w3-border w3-round w3-animate-bottom w3-display-bottommiddle">
+                <p class="w3-text-red">{{error}}</p>
+            </div>
+        {{/error}}
      <h1>Nueva Publicacion</h1>
     <form action="/contenidista/procesarNoticia"  method="post" enctype="multipart/form-data">
         <div>
@@ -29,10 +35,10 @@
              <div id="mapa" style="width:470px; height:400px;" class="w3-margin-top"></div>
              <label for="latitud" class="w3-margin-top">Latitud:</label>
              <input type="text" class="w3-input w3-light-grey w3-margin-top" id="latitud" name="latitud"
-                pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" required>
+                pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
              <label  for="longitud" class="w3-margin-top">Longitud:</label>
              <input type="text"  class="w3-input w3-light-grey w3-margin-top" id="longitud" name="longitud"
-                pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" required>
+                pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
         </div>
         </div>
        <div style="width: 50%; padding: 0em 4em; height: 700px;" class="w3-card-4 w3-light-grey">

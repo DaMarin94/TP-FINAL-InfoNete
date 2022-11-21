@@ -24,8 +24,13 @@ class ContenidistaController
         $this->noticiasBorrador();
     }
 
+    //Metodos relacionado a AGREGAR NOTICIA y ABM
     public function formularioNoticia(){
         $this->validarRol();
+
+        if(!empty($_GET['error'])){
+            $data['error'] = $_GET['error'];
+        }
 
         $data['formAltaNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
@@ -50,7 +55,7 @@ class ContenidistaController
             $this->model->altaNoticia($titulo, $subtitulo, $idMultimedia, $contenido, $seccion, $edicion, $latitud, $longitud);
             Redirect::redirect("noticiasBorrador");
         } else {
-            Redirect::redirect("formularioNoticias");
+            $this->mensajeErrorNoticia();
         }
     }
 
@@ -73,6 +78,25 @@ class ContenidistaController
         echo $this->renderer->render("contenidista.mustache", $data);
     }
 
+    public function procesarEditarNoticia(){
+        $idNoticia = $_POST["id"];
+        $titulo = $_POST["titulo"];
+        $subtitulo = $_POST["subtitulo"];
+        $contenido  = $_POST["contenido"];
+        $latitud = $_POST["latitud"];
+        $longitud = $_POST["longitud"];
+
+        $seccion = $_POST["seccion"];
+        $edicion = $_POST["edicion"];
+
+        if(true) {
+            $this->model->editarNoticia($idNoticia, $titulo, $subtitulo, $contenido, $seccion, $edicion, $latitud, $longitud);
+            Redirect::redirect("noticiasBorrador");
+        } else {
+            Redirect::redirect("editarNoticia?id=$idNoticia");
+        }
+    }
+
     public function borrarNoticia(){
         $idNoticia = $_GET["id"];
         $this->model->deleteNoticiaById($idNoticia);
@@ -84,6 +108,7 @@ class ContenidistaController
         $this->validarRol();
 
         $data['exito'] = $this->mensajeExitoProducto();
+        $data['error'] = $this->mensajeErrorProducto();
 
         $data['formAltaProducto'] = true;
         $data['tipos'] = $this->model->getTipos();
@@ -104,19 +129,38 @@ class ContenidistaController
             $this->model->altaProducto($nombre, $tipo, $imagen);
             Redirect::redirect("formularioProducto?msg=1");
         } else {
-            Redirect::redirect("formularioProducto?msg=0");
+            if (empty($nombre)){
+                Redirect::redirect("formularioProducto?error=nombre");
+            }
+            if (empty($imagen)){
+                Redirect::redirect("formularioProducto?error=imagen");
+            }
         }
     }
 
     public function mensajeExitoProducto(){
         $mensaje = "";
-        if (isset($_GET["msg"]) && $_GET["msg"] == 1){
-            $mensaje = "El producto fue agregado con exito!";
+        if (isset($_GET["exito"]) && $_GET["exito"] == 1){
+            $mensaje = "El producto se ha registrado con exito";
         }
         return $mensaje;
     }
 
+    public function mensajeErrorProducto(){
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "nombre") {
+                $mensaje = $mensaje . "Por favor, ingrese un nombre";
+            }
+            if ($_GET["error"] == "imagen") {
+                $mensaje = $mensaje . "Por favor, ingrese una imagen";
+            }
+            return $mensaje;
+        }
+    }
 
+
+    //Metodos relacionados al formulario de AGREGAR EDICION
     public function formularioEdicion(){
         $this->validarRol();
 
@@ -164,29 +208,33 @@ class ContenidistaController
 
         if(!empty($edicion) && !empty($seccion)){
             $this->model->altaSeccion($edicion, $seccion);
-            Redirect::redirect("formularioSeccion?msg=1");
+            Redirect::redirect("formularioSeccion?exito=1");
         } else {
-            Redirect::redirect("formularioSeccion?msg=0");
+            if(empty($edicion)){
+                Redirect::redirect("formularioSeccion?error=edicion");
+            }
+            if(empty($seccion)){
+                Redirect::redirect("formularioSeccion?error=seccion");
+            }
         }
     }
 
-    //Se paso por url un parametro para poder mostrar un mensaje en
-    //respuesta al envio del form
     public function mensajeErrorSeccion(){
-        if (isset($_GET["msg"]) && $_GET["msg"] == 0){
-            if(!isset($_POST["edicion"])) {
-                return "Por favor, seleccione una edicion";
+        if (isset($_GET["error"])){
+            $mensaje = "";
+            if ($_GET["error"] == "edicion"){
+                $mensaje = "Por favor, seleccione una edicion";
             }
-
-            if(!isset($_POST["seccion"])){
-                return "Por favor, seleccione una seccion";
+            if ($_GET["error"] == "seccion"){
+                $mensaje = "Por favor, seleccione una seccion";
             }
+            return $mensaje;
         }
     }
 
     public function mensajeExitoSeccion(){
         $mensaje = "";
-        if (isset($_GET["msg"]) && $_GET["msg"] == 1){
+        if (isset($_GET["exito"]) && $_GET["exito"] == 1){
             $mensaje = "La seccion fue agregada con exito!";
         }
         return $mensaje;
@@ -251,32 +299,63 @@ class ContenidistaController
         $this->renderer->render('contenidista.mustache', $data);
     }
 
-    public function producto(){
-        $this->validarRol();
-
-        $data['ediciones'] = true;
-        $idProducto = $_GET['id'];
-        $data['nombre'] = $this->model->getNombreProductoById($idProducto);
-        $data['listaEdiciones'] = $this->model->getEdicionesByProducto($idProducto);
-        $this->renderer->render('contenidista.mustache', $data);
-    }
-
     public function validarNoticia(){
         $this->validarRol();
 
-        $titulo = $_POST["titulo"];
-        $subtitulo = $_POST["subtitulo"];
-        $imagen1 = $_FILES['imagen1']['tmp_name'];
-        $contenido  = $_POST["contenido"];
-        $seccion = $_POST["seccion"];
-        $edicion = $_POST["edicion"];
-        $latitud = $_POST["latitud"];
-        $longitud = $_POST["longitud"];
-
-        if(!empty($titulo) && !empty($subtitulo) && !empty($imagen1) && !empty($contenido) && !empty($seccion) && !empty($edicion) && !empty($latitud) && !empty($longitud)){
-            return true;
+        if(empty($_POST["titulo"])){
+            return false;
         }
-        return false;
+        if(empty($_POST["subtitulo"])){
+            return false;
+        }
+        if(empty($_POST["contenido"])){
+            return false;
+        }
+        if(empty($_POST["seccion"])){
+            return false;
+        }
+        if(empty($_POST["edicion"])){
+            return false;
+        }
+        if(empty($_POST["latitud"])){
+            return false;
+        }
+        if(empty($_POST["longitud"])){
+            return false;
+        }
+        if(empty($_FILES['imagen1']['tmp_name'])){
+            return false;
+        }
+        return true;
+    }
+
+    public function mensajeErrorNoticia(){
+        $mensaje="";
+        if(empty($_POST["titulo"])){
+            $mensaje = $mensaje . "Por favor complete el campo 'Titulo'. ";
+        }
+        if(empty($_POST["subtitulo"])){
+            $mensaje = $mensaje . "Por favor complete el campo 'Subtitulo'. ";
+        }
+        if(empty($_POST["contenido"])){
+            $mensaje = $mensaje . "Por favor complete el campo 'Contenido'. ";
+        }
+        if(empty($_POST["seccion"])){
+            $mensaje = $mensaje . "Por favor seleccione una seccion. ";
+        }
+        if(empty($_POST["edicion"])){
+            $mensaje = $mensaje . "Por favor seleccione una edicion. ";
+        }
+        if(empty($_POST["latitud"])){
+            $mensaje = $mensaje . "Por favor marque 'Latitud'. ";
+        }
+        if(empty($_POST["longitud"])){
+            $mensaje = $mensaje . "Por favor marque 'Longitud'. ";
+        }
+        if(empty($_FILES['imagen1']['tmp_name'])){
+            $mensaje = $mensaje . "Por favor inserte la imagen principal'.";
+        }
+        Redirect::redirect("formularioNoticia?error=$mensaje");
     }
 
     /*public function misproductos(){

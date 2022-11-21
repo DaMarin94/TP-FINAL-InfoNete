@@ -49,12 +49,14 @@ class ContenidistaModel
             move_uploaded_file($imagenTmp3, "public/images/" . $imagenName3);
         }
 
+        $videoName = null;
         $video = $_FILES['video']['tmp_name'];
         if (!is_null($video)) {
             $videoName = uniqid().".mp4";
             move_uploaded_file($video, "public/multimedia/" . $videoName);
         }
 
+        $audioName = null;
         $audio = $_FILES['audio']['tmp_name'];
         if (!is_null($audio)){
            $audioName = uniqid().".webm";
@@ -67,13 +69,20 @@ class ContenidistaModel
         return $this->database->insert($multimediasql);
     }
 
+    public function editarNoticia($idNoticia, $titulo, $subtitulo, $contenido, $seccion, $edicion, $latitud, $longitud){
+        $sql = "UPDATE contenido c SET c.titulo = '$titulo', c.subtitulo = '$subtitulo', c.contenido = '$contenido', 
+                                       c.latitud = '$latitud', c.longitud = '$longitud', c.estado = 1
+                                   WHERE c.id = $idNoticia;";
+        return $this->database->execute($sql);
+    }
+
     public function altaProducto($nombre, $tipo, $portada){
         $sql = "INSERT INTO producto (nombre, tipo, portada) VALUES ('$nombre', '$tipo', '$portada')";
         return $this->database->execute($sql);
     }
 
     public function altaEdicion($edicion, $precio, $producto, $portada){
-        $sql = "INSERT INTO edicion (edicion, precio, producto, portada) VALUES ('$edicion', '$precio', '$producto', '$portada')";
+        $sql = "INSERT INTO edicion (edicion, precio, producto, portada, fecha) VALUES ('$edicion', '$precio', '$producto', '$portada', NOW())";
         return $this->database->execute($sql);
     }
 
