@@ -30,6 +30,85 @@ class AdminController{
 
         $data['productos'] = true;
         $data['listaProductos'] = $this->model->getProductos();
+        $data['listaProductosBaja'] = $this->model->getProductosBaja();
+
+        $this->renderer->render('admin.mustache', $data);
+    }
+
+    public function bajaProducto(){
+        $this->validarRol();
+        $id = $_GET['id'];
+
+        $this->model->bajaProducto($id);
+        Redirect::redirect('/admin/productos');
+    }
+
+    public function altaProducto(){
+        $this->validarRol();
+        $id = $_GET['id'];
+
+        $this->model->altaProducto($id);
+        Redirect::redirect('/admin/productos');
+    }
+
+    public function editorProducto() {
+        $this->validarRol();
+        $id = $_GET['id'];
+
+        $data['productos'] = true;
+        $data['editorProducto'] = true;
+
+        $data['tipos'] = $this->model->getTiposProductos();
+        $producto = $this->model->getProducto($id);
+
+        $data['id'] = $producto[0]['id'];
+        $data['nombre'] = $producto[0]['nombre'];
+        $data['tipoOrig'] = $producto[0]['tipo'];
+        $data['portadaOrig'] = $producto[0]['portada'];
+
+        $this->renderer->render('admin.mustache', $data);
+    }
+
+    public function procesarEdicionProducto(){
+        $this->validarRol();
+        $id = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $tipoNuevo = $_POST['tipoNuevo'];
+        $tipoOrig = $_POST['tipoOrig'];
+        $portadaOrig = $_POST['portadaOrig'];
+        $nuevaPortadaName =  $_FILES['portada']['name'];
+        $nuevaPortadaAbsolute = $_FILES['portada']['tmp_name'];
+
+        $tipo = (!isset($tipoNuevo) || $tipoNuevo == '') ? $tipoOrig : $tipoNuevo;
+        $portada = $portadaOrig;
+
+        if(isset($nuevaPortadaName) && $nuevaPortadaName != ''){
+            $portada = $nuevaPortadaName;
+            move_uploaded_file($nuevaPortadaAbsolute, "public/images/".$nuevaPortadaName);
+        }
+
+        if($this->model->editarProducto($id, $nombre, $tipo, $portada)){
+            Redirect::redirect('/admin/productos');
+        } else {
+            Redirect::redirect('/admin/editorProducto?id='.$id);
+        }
+
+    }
+
+    public function ediciones(){
+        $this->validarRol();
+
+        $data['ediciones'] = true;
+        $data['listaEdiciones'] = $this->model->getEdiciones();
+        $data['listaEdicionesBaja'] = $this->model->getEdicionesBaja();
+        $this->renderer->render('admin.mustache', $data);
+    }
+
+    public function contenidos(){
+        $this->validarRol();
+
+        $data['contenidos'] = true;
+        $data['listaContenidos'] = $this->model->getContenidos();
         $this->renderer->render('admin.mustache', $data);
     }
 
@@ -54,6 +133,89 @@ class AdminController{
         foreach($this->model->getRoles() as $rol){
             echo "<option value='" . $rol["id"].  "'>" . $rol["descripcion"] . "</option>";
         }
+    }
+
+    public function editorEdicion() {
+        $this->validarRol();
+        $id = $_GET['id'];
+
+        $data['ediciones'] = true;
+        $data['editorEdicion'] = true;
+
+        $data['listaProductos'] = $this->model->getProductos();
+        $edicion = $this->model->getEdicion($id);
+
+        $data['id'] = $edicion[0]['id'];
+        $data['edicion'] = $edicion[0]['edicion'];
+        $data['fecha'] = $edicion[0]['fecha'];
+        $data['precio'] = $edicion[0]['precio'];
+        $data['productoOrig'] = $edicion[0]['producto'];
+        $data['portadaOrig'] = $edicion[0]['portada'];
+
+        $this->renderer->render('admin.mustache', $data);
+    }
+
+    public function procesarEdicion(){
+        $this->validarRol();
+        $id = $_POST['id'];
+        $edicion = $_POST['edicion'];
+        $precio = $_POST['precio'];
+        $fecha = $_POST['fecha'];
+        $productoNuevo = $_POST['productoNuevo'];
+        $productoOrig = $_POST['productoOrig'];
+        $portadaOrig = $_POST['portadaOrig'];
+        $nuevaPortadaName =  $_FILES['portada']['name'];
+        $nuevaPortadaAbsolute = $_FILES['portada']['tmp_name'];
+
+        $producto = (!isset($productoNuevo) || $productoNuevo == '') ? $productoOrig : $productoNuevo;
+        $portada = $portadaOrig;
+
+        if(isset($nuevaPortadaName) && $nuevaPortadaName != ''){
+            $portada = $nuevaPortadaName;
+            move_uploaded_file($nuevaPortadaAbsolute, "public/images/".$nuevaPortadaName);
+        }
+
+        if($this->model->editarEdicion($id, $edicion, $fecha, $precio, $producto, $portada)){
+            Redirect::redirect('/admin/ediciones');
+        } else {
+            Redirect::redirect('/admin/editorEdicion?id='.$id);
+        }
+
+    }
+
+    public function bajaEdicion(){
+        $this->validarRol();
+        $id = $_GET['id'];
+
+        $this->model->bajaEdicion($id);
+        Redirect::redirect('/admin/ediciones');
+    }
+
+    public function altaEdicion(){
+        $this->validarRol();
+        $id = $_GET['id'];
+
+        $this->model->altaEdicion($id);
+
+        Redirect::redirect('/admin/ediciones');
+    }
+
+    public function detalleContenido() {
+        $this->validarRol();
+        $id = $_GET['id'];
+
+        $data['contenidos'] = true;
+        $data['detalleContenido'] = $this->model->detalleContenido($id);
+
+        return $this->renderer->render('admin.mustache', $data);
+    }
+
+    public function bajaContenido() {
+        $this->validarRol();
+        $id = $_GET['id'];
+        $this->model->bajaContenido($id);
+
+        Redirect::redirect('/admin/contenidos');
     }
 
     public function altaUsuario(){
@@ -154,8 +316,6 @@ class AdminController{
 
         //Sus productos con su información básica, cantidad de vendidos/suscritos y ediciones
         $data['productos'] = $this->model->getProductosReporte();
-//        $data['ediciones'] = $this->model->getEdicionesReporte();
-//        $this->renderer->render('reportesPdf/templatePdfProductos.mustache', $data);
         $html = $this->renderer->getHtml('reportesPdf/templatePdfProductos.mustache', $data);
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-contenidistas');
     }

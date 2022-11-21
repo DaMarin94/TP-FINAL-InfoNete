@@ -8,7 +8,7 @@ class InfoneteModel {
     }
 
     public function getProductos(){
-        $sql = "SELECT * FROM producto";
+        $sql = "SELECT * FROM producto WHERE alta = 1";
         return $this->database->query($sql);
     }
 
@@ -23,7 +23,7 @@ class InfoneteModel {
     }
 
     public function getEdicionesPorProducto($idProducto){
-        $sql = "SELECT * FROM edicion WHERE producto = '$idProducto'";
+        $sql = "SELECT * FROM edicion WHERE producto = '$idProducto' AND alta = 1";
         return $this->database->query($sql);
     }
 
