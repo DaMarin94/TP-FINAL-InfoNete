@@ -10,7 +10,145 @@ class AdminModel
     }
 
     public function getProductos(){
-        $sql = "SELECT p.id, p. nombre, p.portada, t.descripcion as tipo FROM producto p join tipo t on p.tipo = t.id";
+        $sql = "SELECT p.id, p.nombre, p.portada, p.precio, t.descripcion as tipo FROM producto p join tipo t on p.tipo = t.id WHERE alta = 1";
+        return $this->database->query($sql);
+    }
+
+    public function getProducto($id){
+        $sql = "SELECT * FROM producto WHERE id = '$id'";
+        return $this->database->query($sql);
+    }
+
+    public function getProductosBaja(){
+        $sql = "SELECT p.id, p.nombre, p.portada, p.precio, t.descripcion as tipo FROM producto p join tipo t on p.tipo = t.id WHERE alta = 0";
+        return $this->database->query($sql);
+    }
+
+    public function bajaProducto($id){
+        $returnBol = false;
+
+        $bajaProd = "UPDATE producto
+            SET alta = 0
+            WHERE id  = '$id'";
+
+        $bajaEdicion = "UPDATE edicion
+            SET alta = 0
+            WHERE id IN (SELECT e.id FROM producto p JOIN edicion e ON e.producto = p.id WHERE p.id = '$id')";
+
+        $bajaCont = "UPDATE contenido
+            SET estado = 4
+            WHERE id IN (SELECT esn.noticia FROM producto p JOIN edicion e ON e.producto = p.id JOIN edicion_seccion_noticia esn ON e.id = esn.edicion WHERE p.id = '$id')";
+
+        if($this->database->execute($bajaCont)){
+            if($this->database->execute($bajaEdicion)){
+                $returnBol = $this->database->execute($bajaProd);
+            }
+        }
+
+        return $returnBol;
+
+    }
+
+    public function altaProducto($id){
+        $returnBol = false;
+
+        $altaProd = "UPDATE producto
+        SET alta = 1
+        WHERE id = '$id'";
+
+        $altaEdicion = "UPDATE edicion
+        SET alta = 1
+        WHERE id IN (SELECT e.id FROM producto p JOIN edicion e ON e.producto = p.id WHERE p.id = '$id')";
+
+        $altaCont = "UPDATE contenido
+        SET estado = 1
+        WHERE id IN (SELECT esn.noticia FROM producto p JOIN edicion e ON e.producto = p.id JOIN edicion_seccion_noticia esn ON e.id = esn.edicion WHERE p.id = '$id')";
+
+        if($this->database->execute($altaCont)){
+            if($this->database->execute($altaEdicion)){
+                $returnBol = $this->database->execute($altaProd);
+            }
+        }
+
+        return $returnBol;
+
+    }
+
+    public function editarProducto($id, $nombre, $tipo, $portada){
+        $sql = "UPDATE producto SET nombre = '$nombre', tipo = '$tipo', portada = '$portada' WHERE id = '$id';";
+        return $this->database->execute($sql);
+    }
+
+    public function getTiposProductos(){
+        $sql = "SELECT * FROM tipo";
+        return $this->database->query($sql);
+    }
+
+    public function getEdiciones(){
+        $sql = "SELECT e.id, e.edicion, e.precio, DATE_FORMAT(e.fecha, '%d-%m-%Y') as fecha, p.nombre as producto FROM edicion e JOIN producto p ON e.producto = p.id WHERE e.alta = 1";
+        return $this->database->query($sql);
+    }
+
+    public function getEdicionesBaja(){
+        $sql = "SELECT e.id, e.edicion, e.precio, DATE_FORMAT(e.fecha, '%d-%m-%Y') as fecha, p.nombre as producto FROM edicion e JOIN producto p ON e.producto = p.id WHERE e.alta = 0";
+        return $this->database->query($sql);
+    }
+
+    public function getEdicion($id){
+        $sql = "SELECT e.id, e.edicion, e.precio, e.fecha, e.portada, DATE_FORMAT(e.fecha, '%Y-%m-%d') as fecha, p.id as producto FROM edicion e JOIN producto p ON e.producto = p.id WHERE e.id = '$id'";
+        return $this->database->query($sql);
+    }
+
+    public function editarEdicion($id, $edicion, $fecha, $precio, $producto, $portada) {
+        $sql = "UPDATE edicion SET edicion = '$edicion', fecha = '$fecha', portada = '$portada', precio = '$precio', producto = '$producto' WHERE id = '$id';";
+        return $this->database->execute($sql);
+    }
+
+    public function bajaEdicion($id){
+        $returnBol = false;
+
+        $bajaEdicion = "UPDATE edicion SET alta = 0 WHERE id = '$id'";
+
+        $bajaCont = "UPDATE contenido
+            SET estado = 4
+            WHERE id IN (SELECT esn.noticia FROM edicion e JOIN edicion_seccion_noticia esn ON e.id = esn.edicion WHERE e.id = '$id')";
+
+        if($this->database->execute($bajaCont)){
+            $returnBol = $this->database->execute($bajaEdicion);
+        }
+
+        return $returnBol;
+    }
+
+    public function altaEdicion($id){
+        $returnBol = false;
+
+        $altaEdicion = "UPDATE edicion SET alta = 1 WHERE id = '$id'";
+
+        $altaCont = "UPDATE contenido
+            SET estado = 3
+            WHERE id IN (SELECT esn.noticia FROM edicion e JOIN edicion_seccion_noticia esn ON e.id = esn.edicion WHERE e.id = '$id')";
+
+        if($this->database->execute($altaCont)){
+            $this->altaProductoPorEdicion($id);
+            $returnBol = $this->database->execute($altaEdicion);
+        }
+
+        return $returnBol;
+
+    }
+
+    public function altaProductoPorEdicion($idEdicion){
+        $sql = "UPDATE producto SET alta = 1 WHERE id IN (SELECT p.id FROM producto p JOIN edicion e ON e.producto = p.id WHERE e.id = '$idEdicion' AND p.alta = 0);";
+
+        return $this->database->execute($sql);
+
+    }
+
+    public function getContenidos(){
+        $sql = "SELECT c.id, c.titulo, c.subtitulo, LEFT(c.contenido,250) as contenido, cm.imagen1 as imagen, e.descripcion as estado, c.estado as estadoId, ed.edicion, s.descripcion as seccion 
+                FROM contenido c JOIN contenido_multimedia cm ON c.multimedia = cm.id JOIN estado e ON c.estado = e.id JOIN edicion_seccion_noticia esn ON esn.noticia = c.id 
+                JOIN edicion ed ON ed.id = esn.edicion JOIN seccion s ON s.id = esn.seccion WHERE c.estado NOT LIKE 4";
         return $this->database->query($sql);
     }
 
@@ -32,8 +170,7 @@ class AdminModel
     public function getClientesReporte(){
         $clientes = [];
 
-        $sql = "SELECT u.id, u.nombre, u.mail, u.estado
-                FROM usuarios u WHERE u.role = 1";
+        $sql = "SELECT u.id, u.nombre, u.mail, u.estado FROM usuarios u WHERE u.role = 1";
 
         $result = $this->database->query($sql);
 
@@ -75,6 +212,17 @@ class AdminModel
         }
 
         return $compra;
+    }
+
+    public function detalleContenido($id){
+        $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, cm.imagen1 as imagen, e.descripcion as estado, u.nombre as contenidista 
+                FROM contenido c JOIN contenido_multimedia cm ON c.multimedia = cm.id JOIN estado e ON e.id = c.estado 
+                JOIN usuarios u ON u.id = c.contenidista WHERE c.id ='$id'";
+        return $this->database->query($sql);
+    }
+    public function bajaContenido($id){
+        $sql = "UPDATE contenido SET estado = 4 WHERE id = '$id'";
+        return $this->database->execute($sql);
     }
 
     public function getProductosReporte() {

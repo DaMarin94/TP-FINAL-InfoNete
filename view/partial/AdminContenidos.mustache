@@ -1,0 +1,66 @@
+{{^detalleContenido}}
+    <div>
+        <h1>Contenidos</h1>
+    </div>
+
+    <table class='w3-table w3-striped w3-hoverable'>
+        <thead>
+        <tr class="w3-light-grey">
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Subtitulo</th>
+            <th>Estado</th>
+            <th>Edicion</th>
+            <th>Seccion</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        {{#listaContenidos}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{titulo}}</td>
+                <td>{{subtitulo}}</td>
+                <td>{{estado}}</td>
+                <td>{{edicion}}</td>
+                <td>{{seccion}}</td>
+                <td><img src="/public/images/{{imagen}}" width="80" height="60"></td>
+                <td>
+                    <a href="/admin/detalleContenido?id={{id}}" class="w3-button w3-black w3-round-large w3-tiny w3-hover-teal" style="margin: 8px 0px">Ver contenido</a>
+                    <a href="/admin/bajaContenido?id={{id}}" class="w3-button w3-black w3-round-large w3-tiny w3-hover-teal estado-{{estadoId}}" style="margin: 8px 0px">A revisión</a>
+                </td>
+            </tr>
+        {{/listaContenidos}}
+    </table>
+{{/detalleContenido}}
+
+{{#detalleContenido}}
+    <h1>Contenido N° {{id}}</h1>
+    <table class="w3-table w3-grey">
+        <tr>
+            <th>Titulo</th>
+            <td>{{titulo}}</td>
+        </tr>
+        <tr>
+            <th>Subtitulo</th>
+            <td>{{subtitulo}}</td>
+        </tr>
+        <tr>
+            <th>Contenido</th>
+            <td>{{contenido}}</td>
+        </tr>
+        <tr>
+            <th>Imagen</th>
+            <td><img src="../public/images/{{imagen}}" width="400" height="300"/></td>
+        </tr>
+        <tr>
+            <th>Contenidista</th>
+            <td>{{contenidista}}</td>
+        </tr>
+        <tr>
+            <th>Estado</th>
+            <td>{{estado}}</td>
+        </tr>
+    </table>
+
+{{/detalleContenido}}

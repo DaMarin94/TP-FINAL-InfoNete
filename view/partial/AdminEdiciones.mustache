@@ -1,0 +1,99 @@
+{{^editorEdicion}}
+    <div>
+        <h1>Ediciones</h1>
+    </div>
+
+    <table class='w3-table w3-striped w3-hoverable'>
+        <thead>
+        <tr class="w3-light-grey">
+            <th>Id</th>
+            <th>Edicion</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+        {{#listaEdiciones}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{edicion}}</td>
+                <td>${{precio}}</td>
+                <td>{{fecha}}</td>
+                <td>{{producto}}</td>
+                <td><a href="/admin/editorEdicion?id={{id}}"/><i class="fa fa-pencil w3-large" aria-hidden="true"></i></td>
+                <td><a href="/admin/bajaEdicion?id={{id}}" class="w3-button w3-black w3-round-large w3-tiny w3-hover-teal" />Dar de baja</td>
+            </tr>
+        {{/listaEdiciones}}
+    </table>
+    <div>
+        <h1>Ediciones dadas de baja</h1>
+    </div>
+
+    <table class='w3-table w3-striped w3-hoverable'>
+        <thead>
+        <tr class="w3-light-grey">
+            <th>Id</th>
+            <th>Edicion</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+        {{#listaEdicionesBaja}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{edicion}}</td>
+                <td>${{precio}}</td>
+                <td>{{fecha}}</td>
+                <td>{{producto}}</td>
+                <!--                <td><img src="/public/images/{{portada}}" width="80" height="60"></td>-->
+                <td><a href="/admin/editorEdicion?id={{id}}"/><i class="fa fa-pencil w3-large" aria-hidden="true"></i></td>
+                <td><a href="/admin/altaEdicion?id={{id}}" class="w3-button w3-black w3-round-large w3-tiny w3-hover-teal" />Dar de alta</td>
+            </tr>
+        {{/listaEdicionesBaja}}
+    </table>
+{{/editorEdicion}}
+
+{{#editorEdicion}}
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
+        <h1>Editar Edicion - {{edicion}}</h1>
+        <form action="/admin/procesarEdicion" method="POST" enctype="multipart/form-data">
+            <input style="display: none" type="text" name="id" value="{{id}}">
+            <input style="display: none" name="productoOrig" value="{{productoOrig}}" type="number">
+            <input style="display: none" type="text" name="portadaOrig" value="{{portadaOrig}}">
+            <div>
+                <label for="edicion">Edicion:</label>
+                <input class="w3-input w3-light-grey w3-margin-top" type="text" name="edicion" value="{{edicion}}">
+            </div>
+            <div class="w3-margin-top">
+                <label for="portada">Portada:</label>
+                <input class="w3-input w3-center w3-margin-top" type="file" name="portada">
+            </div>
+            <div class="w3-margin-top">
+                <label for="precio">Precio:</label>
+                <input class="w3-input w3-light-grey w3-margin-top" type="number" name="precio" value="{{precio}}">
+            </div>
+            <div class="w3-margin-top">
+                <label for="precio">Fecha:</label>
+                <input class="w3-input w3-light-grey w3-margin-top" type="date" name="fecha" value="{{fecha}}">
+            </div>
+            <div class="w3-margin-top">
+                <label for="producto">Producto:</label>
+                <select name="productoNuevo" class="w3-input w3-light-grey w3-margin-top">
+                    <option value="">Cambiar producto</option>
+                    {{#listaProductos}}
+                        <option value="{{id}}">{{nombre}}</option>
+                    {{/listaProductos}}
+                </select>
+            </div>
+
+            <button class="w3-button w3-black w3-margin-top" type="submit">Editar</button>
+        </form>
+    </div>
+{{/editorEdicion}}
