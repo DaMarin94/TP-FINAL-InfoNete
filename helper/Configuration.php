@@ -106,7 +106,7 @@ class Configuration{
     }
 
     public function getLectorController(){
-        return new LectorController($this->view, $this->getLectorModel());
+        return new LectorController($this->view, $this->getLectorModel(), $this->pdfGenerator);
     }
 
     public function getLectorModel(){

@@ -1,0 +1,25 @@
+<div class="contAddUser">
+    <h1>Para revisar</h1>
+</div>
+<table class='w3-table w3-striped'>
+    <thead>
+    <tr class="w3-dark-grey">
+        <th>Id</th>
+        <th>Titulo</th>
+        <th>Reporte</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    {{#listaNoticias}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{titulo}}</td>
+            <td>{{comentarios}}</td>
+            <td style="display: flex;">
+            <a href="/contenidista/verNoticia?id={{id}}" class="w3-button w3-black w3-round-large" style="margin-right: 10px;">Ver</a>
+            <a href="/contenidista/editarNoticia?id={{id}}" class="w3-button w3-black w3-round-large" style="margin-right: 10px;">Editar</a>
+            <a href="/contenidista/borrarNoticia?id={{id}}" class="w3-button w3-black w3-round-large" style="margin-right: 10px;">Borrar</a>
+            </td>
+        </tr>
+    {{/listaNoticias}}
+</table>

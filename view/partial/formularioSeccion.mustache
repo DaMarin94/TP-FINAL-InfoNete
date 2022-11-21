@@ -4,6 +4,7 @@
         <div>
             <label for="edicion">Elegi una edicion:</label>
             <select name="edicion" onchange="muestraSecciones(this.value)" class="w3-input w3-light-grey w3-margin-top">
+              <option value="0">Seleccione una edicion</option>
               {{#listaEdiciones}}
               <option value="{{id}}">{{edicion}}</option>
               {{/listaEdiciones}}
@@ -11,6 +12,18 @@
         </div>
         <div id="secciones" class="w3-margin-top">
         </div>
-        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
+        <button class="w3-button w3-black w3-margin-top" type="submit" onsubmit="muestraMensaje()">Enviar</button>
     </form>
+
+    {{#exito}}
+        <div class="w3-panel w3-pale-green w3-border w3-round w3-animate-bottom w3-display-bottommiddle">
+            <p class="w3-text-green">{{exito}}</p>
+        </div>
+    {{/exito}}
+
+    {{#error}}
+        <div class="w3-panel w3-pale-red w3-border w3-round w3-animate-bottom w3-display-bottommiddle">
+            <p class="w3-text-red">{{error}}</p>
+        </div>
+    {{/error}}
 </div>

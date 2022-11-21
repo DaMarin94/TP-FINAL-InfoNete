@@ -28,7 +28,8 @@ class RegistroModel
         
         $passId = $this->database->insert($sqlPassword);
 
-        $sql = "INSERT INTO usuarios (nombre, mail, password, latitud, longitud, role, estado) VALUES('$name', '$mail', '$passId', '$latitud','$longitud', '$role', 0)";
+        $sql = "INSERT INTO usuarios (nombre, mail, password, latitud, longitud, role, estado) 
+            VALUES('$name', '$mail', '$passId', '$latitud','$longitud', '$role', 0)";
 
         return $this->database->execute($sql);
 

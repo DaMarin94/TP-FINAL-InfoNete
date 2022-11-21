@@ -1,0 +1,79 @@
+<div class="w3-margin-top">
+    <h2 class="w3-black">Mis pagos</h2>
+</div>
+<div class="contAddUser">
+    <h1>Suscripciones</h1>
+</div>
+
+<table class='w3-table w3-striped'>
+    <thead>
+    <tr class="w3-dark-grey">
+        <th>Producto</th>
+        <th>Fecha de compra</th>
+        <th>Fecha de vencimiento</th>
+        <th>Monto</th>
+    </tr>
+    </thead>
+    {{#listaSuscripciones}}
+        <tr>
+            <td>{{nombre}}</td>
+            <td>{{fechaAdquirido}}</td>
+            <td>{{fechaVencimiento}}</td>
+            <td>{{precio}}</td>
+        </tr>
+    {{/listaSuscripciones}}
+</table>
+
+
+
+<div class="w3-center-align w3-padding-24">
+
+    <form action="/lector/getPdfSuscripciones" method="get">
+        <label for="fechaInicio">Desde:</label>
+        <input type="datetime-local" id="fechaInicio" name="fechaInicio">
+        <label for="fechaFin">Hasta:</label>
+        <input type="datetime-local" id="fechaFin" name="fechaFin">
+        <br>
+        <button class="w3-button w3-black w3-margin-top" type="submit">Imprimir</button>
+
+    </form>
+</div>
+
+<div class="contAddUser">
+    <h1>Compras</h1>
+</div>
+
+<table class='w3-table w3-striped'>
+    <thead>
+    <tr class="w3-dark-grey">
+        <th>Producto</th>
+        <th>Edicion</th>
+        <th>Fecha de compra</th>
+        <th>Monto</th>
+    </tr>
+    </thead>
+    {{#listaCompras}}
+        <tr>
+            <td>{{nombre}}</td>
+            <td>{{edicion}}</td>
+            <td>{{fecha}}</td>
+            <td>{{precio}}</td>
+        </tr>
+    {{/listaCompras}}
+</table>
+
+<div class="w3-center-align w3-padding-24">
+
+    <form action="/lector/getPdfCompras" method="get">
+        <label for="fechaInicio">Desde:</label>
+        <input type="datetime-local" id="fechaInicio" name="fechaInicio">
+        <label for="fechaFin">Hasta:</label>
+        <input type="datetime-local" id="fechaFin" name="fechaFin">
+        <br>
+        <button class="w3-button w3-black w3-margin-top" type="submit">Imprimir</button>
+
+    </form>
+</div>
+
+
+

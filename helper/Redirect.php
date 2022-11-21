@@ -9,7 +9,6 @@ class Redirect{
         header("location:" . $url);
         exit();
     }
-
 }
 
 ?>
