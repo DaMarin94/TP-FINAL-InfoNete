@@ -1,62 +1,66 @@
 {{> header}}
 
     <div class="w3-container w3-content  w3-padding-64" style="max-width:1000px" id="band">
-        <div style="padding-bottom: 150px;">
+        <div>
             {{#contenidoEdit}}
                <h1>Contenido N° {{id}}</h1>
 
                <form action="contenidoedit/alta">
                    <input id="id" name="id" type="hidden" value="{{id}}">
                    <input id="id" name="contenidista" type="hidden" value="{{c_id}}">
-                   <table class="w3-table w3-grey">
-                           <tr>
-                               <th>Titulo</th>
-                               <td>{{titulo}}</td>
-                           </tr>
-                           <tr>
-                               <th>Subtitulo</th>
-                               <td>{{subtitulo}}</td>
-                           </tr>
-                            <tr>
-                                <th>Contenido</th>
-                                <td>{{contenido}}</td>
-                            </tr>
-                             <tr>
-                                <th>Imagen</th>
-                                <td><img src="../public/images/{{imagen}}" width="400" height="300"/></td>
-                             </tr>
-                             <tr>
-                                <th>Contenidista</th>
-                                <td>{{contenidista}}</td>
-                            </tr>
-                             <tr>
-                                <th>Estado</th>
-                                <td>
-                                    <select name="estado" id="estado">
-                                        {{#tipos}}
-                                            <option value="{{id}}">{{descripcion}}</option>
-                                        {{/tipos}}
 
-                                    </select>
-                                </td>
-                             </tr>
-                             <tr>
-                                <th>Comentarios</th>
-                                    <td>
-                                        <textarea name="comentario" rows="7" cols="50">
-                                            {{#reportesEdit}}
-                                                {{comentarios}}
-                                            {{/reportesEdit}}
-                                        </textarea>
+                    <div class="editor-contenido-titulo">Título</div>
+                    <div class="editor-contenido-texto">{{titulo}}</div>
+
+
+                    <div class="editor-contenido-titulo">Subtítulo</div>
+                     <div class="editor-contenido-texto">{{subtitulo}}</div>
+
+                     <div class="editor-contenido-titulo">Contenido</div>
+                     <div class="editor-contenido-texto">{{contenido}}</div>
+
+                     <div class="editor-contenido-titulo">Imagen</div>
+                     <div class="editor-contenido-img"><img src="../public/images/{{imagen}}" height="300"/></div>
+
+                     <div class="editor-contenido-titulo">Contenidista</div>
+                     <div class="editor-contenido-texto">{{contenidista}}</div>
+
+                     <hr>
+
+                    <div class="editor-contenido-titulo seccion-editor">Edición de contenido</div>
+                    <div class="editor-contenido-edicion">
+                       <table class="w3-table">
+                                 <tr>
+                                    <th><div>Estado</div></th>
+                                    <td><div>
+                                        <select name="estado" id="estado">
+                                            {{#tipos}}
+                                                <option value="{{id}}">{{descripcion}}</option>
+                                            {{/tipos}}
+
+                                        </select></div>
                                     </td>
-                             </tr>
-                   </table>
-                   <button class="w3-button w3-black w3-margin-top" type="submit" style="float: right;">Enviar</button>
+                                 </tr>
+                                 <tr>
+                                    <th><div>Comentarios</div></th>
+                                        <td>
+                                            <div><textarea name="comentario" rows="7" cols="50">
+                                                {{#reportesEdit}}
+                                                    {{comentarios}}
+                                                {{/reportesEdit}}
+                                            </textarea></div>
+                                        </td>
+                                 </tr>
+                       </table>
+                   </div>
+                   <div class="editor-contenido-botones">
+                                           <button class="btn boton-enviar" type="submit">Enviar</button>
+                                           <a class="btn boton-cancelar" href="/editor/misContenidos"> Cancelar </a>
+                   </div>
+
                </form>
             {{/contenidoEdit}}
-             <div  style="padding-top: 80px;" >
-                <a href="/editor/misContenidos"> Volver </a>
-             </div>
         </div>
+
    </div>
 {{> footer}}
