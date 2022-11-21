@@ -1,5 +1,26 @@
 {{> header}}
 
+<div class="report-container clima">
+
+        {{#clima}}
+        <h6>{{name}}</h6>
+        <div class="time">
+            <div>{{date1}}</div>
+            <div>{{date2}}</div>
+            <div>{{description}}</div>
+        </div>
+        <div class="weather-forecast">
+            <img src="http://openweathermap.org/img/w/{{icon}}.png" class="weather-icon" />
+            <span class="max-temperature">{{tempmax}}°C</span>
+            <span class="min-temperature">{{tempmin}}°C</span>
+        </div>
+        <div class="time">
+            <div>Humidity: {{humedad}}%</div>
+            <div>Wind: {{speed}} km/h</div>
+        </div>
+        {{/clima}}
+</div>
+
 <div class="w3-container w3-center" id="band">
 
         {{#productos}}

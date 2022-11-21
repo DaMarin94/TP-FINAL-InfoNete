@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 include_once("helper/Redirect.php");
 include_once("helper/MysqlDatabase.php");
 include_once("helper/Router.php");
@@ -26,6 +27,7 @@ include_once("controller/ContenidoEditController.php");
 include_once("controller/LectorController.php");
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
+include_once('third-party/openWeather/ClimaApi.php');
 
 
 class Configuration{

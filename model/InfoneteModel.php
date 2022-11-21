@@ -125,4 +125,8 @@ class InfoneteModel {
         return $this->database->query($sql);
     }
 
+    public function getClima(){
+
+    }
+
 }
