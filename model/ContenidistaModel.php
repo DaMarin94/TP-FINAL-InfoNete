@@ -19,6 +19,16 @@ class ContenidistaModel
         return $this->database->execute($sql2);
     }
 
+    public function deleteNoticiaById($idNoticia){
+        $sql1 = "DELETE FROM edicion_seccion_noticia WHERE noticia = '$idNoticia'";
+        $this->database->execute($sql1);
+
+        $sql2 = "DELETE c, cm FROM contenido c INNER JOIN contenido_multimedia cm
+                                                        WHERE c.multimedia = cm.id
+                                                        AND c.id = '$idNoticia'";
+        return $this->database->execute($sql2);
+    }
+
     public function procesarMultimedia()
     {
         $imagenName1 = $_FILES['imagen1']['name'];
@@ -39,12 +49,14 @@ class ContenidistaModel
             move_uploaded_file($imagenTmp3, "public/images/" . $imagenName3);
         }
 
+        $videoName = null;
         $video = $_FILES['video']['tmp_name'];
         if (!is_null($video)) {
             $videoName = uniqid().".mp4";
             move_uploaded_file($video, "public/multimedia/" . $videoName);
         }
 
+        $audioName = null;
         $audio = $_FILES['audio']['tmp_name'];
         if (!is_null($audio)){
            $audioName = uniqid().".webm";
@@ -57,13 +69,20 @@ class ContenidistaModel
         return $this->database->insert($multimediasql);
     }
 
+    public function editarNoticia($idNoticia, $titulo, $subtitulo, $contenido, $seccion, $edicion, $latitud, $longitud){
+        $sql = "UPDATE contenido c SET c.titulo = '$titulo', c.subtitulo = '$subtitulo', c.contenido = '$contenido', 
+                                       c.latitud = '$latitud', c.longitud = '$longitud', c.estado = 1
+                                   WHERE c.id = $idNoticia;";
+        return $this->database->execute($sql);
+    }
+
     public function altaProducto($nombre, $tipo, $portada){
         $sql = "INSERT INTO producto (nombre, tipo, portada) VALUES ('$nombre', '$tipo', '$portada')";
         return $this->database->execute($sql);
     }
 
     public function altaEdicion($edicion, $precio, $producto, $portada){
-        $sql = "INSERT INTO edicion (edicion, precio, producto, portada) VALUES ('$edicion', '$precio', '$producto', '$portada')";
+        $sql = "INSERT INTO edicion (edicion, precio, producto, portada, fecha) VALUES ('$edicion', '$precio', '$producto', '$portada', NOW())";
         return $this->database->execute($sql);
     }
 
@@ -77,8 +96,8 @@ class ContenidistaModel
         return $this->database->query($sql);
     }
 
-    public function getNoticiasByAutor($idContenidista){
-        $sql = "SELECT * FROM contenido WHERE contenidista = '$idContenidista'";
+    public function getEdiciones(){
+        $sql = "SELECT * FROM edicion";
         return $this->database->query($sql);
     }
 
@@ -87,13 +106,30 @@ class ContenidistaModel
         return $this->database->query($sql);
     }
 
-    public function getNombreProductoById($idProducto){
-        $sql = "SELECT nombre FROM producto WHERE id = '$idProducto'";
+    public function getNoticiasEnBorradorByAutor($idContenidista){
+        $sql = "SELECT c.id, c.titulo FROM contenido c JOIN estado e ON c.estado = e.id 
+                                      WHERE e.descripcion = 'Sin publicar'
+                                      AND c.contenidista = '$idContenidista'";
         return $this->database->query($sql);
     }
 
-    public function getEdiciones(){
-        $sql = "SELECT * FROM edicion";
+    public function getNoticiasRevisadasByAutor($idContenidista){
+        $sql = "SELECT c.id, c.titulo, re.comentarios FROM contenido c JOIN estado e ON c.estado = e.id 
+                                                                       JOIN reportes_editor re ON re.contenido = c.id 
+                                                                       WHERE e.descripcion = 'Revision'
+                                                                       AND c.contenidista = '$idContenidista'";
+        return $this->database->query($sql);
+    }
+
+    public function getNoticiasPublicadasByAutor($idContenidista){
+        $sql = "SELECT * FROM contenido c JOIN estado e ON c.estado = e.id 
+                                          WHERE e.descripcion = 'Publicado'
+                                          AND c.contenidista = '$idContenidista'";
+        return $this->database->query($sql);
+    }
+
+    public function getNombreProductoById($idProducto){
+        $sql = "SELECT nombre FROM producto WHERE id = '$idProducto'";
         return $this->database->query($sql);
     }
 
@@ -104,11 +140,6 @@ class ContenidistaModel
 
     public function getEdicionesByProducto($idProducto){
         $sql = "SELECT * FROM edicion WHERE producto = '$idProducto'";
-        return $this->database->query($sql);
-    }
-
-    public function getSecciones(){
-        $sql = "SELECT * FROM seccion";
         return $this->database->query($sql);
     }
 
@@ -138,6 +169,16 @@ class ContenidistaModel
 
     public function getDatosNoticia($noticia){
         $sql = "SELECT * FROM contenido WHERE id = '$noticia'";
+        return $this->database->query($sql);
+    }
+
+    public function getNoticia($idNoticia) {
+        $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, 
+                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url FROM contenido c 
+                                        JOIN contenido_multimedia cm ON c.multimedia = cm.id
+                                        JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                        JOIN edicion e ON e.id = esn.edicion
+                                        WHERE c.id = '$idNoticia'";
         return $this->database->query($sql);
     }
 
