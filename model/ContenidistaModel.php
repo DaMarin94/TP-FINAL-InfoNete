@@ -76,8 +76,8 @@ class ContenidistaModel
         return $this->database->execute($sql);
     }
 
-    public function altaProducto($nombre, $tipo, $portada){
-        $sql = "INSERT INTO producto (nombre, tipo, portada) VALUES ('$nombre', '$tipo', '$portada')";
+    public function altaProducto($nombre, $tipo, $imagen, $precio){
+        $sql = "INSERT INTO producto (nombre, tipo, portada, precio) VALUES ('$nombre', '$tipo', '$imagen', '$precio')";
         return $this->database->execute($sql);
     }
 

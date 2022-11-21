@@ -1,27 +1,40 @@
-<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
-    <h1>Crear Edicion</h1>
+<div class="w3-content w3-padding-64 contenidista-form-container">
+
+    <h1 class="contenidista-form-titulo">Crear Edicion</h1>
+
     <form action="/contenidista/procesarEdicion"  method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="edicion">Edicion:</label>
-            <input class="w3-input w3-light-grey w3-margin-top" type="text" name="edicion">
+        <div class="contenidista-form-div">
+            <label for="edicion" class="contenidista-form-label">Edicion:</label>
+            <input class="w3-input w3-margin-top contenidista-form-input" type="text" style="width:60%;" name="edicion">
         </div>
-        <div class="w3-margin-top">
-            <label for="portada">Portada:</label>
-            <input class="w3-input w3-center w3-margin-top" type="file" name="portada">
+        <div class="contenidista-form-div">
+            <label for="portada" class="contenidista-form-label">Portada:</label>
+            <input class="w3-input w3-margin-top contenidista-form-file" type="file" style="width:60%;" name="portada">
         </div>
-        <div class="w3-margin-top">
-            <label for="precio">precio:</label>
-            <input class="w3-input w3-light-grey w3-margin-top" type="number" name="precio">
+        <div class="contenidista-form-div">
+            <label for="precio" class="contenidista-form-label">precio:</label>
+            <input class="w3-input w3-margin-top contenidista-form-input" type="number" style="width:60%;" name="precio">
         </div>
-        <div class="w3-margin-top">
-            <label for="producto">Producto:</label>
-            <select name="producto" class="w3-input w3-light-grey w3-margin-top">
+        <div class="contenidista-form-div">
+            <label for="producto" class="contenidista-form-label">Producto:</label>
+            <select name="producto" class="w3-input w3-margin-top contenidista-form-select" style="width:60%;">
               {{#listaProductos}}
               <option value="{{id}}">{{nombre}}</option>
               {{/listaProductos}}
             </select>
         </div>
-
-        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
+        <button class="w3-button w3-black w3-margin-top contenidista-form-boton" type="submit">Enviar</button>
     </form>
+
+    {{#exito}}
+        <div class="w3-panel w3-pale-green w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid green; width: 70%;">
+            <p class="w3-text-green">{{exito}}</p>
+        </div>
+    {{/exito}}
+
+    {{#error}}
+        <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+            <p class="w3-text-red">{{error}}</p>
+        </div>
+    {{/error}}
 </div>

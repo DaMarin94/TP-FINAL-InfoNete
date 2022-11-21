@@ -1,28 +1,28 @@
-<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
-    <h1>Agrega Seccion</h1>
+<div class="w3-content w3-padding-64 contenidista-form-container">
+    <h1 class="contenidista-form-titulo">Agrega Seccion</h1>
     <form action="/contenidista/procesarSeccion"  method="post">
-        <div>
-            <label for="edicion">Elegi una edicion:</label>
-            <select name="edicion" onchange="muestraSecciones(this.value)" class="w3-input w3-light-grey w3-margin-top">
+        <div class="contenidista-form-div">
+            <label for="edicion" class="contenidista-form-label">Elegi una edicion:</label>
+            <select name="edicion" onchange="muestraSecciones(this.value)" class="w3-input w3-margin-top contenidista-form-select">
               <option value="0">Seleccione una edicion</option>
               {{#listaEdiciones}}
               <option value="{{id}}">{{edicion}}</option>
               {{/listaEdiciones}}
             </select>
         </div>
-        <div id="secciones" class="w3-margin-top">
+        <div id="secciones" class="contenidista-form-div">
         </div>
-        <button class="w3-button w3-black w3-margin-top" type="submit" onsubmit="muestraMensaje()">Enviar</button>
+        <button class="w3-button w3-black w3-margin-top contenidista-form-boton" type="submit" onsubmit="muestraMensaje()">Enviar</button>
     </form>
 
     {{#exito}}
-        <div class="w3-panel w3-pale-green w3-border w3-round w3-animate-bottom w3-display-bottommiddle">
+        <div class="w3-panel w3-pale-green w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid green; width: 70%;">
             <p class="w3-text-green">{{exito}}</p>
         </div>
     {{/exito}}
 
     {{#error}}
-        <div class="w3-panel w3-pale-red w3-border w3-round w3-animate-bottom w3-display-bottommiddle">
+        <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
             <p class="w3-text-red">{{error}}</p>
         </div>
     {{/error}}
