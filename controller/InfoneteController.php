@@ -22,15 +22,18 @@ class InfoneteController {
 
     private $renderer;
     private $model;
+    private $clima;
 
     public function __construct($render, $model){
         $this->renderer = $render;
         $this->model = $model;
+        $this->clima = Clima::getClima();
     }
 
     public function list() {
         $data['productos'] = true;
         $data['listaProductos'] = $this->model->getProductos();
+        $data['clima'] = $this->clima;
 
         $this->renderer->render('infonete.mustache', $data);
     }
@@ -105,6 +108,12 @@ class InfoneteController {
                 Redirect::redirect('/');
                 break;
         }
+    }
+
+    public function mostrarClima(){
+        $this->validarRol();
+
+
     }
 
     public function cerrarSesion(){
