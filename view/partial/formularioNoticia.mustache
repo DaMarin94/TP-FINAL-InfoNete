@@ -1,4 +1,4 @@
-<div class="w3-container w3-padding-32" style="display: flex;" id="band">
+<div class="w3-container w3-padding-32" style="display: flex;">
 
     <div style="padding: 0em 3em;">
         {{#error}}
@@ -6,44 +6,46 @@
                 <p class="w3-text-red">{{error}}</p>
             </div>
         {{/error}}
-     <h1>Nueva Publicacion</h1>
+
+     <h1 class="contenidista-form-titulo">Nueva Publicacion</h1>
+
     <form action="/contenidista/procesarNoticia"  method="post" enctype="multipart/form-data">
-        <div>
-            <label for="edicion">Escoge la edicion:</label>
-            <select name="edicion" onchange="muestraSeccionesPorEdicion(this.value)" class="w3-input w3-light-grey w3-margin-top">
+        <div class="contenidista-form-div">
+            <label for="edicion" class="contenidista-form-label">Escoge la edicion:</label>
+            <select name="edicion" onchange="muestraSeccionesPorEdicion(this.value)" class="w3-input w3-margin-top contenidista-form-select">
               {{#listaEdiciones}}
               <option value="{{id}}">{{edicion}}</option>
               {{/listaEdiciones}}
             </select>
         </div>
-        <div id="seccionesPorEdicion" class="w3-margin-top">
+        <div id="seccionesPorEdicion" class="contenidista-form-div">
         </div>
-        <div class="w3-margin-top">
-            <label for="titulo">Título:</label>
-            <input class="w3-input w3-light-grey w3-margin-top" type="text" name="titulo">
+        <div class="contenidista-form-div">
+            <label for="titulo" class="contenidista-form-label">Título:</label>
+            <input class="w3-input w3-margin-top contenidista-form-input" type="text" name="titulo">
         </div>
-        <div class="w3-margin-top">
-            <label for="subtitulo">Subtítulo:</label>
-            <input class="w3-input w3-light-grey w3-margin-top" type="text" name="subtitulo">
+        <div class="contenidista-form-div">
+            <label for="subtitulo" class="contenidista-form-label">Subtítulo:</label>
+            <input class="w3-input w3-margin-top contenidista-form-input" type="text" name="subtitulo">
         </div>
-        <div class="w3-margin-top">
-            <label for="contenido">Contenido:</label>
-            <textarea class="w3-input w3-light-grey w3-margin-top" rows="4" cols="50" name="contenido"></textarea>
+        <div class="contenidista-form-div">
+            <label for="contenido" class="contenidista-form-label">Contenido:</label>
+            <textarea class="w3-input w3-margin-top contenidista-form-input" rows="4" cols="50" name="contenido"></textarea>
         </div>
-        <div class="w3-margin-top">
-             <label for="ubicacion">Click derecho en la ubicacion de la noticia: </label>
+        <div class="contenidista-form-div">
+             <label for="ubicacion" class="contenidista-form-label">Click derecho en el mapa</label>
              <div id="mapa" style="width:470px; height:400px;" class="w3-margin-top"></div>
-             <label for="latitud" class="w3-margin-top">Latitud:</label>
+             <label for="latitud">Latitud:</label>
              <input type="text" class="w3-input w3-light-grey w3-margin-top" id="latitud" name="latitud"
                 pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
-             <label  for="longitud" class="w3-margin-top">Longitud:</label>
+             <label  for="longitud">Longitud:</label>
              <input type="text"  class="w3-input w3-light-grey w3-margin-top" id="longitud" name="longitud"
                 pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
         </div>
         </div>
-       <div style="width: 50%; padding: 0em 4em; height: 700px;" class="w3-card-4 w3-light-grey">
+       <div class="contenidista-form-multimedia w3-light-grey">
         <h2>Multimedia</h2>
-        <div  class="w3-margin-top">
+        <div class="w3-margin-top">
                 <label for="audio">Graba un audio para la nota:</label>
                 <select name="listaDeDispositivos" id="listaDeDispositivos" class="w3-margin-top"></select>
                 <p id="duracion"></p>

@@ -286,8 +286,7 @@ class ContenidistaController
         $idNoticia = $_GET["id"];
         $data['editarNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
-        $data['datosNoticia'] = $this->model->getDatosNoticia($idNoticia);
-        $data['datosMultimedia'] = $this->model->getMultimediaByNoticia($idNoticia);
+        $data['datosNoticia'] = $this->model->getNoticia($idNoticia);
         echo $this->renderer->render("contenidista.mustache", $data);
     }
 
@@ -339,7 +338,7 @@ class ContenidistaController
         $seccionesEncontradas =  $this->model->getAjaxSeccionesByEdicion($edicion);
 
         echo "<label for='seccion'>Seccion a la que pertenece:</label>";
-        echo "<select name='seccion' class='w3-input w3-light-grey w3-margin-top'>";
+        echo "<select name='seccion' class='w3-input w3-margin-top contenidista-form-select'>";
         var_dump($seccionesEncontradas);
         foreach ($seccionesEncontradas as $seccion){
             echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";

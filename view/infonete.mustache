@@ -1,20 +1,20 @@
 {{> header}}
 
-<div class="report-container clima">
+<div class="report-container clima w3-row">
 
         {{#clima}}
         <h6>{{name}}</h6>
-        <div class="time">
+        <div class="w3-col m4 time">
             <div>{{date1}}</div>
             <div>{{date2}}</div>
             <div>{{description}}</div>
         </div>
-        <div class="weather-forecast">
+        <div class="w3-col m4 weather-forecast">
             <img src="http://openweathermap.org/img/w/{{icon}}.png" class="weather-icon" />
             <span class="max-temperature">{{tempmax}}°C</span>
             <span class="min-temperature">{{tempmin}}°C</span>
         </div>
-        <div class="time">
+        <div class="w3-col m4 time">
             <div>Humidity: {{humedad}}%</div>
             <div>Wind: {{speed}} km/h</div>
         </div>

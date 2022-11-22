@@ -73,6 +73,38 @@ class ContenidistaModel
         $sql = "UPDATE contenido c SET c.titulo = '$titulo', c.subtitulo = '$subtitulo', c.contenido = '$contenido', 
                                        c.latitud = '$latitud', c.longitud = '$longitud', c.estado = 1
                                    WHERE c.id = $idNoticia;";
+
+        if(!empty($_FILES['imagen1']['name'])){
+            $imagen1 = $_FILES['imagen1']['name'];
+            move_uploaded_file($_FILES['imagen1']['tmp_name'], "public/images/" . $imagen1);
+            $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
+                                                   SET cm.imagen1 = '$imagen1' WHERE c.id = '$idNoticia'";
+            $this->database->execute($sql);
+         }
+
+        if(!empty($_FILES['imagen2']['name'])){
+            $imagen2 = $_FILES['imagen2']['name'];
+            move_uploaded_file($_FILES['imagen2']['tmp_name'], "public/images/" . $imagen2);
+            $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
+                                                   SET cm.imagen2 = '$imagen2' WHERE c.id = '$idNoticia'";
+            $this->database->execute($sql);
+        }
+
+        if(!empty($_FILES['imagen3']['name'])){
+            $imagen3 = $_FILES['imagen3']['name'];
+            move_uploaded_file($_FILES['imagen3']['tmp_name'], "public/images/" . $imagen3);
+            $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
+                                                   SET cm.imagen3 = '$imagen3' WHERE c.id = '$idNoticia'";
+            $this->database->execute($sql);
+        }
+
+        if(!empty($_POST['url'])){
+            $url = $_POST['url'];
+            $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
+                                                   SET cm.url = '$url' WHERE c.id = '$idNoticia'";
+            $this->database->execute($sql);
+        }
+
         return $this->database->execute($sql);
     }
 
@@ -122,7 +154,7 @@ class ContenidistaModel
     }
 
     public function getNoticiasPublicadasByAutor($idContenidista){
-        $sql = "SELECT * FROM contenido c JOIN estado e ON c.estado = e.id 
+        $sql = "SELECT c.id, c.titulo FROM contenido c JOIN estado e ON c.estado = e.id 
                                           WHERE e.descripcion = 'Publicado'
                                           AND c.contenidista = '$idContenidista'";
         return $this->database->query($sql);
