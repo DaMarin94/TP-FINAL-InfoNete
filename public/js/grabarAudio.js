@@ -5,7 +5,6 @@ const init = () => {
     if (typeof MediaRecorder === "undefined" || !tieneSoporteUserMedia())
         return alert("Tu navegador web no cumple los requisitos; por favor, actualiza a un navegador decente como Firefox o Google Chrome");
 
-
     // Declaración de elementos del DOM
     const $listaDeDispositivos = document.querySelector("#listaDeDispositivos"),
         $duracion = document.querySelector("#duracion"),
@@ -90,22 +89,19 @@ const init = () => {
                         detenerConteo();
                         // Convertir los fragmentos a un objeto binario
                         const blobAudio = new Blob(fragmentosDeAudio);
-                        const formData = new FormData();
-                        // Enviar el BinaryLargeObject con FormData
-                        formData.append("audio", blobAudio);
-                        const RUTA_SERVIDOR = "/contenidista/guardarAudio";
-                        $duracion.textContent = "Enviando audio...";
-                        fetch(RUTA_SERVIDOR, {
-                            method: "POST",
-                            body: formData,
-                        })
-                            .then(respuestaRaw => respuestaRaw.text()) // Decodificar como texto
-                            .then(respuestaComoTexto => {
-                                // Aquí haz algo con la respuesta ;)
-                                console.log("La respuesta: ", respuestaComoTexto);
-                                // Abrir el archivo, es opcional y solo lo pongo como demostración
-                                $duracion.innerHTML = `<strong>Audio subido correctamente.</strong>&nbsp; <a target="_blank" href="${respuestaComoTexto}">Abrir</a>`
-                            })
+
+                        // Crear una URL o enlace para descargar
+                        const urlParaDescargar = URL.createObjectURL(blobAudio);
+                        // Crear un elemento <a> invisible para descargar el audio
+                        let a = document.createElement("a");
+                        document.body.appendChild(a);
+                        a.style = "display: none";
+                        a.href = urlParaDescargar;
+                        a.download = "grabacion.mp3";
+                        // Hacer click en el enlace
+                        a.click();
+                        // Y remover el objeto
+                        window.URL.revokeObjectURL(urlParaDescargar);
                     });
                 }
             )

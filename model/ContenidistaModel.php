@@ -56,16 +56,16 @@ class ContenidistaModel
             move_uploaded_file($video, "public/multimedia/" . $videoName);
         }
 
-        $audioName = null;
-        $audio = $_FILES['audio']['tmp_name'];
+        $audio = $_FILES['audio']['name'];
+        $audioName = uniqid() . $audio;
+        $audiotmp = $_FILES['audio']['tmp_name'];
         if (!is_null($audio)){
-           $audioName = uniqid().".webm";
-           move_uploaded_file($audio, "public/multimedia/" . $audioName);
+           move_uploaded_file($audiotmp, "public/multimedia/" . $audioName);
         }
 
         $url = $_POST['url'];
 
-        $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video, url) VALUES('$imagenName1', '$imagenName2', '$imagenName3', '$videoName', '$audioName', '$url')";
+        $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video, url) VALUES('$imagenName1', '$imagenName2', '$imagenName3', '$audioName', '$videoName', '$url')";
         return $this->database->insert($multimediasql);
     }
 
@@ -95,6 +95,15 @@ class ContenidistaModel
             move_uploaded_file($_FILES['imagen3']['tmp_name'], "public/images/" . $imagen3);
             $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
                                                    SET cm.imagen3 = '$imagen3' WHERE c.id = '$idNoticia'";
+            $this->database->execute($sql);
+        }
+
+        if(!empty($_FILES['audio']['name'])){
+            $audioName = uniqid() . $_FILES['audio']['name'];
+            $audiotmp = $_FILES['audio']['tmp_name'];
+            move_uploaded_file($audiotmp, "public/multimedia/" . $audioName);
+            $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
+                                                   SET cm.audio = '$audioName' WHERE c.id = '$idNoticia'";
             $this->database->execute($sql);
         }
 

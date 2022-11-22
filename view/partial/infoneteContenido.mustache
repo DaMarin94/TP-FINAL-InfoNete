@@ -33,6 +33,14 @@
               {{/imagen2}}
             </div>
 
+            {{#audio}}
+            <div style="text-align: center; margin-top: 1em;">
+                <audio controls>
+                    <source src="/public/multimedia/{{audio}}" type="audio/mp3">
+                </audio>
+            </div>
+            {{/audio}}
+
             <div class ="w3-left-align">
                 <p class="noticia-contenido">{{contenido}}</p>
             </div>
