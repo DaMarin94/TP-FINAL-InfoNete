@@ -15,7 +15,7 @@
             <th>Estado</th>
             <th>Role</th>
             <th></th>
-            <th></th>
+<!--            <th></th>-->
         </tr>
         </thead>
         {{#listadoUsuarios}}
@@ -28,7 +28,7 @@
                 <td>{{estado}}</td>
                 <td>{{role}}</td>
                 <td><a href="/admin/editorUsuario?id={{id}}"/><i class="fa fa-pencil w3-large" aria-hidden="true"></i></td>
-                <td><a href="/admin/deleteUsuario?id={{id}}"/><i class="fa fa-trash w3-large" aria-hidden="true"></i></td>
+<!--                <td><a href="/admin/deleteUsuario?id={{id}}"/><i class="fa fa-trash w3-large" aria-hidden="true"></i></td>-->
             </tr>
         {{/listadoUsuarios}}
     </table>
@@ -36,53 +36,55 @@
 
 <!--Seccion de edicion-->
 {{#editorUser}}
-    <h1>Editar usuario</h1>
-    <form action="/admin/editUsuario"  method="post">
-        <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:500px" id="band">
-            <input style="display: none" type="text" name="id" value="{{id}}">
-            <input style="display: none" type="text" id="estadoOrig" name="estadoOrig" value="{{estado}}">
-            <input style="display: none" name="role" value="{{role}}" type="number">
+    <div class="w3-container w3-content w3-center w3-padding-64 contenidista-form-container">
+        <h1 class="contenidista-form-titulo">Editar usuario</h1>
+        <form action="/admin/editUsuario"  method="post">
+            <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:500px" id="band">
+                <input style="display: none" type="text" name="id" value="{{id}}">
+                <input style="display: none" type="text" id="estadoOrig" name="estadoOrig" value="{{estado}}">
+                <input style="display: none" name="role" value="{{role}}" type="number">
 
-            <div>
-                <label for="name">Nombre: </label>
-                <input class="w3-input w3-light-grey" id="name" type="text" name="name" value="{{name}}" required>
+                <div class="w3-margin-top">
+                    <label class="contenidista-form-label" for="name">Nombre: </label>
+                    <input class="w3-input w3-light-grey w3-margin-top contenidista-form-input" id="name" type="text" name="name" value="{{name}}" required>
+                </div>
+
+                <div class="w3-margin-top">
+                    <label class="contenidista-form-label" for="username">Email: </label>
+                    <input class="w3-input w3-light-grey w3-margin-top contenidista-form-input" type="email" name="mail" value="{{email}}" required>
+                </div>
+
+                <div class="w3-margin-top">
+                    <label class="contenidista-form-label" for="latitud">Latitud: </label>
+                    <input class="w3-input w3-light-grey w3-margin-top contenidista-form-input" id="latitud" type="text" name="latitud" value="{{latitud}}" required>
+                </div>
+
+                <div class="w3-margin-top">
+                    <label class="contenidista-form-label" for="longitud">Longitud: </label>
+                    <input class="w3-input w3-light-grey w3-margin-top contenidista-form-input" id="longitud" type="text" name="longitud" value="{{longitud}}" required>
+                </div>
+
+                <div class="w3-margin-top">
+                    <label class="contenidista-form-label" for="roleEdit">Role</label>
+                    <select class="w3-input w3-light-grey w3-margin-top contenidista-form-select" name="roleEdit" id="roles">
+                        <option value="" disabled selected>Cambiar rol</option>
+                    </select>
+                </div>
+
+                <div>
+                    <p>
+                        <label>Activo</label>
+                        <input class="w3-radio" type="radio" id="radioEstado1" name="estado" value="1">
+                        <label>Inactivo</label>
+                        <input class="w3-radio" type="radio" id="radioEstado0" name="estado" value="0">
+                    </p>
+                </div>
+
+                <button class="w3-button w3-black w3-margin-top contenidista-form-boton" type="submit">Editar</button>
+
             </div>
-
-            <div>
-                <label for="username">Email: </label>
-                <input class="w3-input w3-light-grey" type="email" name="mail" value="{{email}}" required>
-            </div>
-
-            <div>
-                <label for="latitud">Latitud: </label>
-                <input class="w3-input w3-light-grey" id="latitud" type="text" name="latitud" value="{{latitud}}" required>
-            </div>
-
-            <div>
-                <label for="longitud">Longitud: </label>
-                <input class="w3-input w3-light-grey" id="longitud" type="text" name="longitud" value="{{longitud}}" required>
-            </div>
-
-            <div>
-                <label for="roleEdit">Role</label>
-                <select class="w3-input w3-light-grey" name="roleEdit" id="roles">
-                    <option value="" disabled selected>Cambiar rol</option>
-                </select>
-            </div>
-
-            <div>
-                <p>
-                    <label>Activo</label>
-                    <input class="w3-radio" type="radio" id="radioEstado1" name="estado" value="1">
-                    <label>Inactivo</label>
-                    <input class="w3-radio" type="radio" id="radioEstado0" name="estado" value="0">
-                </p>
-            </div>
-
-            <button class="w3-button w3-black w3-margin-top" type="submit">Editar</button>
-
-        </div>
-    </form>
+        </form>
+    </div>
 {{/editorUser}}
 <!--Seccion de edicion-->
 
