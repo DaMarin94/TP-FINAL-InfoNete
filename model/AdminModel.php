@@ -270,8 +270,8 @@ class AdminModel
         return $this->database->query($sql);
     }
 
-    public function editUsuario($id, $name, $mail, $latitud, $longitud, $role){
-        $sql = "UPDATE usuarios SET nombre = '$name', mail = '$mail', latitud = '$latitud', longitud = '$longitud' role = '$role' WHERE id = '$id'";
+    public function editUsuario($id, $name, $mail, $latitud, $longitud, $role, $estado){
+        $sql = "UPDATE usuarios SET nombre = '$name', mail = '$mail', latitud = '$latitud', longitud = '$longitud', role = '$role', estado = '$estado' WHERE id = '$id'";
         return $this->database->execute($sql);
     }
 

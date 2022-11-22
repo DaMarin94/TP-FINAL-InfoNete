@@ -254,6 +254,7 @@ class AdminController{
         $data['latitud'] = $usuario[0]['latitud'];
         $data['longitud'] = $usuario[0]['longitud'];
         $data['role'] = $usuario[0]['role'];
+        $data['estado'] = $usuario[0]['estado'];
 
         $this->renderer->render('admin.mustache', $data);
 
@@ -268,10 +269,11 @@ class AdminController{
         $latitud  = $_POST["latitud"];
         $longitud  = $_POST["longitud"];
         $role  = $_POST["role"];
+        $estado = $_POST["estado"];
 
         if($_POST["roleEdit"]){ $role  = $_POST["roleEdit"]; }
 
-        $this->model->editUsuario($id, $name, $mail, $latitud, $longitud, $role);
+        $this->model->editUsuario($id, $name, $mail, $latitud, $longitud, $role, $estado);
 
         Redirect::redirect('/admin/usuarios');
     }

@@ -1,15 +1,38 @@
 <div class="w3-margin-top">
-    <h2 class="w3-black titulo2">Mis productos</h2>
+    <h2 class="w3-black titulo2">Mi biblioteca</h2>
+</div>
+
+<div class="contAddUser">
+    <h1>Suscripciones</h1>
 </div>
 
     <div style="overflow-x:auto;">
         <div class="w3-row lector">
-            {{#listaProductos}}
+            {{#edicionesSuscrito}}
                 <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
-                    <a class="w3-center" href="lector/producto?id={{id}}">
+                    <a class="w3-center" href="http://localhost/infonete/edicion?id={{id}}&ids=null">
                     <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
+                    <ul class="w3-ul">{{edicion}}</ul>
                     </a>
                 </div>
-            {{/listaProductos}}
+            {{/edicionesSuscrito}}
         </div>
     </div>
+
+<div class="contAddUser">
+    <h1>Compras</h1>
+</div>
+
+    <div style="overflow-x:auto;">
+        <div class="w3-row lector">
+            {{#edicionesCompradas}}
+                <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
+                    <a class="w3-center" href="http://localhost/infonete/edicion?id={{id}}&ids=null">
+                    <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
+                    <ul class="w3-ul">{{edicion}}</ul>
+                    </a>
+                </div>
+            {{/edicionesCompradas}}
+        </div>
+    </div>
+
