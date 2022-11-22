@@ -9,25 +9,18 @@ class AdminController{
         $this->renderer = $render;
         $this->model = $model;
         $this->pdfGenerator = $pdfGenerator;
-    }
-
-    public function validarRol(){
         if(!Router::checkAuth([4])){
             Redirect::redirect('/');
         };
     }
 
     public function list(){
-        $this->validarRol();
-
         $data['usuarios'] = true;
         $data['listadoUsuarios'] = $this->model->getUsuarios();
         $this->renderer->render('admin.mustache', $data);
     }
 
     public function productos(){
-        $this->validarRol();
-
         $data['productos'] = true;
         $data['listaProductos'] = $this->model->getProductos();
         $data['listaProductosBaja'] = $this->model->getProductosBaja();
@@ -36,7 +29,6 @@ class AdminController{
     }
 
     public function bajaProducto(){
-        $this->validarRol();
         $id = $_GET['id'];
 
         $this->model->bajaProducto($id);
@@ -44,7 +36,6 @@ class AdminController{
     }
 
     public function altaProducto(){
-        $this->validarRol();
         $id = $_GET['id'];
 
         $this->model->altaProducto($id);
@@ -52,7 +43,6 @@ class AdminController{
     }
 
     public function editorProducto() {
-        $this->validarRol();
         $id = $_GET['id'];
 
         $data['productos'] = true;
@@ -70,7 +60,6 @@ class AdminController{
     }
 
     public function procesarEdicionProducto(){
-        $this->validarRol();
         $id = $_POST['id'];
         $nombre = $_POST['nombre'];
         $tipoNuevo = $_POST['tipoNuevo'];
@@ -96,8 +85,6 @@ class AdminController{
     }
 
     public function ediciones(){
-        $this->validarRol();
-
         $data['ediciones'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
         $data['listaEdicionesBaja'] = $this->model->getEdicionesBaja();
@@ -105,38 +92,29 @@ class AdminController{
     }
 
     public function contenidos(){
-        $this->validarRol();
-
         $data['contenidos'] = true;
         $data['listaContenidos'] = $this->model->getContenidos();
         $this->renderer->render('admin.mustache', $data);
     }
 
     public function usuarios(){
-        $this->validarRol();
-
         $data['usuarios'] = true;
         $data['listadoUsuarios'] = $this->model->getUsuarios();
         $this->renderer->render('admin.mustache', $data);
     }
 
     public function formUsuario(){
-        $this->validarRol();
-
         $data['formAltaUsuarios'] = true;
         $this->renderer->render('admin.mustache', $data);
     }
 
     public function loadRoles(){
-        $this->validarRol();
-
         foreach($this->model->getRoles() as $rol){
             echo "<option value='" . $rol["id"].  "'>" . $rol["descripcion"] . "</option>";
         }
     }
 
     public function editorEdicion() {
-        $this->validarRol();
         $id = $_GET['id'];
 
         $data['ediciones'] = true;
@@ -156,7 +134,6 @@ class AdminController{
     }
 
     public function procesarEdicion(){
-        $this->validarRol();
         $id = $_POST['id'];
         $edicion = $_POST['edicion'];
         $precio = $_POST['precio'];
@@ -184,7 +161,6 @@ class AdminController{
     }
 
     public function bajaEdicion(){
-        $this->validarRol();
         $id = $_GET['id'];
 
         $this->model->bajaEdicion($id);
@@ -192,7 +168,6 @@ class AdminController{
     }
 
     public function altaEdicion(){
-        $this->validarRol();
         $id = $_GET['id'];
 
         $this->model->altaEdicion($id);
@@ -201,7 +176,6 @@ class AdminController{
     }
 
     public function detalleContenido() {
-        $this->validarRol();
         $id = $_GET['id'];
 
         $data['contenidos'] = true;
@@ -211,7 +185,6 @@ class AdminController{
     }
 
     public function bajaContenido() {
-        $this->validarRol();
         $id = $_GET['id'];
         $this->model->bajaContenido($id);
 
@@ -219,8 +192,6 @@ class AdminController{
     }
 
     public function altaUsuario(){
-        $this->validarRol();
-
         $name = $_POST["name"];
         $email = $_POST["email"];
         $password  = $_POST["password"];
@@ -238,8 +209,6 @@ class AdminController{
     }
 
     public function editorUsuario(){
-        $this->validarRol();
-
         $id = $_GET["id"];
 
         $data['editorUser'] = true;
@@ -261,8 +230,6 @@ class AdminController{
     }
 
     public function editUsuario(){
-        $this->validarRol();
-
         $id = $_POST["id"];
         $name = $_POST["name"];
         $mail = $_POST["mail"];
@@ -279,8 +246,6 @@ class AdminController{
     }
 
     public function deleteUsuario(){
-        $this->validarRol();
-
         $id = $_GET["id"];
 
         $this->model->deleteUsuario($id);
@@ -289,15 +254,11 @@ class AdminController{
     }
 
     public function reportes(){
-        $this->validarRol();
-
         $data['reportes'] = true;
         $this->renderer->render('admin.mustache', $data);
     }
 
     public function getPdfContenidistas() {
-        $this->validarRol();
-
         //Sus contenidistas y su información personal
         $data['contenidistas'] = $this->model->getContenidistasReporte();
         $html = $this->renderer->getHtml('reportesPdf/templatePdfContenidistas.mustache', $data);
@@ -305,8 +266,6 @@ class AdminController{
     }
 
     public function getPdfClientes() {
-        $this->validarRol();
-
         //Sus clientes y su información personal y producto adquirido
         $data['clientes'] = $this->model->getClientesReporte();
         $html = $this->renderer->getHtml('reportesPdf/templatePdfClientes.mustache', $data);
@@ -314,8 +273,6 @@ class AdminController{
     }
 
     public function getPdfProductos() {
-        $this->validarRol();
-
         //Sus productos con su información básica, cantidad de vendidos/suscritos y ediciones
         $data['productos'] = $this->model->getProductosReporte();
         $html = $this->renderer->getHtml('reportesPdf/templatePdfProductos.mustache', $data);

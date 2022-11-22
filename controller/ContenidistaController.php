@@ -6,13 +6,9 @@ class ContenidistaController
     private $renderer;
     private $model;
 
-    public function __construct($render, $model)
-    {
+    public function __construct($render, $model){
         $this->renderer = $render;
         $this->model = $model;
-    }
-
-    public function validarRol(){
         if(!Router::checkAuth([2])){
             Redirect::redirect('/');
         };
@@ -26,8 +22,6 @@ class ContenidistaController
 
     //Metodos relacionados al formulario de AGREGAR PRODUCTO
     public function formularioProducto(){
-        $this->validarRol();
-
         $data['exito'] = $this->mensajeExitoProducto();
         $data['error'] = $this->mensajeErrorProducto();
 
@@ -37,8 +31,6 @@ class ContenidistaController
     }
 
     public function procesarProducto(){
-        $this->validarRol();
-
         $nombre = $_POST["nombre"];
         $tipo = $_POST["tipo"];
         $precio = $_POST["precio"];
@@ -114,8 +106,6 @@ class ContenidistaController
 
     //Metodos relacionados al formulario de AGREGAR EDICION
     public function formularioEdicion(){
-        $this->validarRol();
-
         $data['exito'] = $this->mensajeExitoEdicion();
         $data['error'] = $this->mensajeErrorEdicion();
 
@@ -125,8 +115,6 @@ class ContenidistaController
     }
 
     public function procesarEdicion(){
-        $this->validarRol();
-
         $edicion = $_POST["edicion"];
         $precio = $_POST["precio"];
         $producto = $_POST["producto"];
@@ -187,8 +175,6 @@ class ContenidistaController
 
     //Metodos relacionados a formulario de AGREGAR SECCION
     public function formularioSeccion(){
-        $this->validarRol();
-
         $data['error'] = $this->mensajeErrorSeccion();
         $data['exito'] = $this->mensajeExitoSeccion();
 
@@ -198,8 +184,6 @@ class ContenidistaController
     }
 
     public function procesarSeccion(){
-        $this->validarRol();
-
         $edicion = $_POST["edicion"];
         $seccion = $_POST["seccion"];
 
@@ -239,8 +223,6 @@ class ContenidistaController
 
     //Metodos relacionado a AGREGAR NOTICIA y ABM
     public function formularioNoticia(){
-        $this->validarRol();
-
         if(!empty($_GET['error'])){
             $data['error'] = $_GET['error'];
         }
@@ -251,8 +233,6 @@ class ContenidistaController
     }
 
     public function procesarNoticia(){
-        $this->validarRol();
-
         $titulo = $_POST["titulo"];
         $subtitulo = $_POST["subtitulo"];
 
@@ -273,16 +253,12 @@ class ContenidistaController
     }
 
     public function verNoticia(){
-        $this->validarRol();
-
         $idNoticia = $_GET["id"];
         $data['datosNoticia'] = $this->model->getNoticia($idNoticia);
         echo $this->renderer->render("noticia.mustache", $data);
     }
 
     public function editarNoticia(){
-        $this->validarRol();
-
         $idNoticia = $_GET["id"];
         $data['editarNoticia'] = true;
         $data['listaEdiciones'] = $this->model->getEdiciones();
@@ -317,8 +293,6 @@ class ContenidistaController
 
     //Metodos AJAX para obtener las secciones
     public function ajaxSecciones(){
-        $this->validarRol();
-
         $edicion = $_GET["edicion"];
         $seccionesDisponibles =  $this->model->getSeccionesFaltantesByEdicion($edicion);
 
@@ -332,8 +306,6 @@ class ContenidistaController
     }
 
     public function ajaxSeccionesPorEdicion(){
-        $this->validarRol();
-
         $edicion = $_GET["edicion"];
         $seccionesEncontradas =  $this->model->getAjaxSeccionesByEdicion($edicion);
 
@@ -348,8 +320,6 @@ class ContenidistaController
 
     //Metodos para obtener las noticias del contenidista segun el estado
     public function noticiasBorrador(){
-        $this->validarRol();
-
         $data['noticiasBorrador'] = true;
         $idContenidista = $_SESSION['usuario'][0]['id'];
         $data['listaNoticias'] = $this->model->getNoticiasEnBorradorByAutor($idContenidista);
@@ -357,8 +327,6 @@ class ContenidistaController
     }
 
     public function noticiasRevision(){
-        $this->validarRol();
-
         $data['noticiasRevision'] = true;
         $idContenidista = $_SESSION['usuario'][0]['id'];
         $data['listaNoticias'] = $this->model->getNoticiasRevisadasByAutor($idContenidista);
@@ -366,8 +334,6 @@ class ContenidistaController
     }
 
     public function noticiasPublicadas(){
-        $this->validarRol();
-
         $data['noticiasPublicadas'] = true;
         $idContenidista = $_SESSION['usuario'][0]['id'];
         $data['listaNoticias'] = $this->model->getNoticiasPublicadasByAutor($idContenidista);
@@ -377,8 +343,6 @@ class ContenidistaController
 
 
     public function validarNoticia(){
-        $this->validarRol();
-
         if(empty($_POST["titulo"])){
             return false;
         }
