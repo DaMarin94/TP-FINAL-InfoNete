@@ -16,7 +16,6 @@ class ContenidistaController
 
     //Primera vista del contenidista
     public function list(){
-        $this->validarRol();
         $this->noticiasBorrador();
     }
 
