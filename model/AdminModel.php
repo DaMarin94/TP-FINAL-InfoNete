@@ -238,6 +238,14 @@ class AdminModel
         return $productos;
     }
 
+    public function getProductosReporteChart() {
+
+        $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant 
+                FROM suscripcion s JOIN producto p ON s.producto_id = p.id JOIN tipo t ON p.tipo = t.id GROUP BY p.id";
+
+        return $this->database->query($sql);
+    }
+
     private function getEdicionesReporte($productoId) {
         $sql = "SELECT COUNT(c.edicion_id) as compras, e.edicion as nom_edicion, e.precio,DATE_FORMAT(e.fecha, '%d-%m-%Y') as fecha FROM producto p JOIN edicion e ON e.producto = p.id LEFT JOIN compra c ON e.id = c.edicion_id WHERE p.id = '$productoId' GROUP BY e.id";
         return $this->database->query($sql);
