@@ -20,7 +20,7 @@
 <!-- Page content -->
 <div class="w3-content contentWrap" style="max-width:2000px; padding-left: 200px">
 
-<div class="w3-container w3-content w3-center w3-padding-30" style="max-width:70%; min-height: 75vh" id="band">
+<div class="w3-container w3-content w3-center w3-padding-30" style="max-width:100%; min-height: 75vh" id="band">
 
         {{#formAltaProducto}}
             {{> formularioProducto}}
@@ -68,32 +68,9 @@
     </div>
 </div>
 
-<script>
-    //funciones para Acordeon del menu
-    function myAccFunc() {
-        var x = document.getElementById("demoAcc");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-            x.previousElementSibling.className += " w3-teal";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-            x.previousElementSibling.className =
-                    x.previousElementSibling.className.replace(" w3-teal", "");
-        }
-    }
+<script src="https://cdn.tiny.cloud/1/a6vdvz9sejlchv64d0vru3my7nrendb2eggh9vy4dvpum6sg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript" src="../public/js/tinymce.js"></script>
 
-    function myDropFunc() {
-        var x = document.getElementById("demoDrop");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-            x.previousElementSibling.className += " w3-green";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-            x.previousElementSibling.className =
-                    x.previousElementSibling.className.replace(" w3-green", "");
-        }
-    }
-</script>
 </body>
 
 {{> footer}}

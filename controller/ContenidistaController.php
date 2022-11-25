@@ -296,7 +296,7 @@ class ContenidistaController
         $seccionesDisponibles =  $this->model->getSeccionesFaltantesByEdicion($edicion);
 
         echo "<label for='seccion' class='contenidista-form-label'>Elegi una seccion:</label>";
-        echo "<select name='seccion' class='w3-input w3-margin-top contenidista-form-select'>";
+        echo "<select name='seccion' class='w3-input w3-margin-top contenidista-form-select' style='width: 90%'>";
         echo "<option value='0'>Seleccione una seccion</option>";
         foreach ($seccionesDisponibles as $seccion){
             echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";
@@ -308,8 +308,8 @@ class ContenidistaController
         $edicion = $_GET["edicion"];
         $seccionesEncontradas =  $this->model->getAjaxSeccionesByEdicion($edicion);
 
-        echo "<label for='seccion'>Seccion a la que pertenece:</label>";
-        echo "<select name='seccion' class='w3-input w3-margin-top contenidista-form-select'>";
+        echo "<label for='seccion' class='contenidista-form-label'>Seccion:</label>";
+        echo "<select name='seccion' class='w3-input w3-margin-top contenidista-form-select' style='width: 90%'>";
         var_dump($seccionesEncontradas);
         foreach ($seccionesEncontradas as $seccion){
             echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";

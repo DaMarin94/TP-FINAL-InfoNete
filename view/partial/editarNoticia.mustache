@@ -1,79 +1,143 @@
 <div class="w3-container w3-padding-32" style="display: flex;">
-    <div style="padding: 0em 3em;">
-     <h1 class="contenidista-form-titulo">Editar Noticia</h1>
 
-    <form action="/contenidista/procesarEditarNoticia"  method="post" enctype="multipart/form-data">
-    {{#datosNoticia}}
-        <div class="contenidista-form-div">
-            <input type="hidden" name="id" value="{{id}}">
-            <label for="edicion" class="contenidista-form-label">Escoge la edicion:</label>
-            <select name="edicion" onchange="muestraSeccionesPorEdicion(this.value)" class="w3-input w3-margin-top contenidista-form-select">
-              {{#listaEdiciones}}
-              <option value="{{id}}">{{edicion}}</option>
-              {{/listaEdiciones}}
-            </select>
-        </div>
-        <div id="seccionesPorEdicion" class="contenidista-form-div">
-        </div>
-        <div class="contenidista-form-div">
-            <label for="titulo" class="contenidista-form-label">Título:</label>
-            <input class="w3-input w3-margin-top contenidista-form-input" type="text" name="titulo" value="{{titulo}}">
-        </div>
-        <div class="contenidista-form-div">
-            <label for="subtitulo" class="contenidista-form-label">Subtítulo:</label>
-            <input class="w3-input w3-margin-top contenidista-form-input" type="text" name="subtitulo" value="{{subtitulo}}">
-        </div>
-        <div class="contenidista-form-div">
-            <label for="contenido" class="contenidista-form-label">Contenido:</label>
-            <textarea class="w3-input w3-margin-top contenidista-form-input" rows="4" cols="50" name="contenido">{{contenido}}</textarea>
-        </div>
-        <div class="contenidista-form-div">
-             <label for="ubicacion" class="contenidista-form-label">Click derecho en el mapa</label>
-             <div id="mapa" style="width:470px; height:400px;" class="w3-margin-top"></div>
-             <label for="latitud" class="w3-margin-top">Latitud:</label>
-             <input type="text" class="w3-input w3-light-grey w3-margin-top" id="latitud" name="latitud"
-                pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" value="{{latitud}}">
-             <label  for="longitud" class="w3-margin-top">Longitud:</label>
-             <input type="text"  class="w3-input w3-light-grey w3-margin-top" id="longitud" name="longitud"
-                pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$" value="{{longitud}}">
-        </div>
-        </div>
+   <div style="width: 60%; padding: 0em 3em;">
+
+           {{#error}}
+               <div class="w3-panel w3-pale-red w3-border w3-round w3-animate-bottom w3-display-bottommiddle">
+                   <p class="w3-text-red">{{error}}</p>
+               </div>
+           {{/error}}
+
+           <h1 class="contenidista-form-titulo">Nueva Publicacion</h1>
+           {{#datosNoticia}}
+           <form action="/contenidista/procesarEditarNoticia"  method="post" enctype="multipart/form-data">
+               <input type="hidden" name="id" value="{{id}}">
+               <div style="display: flex; justify-content: space-evenly;">
+                   <div class="contenidista-form-div-m1">
+                       <label for="edicion" class="contenidista-form-label">Edicion:</label>
+                       <select name="edicion" onchange="muestraSeccionesPorEdicion(this.value)" class="w3-input w3-margin-top contenidista-form-select" style="width: 90%;">
+                       <option value="{{edicionid}}">{{edicion}}</option>
+                       {{#listaEdiciones}}
+                       <option value="{{id}}">{{edicion}}</option>
+                       {{/listaEdiciones}}
+                       </select>
+                   </div>
+
+                   <div id="seccionesPorEdicion" class="contenidista-form-div-m1">
+                       <label for="seccion" class="contenidista-form-label">Seccion:</label>
+                       <select name="seccion" class="w3-input w3-margin-top contenidista-form-select" style="width: 90%;">
+                       <option value="{{seccionid}}">{{seccion}}</option>
+                       </select>
+                   </div>
+               </div>
+
+               <div class="contenidista-form-div-m1">
+                   <label for="titulo" class="contenidista-form-label">Título:</label>
+                   <input class="w3-input w3-margin-top contenidista-form-input" style="width: 60%;" type="text" name="titulo" value="{{seccion}}">
+               </div>
+
+               <div class="contenidista-form-div-m1">
+                   <label for="subtitulo" class="contenidista-form-label">Subtítulo:</label>
+                   <input class="w3-input w3-margin-top contenidista-form-input" style="width: 60%;" type="text" name="subtitulo" value="{{subtitulo}}">
+               </div>
+
+               <div class="contenidista-form-div-m1">
+                   <div style="margin-bottom: 2em;"><label for="contenido" class="contenidista-form-label">Contenido:</label> </div>
+                   <textarea class="w3-input w3-margin-top contenidista-form-input" rows="4" cols="50" name="contenido">{{{contenido}}}</textarea>
+               </div>
+       </div>
 
        <div class="contenidista-form-multimedia w3-light-grey">
-        <h2>Multimedia</h2>
-        <div class="w3-margin-top">
-                <label for="audio">Graba un audio para la nota:</label>
-                <select name="listaDeDispositivos" id="listaDeDispositivos" class="w3-margin-top"></select>
-                <p id="duracion"></p>
-                <a id="btnComenzarGrabacion" class="w3-button w3-yellow">Comenzar</a>
-                <a id="btnDetenerGrabacion" class="w3-button w3-red">Detener</a>
-        </div>
-        <div class="w3-margin-top">
-            <label for="audio">Inserte el audio:</label>
-            <input class="w3-input w3-center w3-margin-top" type="file" accept=".mp3,audio/*" name="audio">
-        </div>
-        <div class="w3-margin-top">
-            <label for="url">Enlace a mas información o video</label>
-            <input type="url" name="url" id="url" class="w3-margin-top"
-               placeholder="{{url}}"
-               pattern="https://.*" size="45">
-        </div>
-        <div class="w3-margin-top">
-            <label for="imagen1">Imagen principal:{{imagen1}}</label>
-            <input class="w3-input w3-center w3-margin-top" type="file" name="imagen1">
-        </div>
-        <div class="w3-margin-top">
-            <label for="imagen2">Segunda Imagen:{{imagen2}}</label>
-            <input class="w3-input w3-center w3-margin-top" type="file" name="imagen2">
-        </div>
-        <div class="w3-margin-top">
-            <label for="imagen3">Tercera Imagen:{{imagen3}}</label>
-            <input class="w3-input w3-center w3-margin-top" type="file" name="imagen3">
-        </div>
-        <div class="w3-margin-top">
-        </div>
-        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
-    {{/datosNoticia}}
-    </form>
-    </div>
-</div>
+
+           <h2>Multimedia</h2>
+
+           <div class="w3-margin-top">
+               <label for="audio" class="contenidista-multimedia-label">Graba un audio para la nota:</label>
+               <select name="listaDeDispositivos" id="listaDeDispositivos" class="w3-margin-top"></select>
+               <p id="duracion"></p>
+               <a id="btnComenzarGrabacion" class="w3-button w3-yellow">Comenzar</a>
+               <a id="btnDetenerGrabacion" class="w3-button w3-red">Detener</a>
+           </div>
+
+           <div class="w3-margin-top">
+                {{#audio}}
+                <label for="audio" class="contenidista-multimedia-label">Audio actual:</label>
+                <div style="text-align: center; margin-top: 1em;">
+                    <audio controls>
+                        <source src="/public/multimedia/{{audio}}" type="audio/mp3">
+                    </audio>
+                </div>
+                {{/audio}}
+               <label for="audio" class="contenidista-multimedia-label">Inserte nuevo audio:</label>
+               <input class="w3-input w3-center w3-margin-top" type="file" accept=".mp3,audio/*" name="audio">
+           </div>
+
+           <div class="w3-margin-top">
+               <label for="url" class="contenidista-multimedia-label">Enlace a mas información o video</label>
+               <input type="url" name="url" id="url" class="w3-margin-top"
+                  pattern="https://.*" size="45" value="{{url}}">
+           </div>
+
+           <div class="w3-margin-top">
+               <label for="imagen1" class="contenidista-multimedia-label">Imagen Principal:
+                    <a onclick="document.getElementById('modal01').style.display='block'"
+                    class="w3-hover-opacity" style="color: blue; text-decoration: underline;">Ver imagen</a>
+               </label>
+
+               <div id="modal01" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                 <img class="w3-modal-content" src="../public/images/{{imagen1}}">
+               </div>
+
+               <input class="w3-input w3-center w3-margin-top" type="file" name="imagen1">
+           </div>
+
+           <div class="w3-margin-top">
+               <label for="imagen2" class="contenidista-multimedia-label">Segunda Imagen:
+               {{#imagen2}}
+                    <a onclick="document.getElementById('modal02').style.display='block'"
+                    class="w3-hover-opacity" style="color: blue; text-decoration: underline;">Ver imagen</a>
+               {{/imagen2}}
+               </label>
+
+               <div id="modal02" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                 <img class="w3-modal-content" src="../public/images/{{imagen2}}">
+               </div>
+
+               <input class="w3-input w3-center w3-margin-top" type="file" name="imagen2">
+           </div>
+
+           <div class="w3-margin-top">
+               <label for="imagen3" class="contenidista-multimedia-label">Tercera Imagen:
+               {{#imagen3}}
+                    <a onclick="document.getElementById('modal03').style.display='block'"
+                    class="w3-hover-opacity" style="color: blue; text-decoration: underline;">Ver imagen</a>
+               {{/imagen3}}
+               </label>
+
+               <div id="modal03" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                 <img class="w3-modal-content" src="../public/images/{{imagen3}}">
+               </div>
+
+               <input class="w3-input w3-center w3-margin-top" type="file" name="imagen3">
+           </div>
+
+       </div>
+   </div>
+
+           <div class="contenidista-form-div">
+               <h2 class="contenidista-form-titulo">Ubicacion</h2>
+               <label for="ubicacion" class="contenidista-form-label">Click derecho en el mapa</label>
+               <div id="mapa" style="width:100%; height:400px;" class="w3-margin-top"></div>
+                   <label for="latitud"  class="contenidista-form-label">Latitud:</label>
+                   <input type="text" class="w3-input w3-light-grey w3-margin-top" style="width: 30%; margin: auto; text-align: center;" id="latitud" name="latitud" value="{{latitud}}"
+                   pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
+                   <label for="longitud"  class="contenidista-form-label">Longitud:</label>
+                   <input type="text"  class="w3-input w3-light-grey w3-margin-top" style="width: 30%; margin: auto; text-align: center;" id="longitud" name="longitud" value="{{longitud}}"
+                   pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
+           </div>
+
+           <button class="w3-button w3-black w3-margin-top" style="border-radius: 50px; width: 20%;" type="submit">Enviar</button>
+           {{/datosNoticia}}
+           </form>
+       </div>
+   </div>

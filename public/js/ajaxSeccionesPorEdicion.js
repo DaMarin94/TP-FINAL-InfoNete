@@ -1,8 +1,5 @@
 function muestraSeccionesPorEdicion(edicion) {
-    if (edicion=="") {
-        document.getElementById("seccionesPorEdicion").innerHTML="";
-        return;
-    }
+
     if (window.XMLHttpRequest) {
         xmlhttp=new XMLHttpRequest();
     } else {

@@ -112,8 +112,6 @@ class InfoneteController {
 
     public function mostrarClima(){
         $this->validarRol();
-
-
     }
 
     public function cerrarSesion(){

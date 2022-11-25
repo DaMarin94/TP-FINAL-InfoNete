@@ -31,41 +31,41 @@ class ContenidistaModel
 
     public function procesarMultimedia()
     {
-        $imagenName1 = $_FILES['imagen1']['name'];
-        $imagenTmp1 = $_FILES['imagen1']['tmp_name'];
-        if (!is_null($imagenTmp1)) {
-            move_uploaded_file($imagenTmp1, "public/images/" . $imagenName1);
+        $imagen1 = $_FILES['imagen1']['name'];
+        if (!is_null($imagen1)) {
+            $imagenTmp1 = $_FILES['imagen1']['tmp_name'];
+            move_uploaded_file($imagenTmp1, "public/images/" . $imagen1);
         }
 
-        $imagenName2 = $_FILES['imagen2']['name'];
-        $imagenTmp2 = $_FILES['imagen2']['tmp_name'];
-        if (!is_null($imagenTmp2)) {
-            move_uploaded_file($imagenTmp2, "public/images/" . $imagenName2);
+        $imagen2 = $_FILES['imagen2']['name'];
+        if (!is_null($imagen2)) {
+            $imagenTmp2 = $_FILES['imagen2']['tmp_name'];
+            move_uploaded_file($imagenTmp2, "public/images/" . $imagen2);
         }
 
-        $imagenName3 = $_FILES['imagen3']['name'];
-        $imagenTmp3 = $_FILES['imagen3']['tmp_name'];
-        if (!is_null($imagenTmp3)) {
-            move_uploaded_file($imagenTmp3, "public/images/" . $imagenName3);
+        $imagen3 = $_FILES['imagen3']['name'];
+        if (!is_null($imagen3)) {
+            $imagenTmp3 = $_FILES['imagen3']['tmp_name'];
+            move_uploaded_file($imagenTmp3, "public/images/" . $imagen3);
         }
 
-        $videoName = null;
-        $video = $_FILES['video']['tmp_name'];
+        $video = null;
         if (!is_null($video)) {
             $videoName = uniqid().".mp4";
             move_uploaded_file($video, "public/multimedia/" . $videoName);
         }
 
         $audio = $_FILES['audio']['name'];
-        $audioName = uniqid() . $audio;
-        $audiotmp = $_FILES['audio']['tmp_name'];
-        if (!is_null($audio)){
-           move_uploaded_file($audiotmp, "public/multimedia/" . $audioName);
+        $audioName = null;
+        if (!empty($audio)){
+            $audioName = uniqid() . $audio;
+            $audiotmp = $_FILES['audio']['tmp_name'];
+            move_uploaded_file($audiotmp, "public/multimedia/" . $audioName);
         }
 
         $url = $_POST['url'];
 
-        $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video, url) VALUES('$imagenName1', '$imagenName2', '$imagenName3', '$audioName', '$videoName', '$url')";
+        $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video, url) VALUES('$imagen1', '$imagenName2', '$imagenName3', '$audioName', '$videoName', '$url')";
         return $this->database->insert($multimediasql);
     }
 
@@ -215,10 +215,14 @@ class ContenidistaModel
 
     public function getNoticia($idNoticia) {
         $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, 
-                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url FROM contenido c 
+                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url,
+                       e.id as edicionid, e.edicion as edicion,
+                       s.id as seccionid, s.descripcion as seccion
+                                        FROM contenido c 
                                         JOIN contenido_multimedia cm ON c.multimedia = cm.id
                                         JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
                                         JOIN edicion e ON e.id = esn.edicion
+                                        JOIN seccion s ON s.id = esn.seccion
                                         WHERE c.id = '$idNoticia'";
         return $this->database->query($sql);
     }
