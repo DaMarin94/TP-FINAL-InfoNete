@@ -13,11 +13,11 @@ class RegistroController
     }
 
     public function list(){
-        echo "nada";
+        $this->alta();
     }
 
     public function alta(){
-        echo $this->renderer->render("registroForm.mustache");
+        $this->renderer->render("registroForm.mustache");
     }
 
     public function procesarAlta(){
@@ -64,7 +64,7 @@ class RegistroController
         //Definimos la cuenta que vamos a usar. Dirección completa de la misma
         $mail->Username   = "progweb2.2022@gmail.com";
         //Introducimos nuestra contraseña de gmail
-        $mail->Password   = "qshiqlrkvsojwfcn";
+        $mail->Password   = "hzwcaxhkuxoehazy";
         //Definimos el remitente (dirección y, opcionalmente, nombre)
         $mail->SetFrom('infonete@gmail.com', 'Infonete');
         //Y, ahora sí, definimos el destinatario (dirección y, opcionalmente, nombre)
@@ -78,12 +78,14 @@ class RegistroController
         //Y por si nos bloquean el contenido HTML (algunos correos lo hacen por seguridad) una versión alternativa en texto plano
         // (también será válida para lectores de pantalla)
 
-        $mensaje = "<h1>Hola!</h1><br>"
-                    . "<p>Por favor verificá tu correo:</p><br>"
-                    . "<form action='http://localhost/registro/verificarEmail' method='post'>
-                       <input type='hidden' name='email' id='email' value='$email'>
-                       <button type='submit'>Click acá!</button>
-                       </form>";
+        $mensaje = "<div>
+                        <h1>Confirmación de correo</h1>
+                        <p>Necesitás verificar tu cuenta de infonete antes de poder usarla.</p>
+                        <form action='http://localhost/registro/verificarEmail' method='post'>
+                           <input type='hidden' name='email' id='email' value='$email'>
+                           <button type='submit'>Click acá!</button>
+                        </form>  
+                   </div>";
 
         $mail->Body = $mensaje;
         $mail->AltBody = 'This is a plain-text message body';
