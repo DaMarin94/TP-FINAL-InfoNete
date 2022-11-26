@@ -1,4 +1,4 @@
-<body onload="loadCharts()">
+
 <h1>Reportes</h1>
 <div class="contBotonReporte">
     <div class="">
@@ -12,14 +12,16 @@
     </div>
 
 </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div id="piechart_div"></div>
-            <div id="barchart_div"></div>
-        </div>
-    </div>
-</div>
+
+    <form action="/admin/graficos" method="post">
+        <label for="fechaInicio">Desde:</label>
+        <input type="datetime-local" id="fechaInicio" name="fechaInicio">
+        <label for="fechaFin">Hasta:</label>
+        <input type="datetime-local" id="fechaFin" name="fechaFin">
+        <br>
+        <button class="w3-button w3-black w3-margin-top" type="submit">Generar Graficos</button>
+
+    </form>
+
 

@@ -238,10 +238,22 @@ class AdminModel
         return $productos;
     }
 
-    public function getProductosReporteChart() {
+    public function getProductosReporteGraficoTorta($fechaInicio, $fechaFin) {
 
-        $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant 
-                FROM suscripcion s JOIN producto p ON s.producto_id = p.id JOIN tipo t ON p.tipo = t.id GROUP BY p.id";
+        $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant, s.fechaAdquirido AS fecha
+                FROM suscripcion s JOIN producto p ON s.producto_id = p.id JOIN tipo t ON p.tipo = t.id
+                WHERE s.fechaAdquirido BETWEEN  '$fechaInicio' AND '$fechaFin'
+                GROUP BY p.id";
+
+        return $this->database->query($sql);
+    }
+
+    public function getProductosReporteGraficoBarra($fechaInicio, $fechaFin) {
+
+        $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant, s.fechaAdquirido AS fecha
+                FROM suscripcion s JOIN producto p ON s.producto_id = p.id JOIN tipo t ON p.tipo = t.id
+                WHERE s.fechaAdquirido BETWEEN  '$fechaInicio' AND '$fechaFin'
+                GROUP BY p.id";
 
         return $this->database->query($sql);
     }

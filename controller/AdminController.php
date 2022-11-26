@@ -281,14 +281,19 @@ class AdminController{
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-contenidistas');
     }
 
-    public function graficoTorta(){
+    public function graficos(){
 
+        $fechaInicio = $_POST['fechaInicio'];
+        $fechaFin = $_POST['fechaFin'];
 
-       /*echo '{
-            "cols":[{"type":"string", "label":"nombre"},{"type":"number", "label":"sub_cant"}],
-            "rows":'.json_encode($this->model->getProductosReporteChart()).'}';*/
+        $data ['fechaInicio'] = $fechaInicio;
+        $data ['fechaFin'] = $fechaFin;
 
-        echo json_encode($this->model->getProductosReporteChart());
+        $data ['suscripciones'] = json_encode($this->model->getProductosReporteGraficoTorta($fechaInicio, $fechaFin));
+
+        $data['graficos'] = true;
+
+        $this->renderer->render('admin.mustache', $data);
     }
 
 }
