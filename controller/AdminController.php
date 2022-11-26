@@ -254,6 +254,8 @@ class AdminController{
     }
 
     public function reportes(){
+        //mensaje de error si las fechas estan vacías
+        $data['error'] = $this->mensajeErrorGraficos();
         $data['reportes'] = true;
 
         $this->renderer->render('admin.mustache', $data);
@@ -286,13 +288,32 @@ class AdminController{
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFin = $_POST['fechaFin'];
 
+        if($fechaInicio!= null && $fechaFin != null){
+
         $data ['suscripciones'] = json_encode($this->model->getProductosSuscripcionesReporteGraficoTorta($fechaInicio, $fechaFin));
         $data ['suscripcionesBarra'] = json_encode($this->model->getProductosSuscripcionesReporteGraficoBarra($fechaInicio, $fechaFin));
         $data ['compras'] = json_encode($this->model->getProductosComprasReporteGraficoBarra($fechaInicio, $fechaFin));
 
         $data['graficos'] = true;
-
         $this->renderer->render('admin.mustache', $data);
+        }else{
+            $this->errorGraficos();
+        }
+
+    }
+
+    public function mensajeErrorGraficos(){
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "fecha") {
+                $mensaje = $mensaje . "Seleccione un rango de fechas";
+            }
+            return $mensaje;
+        }
+    }
+
+    public function errorGraficos(){
+        Redirect::redirect("reportes?error=fecha");
     }
 
 }

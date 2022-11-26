@@ -1,11 +1,7 @@
-<div class="w3-margin-top">
-    <h2 class="w3-black titulo2">Mis pagos</h2>
-</div>
-<div class="contAddUser">
-    <h1>Suscripciones</h1>
-</div>
+<h1 class="w3-container titulo w3-center">Mis pagos</h1>
+<h2 class="w3-black titulo2">Suscripciones</h2>
 
-<table class='w3-table w3-striped'>
+<table class='w3-table-all w3-hoverable'>
     <thead>
     <tr class="w3-dark-grey">
         <th>Producto</th>
@@ -25,23 +21,25 @@
 </table>
 
 <div class="w3-center-align w3-padding-24">
-
-    <form action="/lector/getPdfSuscripciones" method="get">
+    <form action="/lector/getPdfSuscripciones" method="post">
         <label for="fechaInicio">Desde:</label>
         <input type="datetime-local" id="fechaInicio" name="fechaInicio">
         <label for="fechaFin">Hasta:</label>
         <input type="datetime-local" id="fechaFin" name="fechaFin">
         <br>
-        <button class="w3-button w3-black w3-margin-top" type="submit">Imprimir</button>
-
+        <button class="w3-button w3-black w3-margin-top w3-round" type="submit">Imprimir</button>
     </form>
 </div>
 
-<div class="contAddUser">
-    <h1>Compras</h1>
-</div>
+{{#errorSuscripciones}}
+    <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+        <p class="w3-text-red">{{errorSuscripciones}}</p>
+    </div>
+{{/errorSuscripciones}}
 
-<table class='w3-table w3-striped'>
+<h2 class="w3-black titulo2">Compras</h2>
+
+<table class='w3-table-all w3-hoverable'>
     <thead>
     <tr class="w3-dark-grey">
         <th>Producto</th>
@@ -61,17 +59,21 @@
 </table>
 
 <div class="w3-center-align w3-padding-24">
-
     <form action="/lector/getPdfCompras" method="get">
         <label for="fechaInicio">Desde:</label>
         <input type="datetime-local" id="fechaInicio" name="fechaInicio">
         <label for="fechaFin">Hasta:</label>
         <input type="datetime-local" id="fechaFin" name="fechaFin">
         <br>
-        <button class="w3-button w3-black w3-margin-top" type="submit">Imprimir</button>
-
+        <button class="w3-button w3-black w3-margin-top w3-round" type="submit">Imprimir</button>
     </form>
 </div>
+
+{{#errorCompras}}
+    <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+        <p class="w3-text-red">{{errorCompras}}</p>
+    </div>
+{{/errorCompras}}
 
 
 

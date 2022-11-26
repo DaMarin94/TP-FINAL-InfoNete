@@ -1,6 +1,9 @@
-
-<h1>Reportes</h1>
+<h1 class="w3-container titulo w3-center">Reportes</h1>
+<div class="w3-margin-top">
+    <h2 class="w3-black titulo2">PDFs</h2>
+</div>
 <div class="contBotonReporte">
+
     <div class="">
         <a href="/admin/getPdfContenidistas" class="w3-button w3-teal botonReportes">Contenidistas</a>
     </div>
@@ -13,6 +16,9 @@
 
 </div>
 
+<div class="w3-margin-top">
+    <h2 class="w3-black titulo2">Gráficos</h2>
+</div>
 
     <form action="/admin/graficos" method="post">
         <label for="fechaInicio">Desde:</label>
@@ -20,8 +26,14 @@
         <label for="fechaFin">Hasta:</label>
         <input type="datetime-local" id="fechaFin" name="fechaFin">
         <br>
-        <button class="w3-button w3-black w3-margin-top" type="submit">Generar Graficos</button>
+        <button class="w3-button w3-black w3-margin-top w3-round" type="submit">Generar</button>
 
     </form>
+
+{{#error}}
+    <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+        <p class="w3-text-red">{{error}}</p>
+    </div>
+{{/error}}
 
 

@@ -31,6 +31,10 @@ class LectorController{
     }
 
     public function misPagos(){
+        //mensajes de error por si no selecciona fecha
+        $data['errorSuscripciones'] = $this->mensajeErrorSuscripciones();
+        $data['errorCompras'] = $this->mensajeErrorCompras();
+
         $usuario = $_SESSION['id_user'];
 
         $data['compras'] = true;
@@ -45,10 +49,29 @@ class LectorController{
         $fechaInicio = $_GET['fechaInicio'];
         $fechaFin = $_GET['fechaFin'];
 
+        if($fechaInicio!= null && $fechaFin != null){
         $data['listaSuscripciones'] = $this->model->getSuscripcionesPDF($usuario, $fechaInicio, $fechaFin);
 
         $html = $this->renderer->getHtml('reportesPdf/templatePdfLectorSuscripciones.mustache', $data);
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-suscripciones');
+
+        }else{
+            $this->errorFechaSuscripciones();
+        }
+    }
+
+    public function errorFechaSuscripciones(){
+        Redirect::redirect("misPagos?error=fechaSuscripciones");
+    }
+
+    public function mensajeErrorSuscripciones(){
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "fechaSuscripciones") {
+                $mensaje = $mensaje . "Seleccione un rango de fechas";
+            }
+            return $mensaje;
+        }
     }
 
     public function getPdfCompras() {
@@ -57,10 +80,30 @@ class LectorController{
         $fechaInicio = $_GET['fechaInicio'];
         $fechaFin = $_GET['fechaFin'];
 
+        if($fechaInicio!= null && $fechaFin != null){
+
         $data['listaCompras'] = $this->model->getComprasPDF($usuario, $fechaInicio, $fechaFin);
 
         $html = $this->renderer->getHtml('reportesPdf/templatePdfLectorCompras.mustache', $data);
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-compras');
+
+        }else{
+            $this->errorFechaCompras();
+        }
+    }
+
+    public function errorFechaCompras(){
+        Redirect::redirect("misPagos?error=fechaCompras");
+    }
+
+    public function mensajeErrorCompras(){
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "fechaCompras") {
+                $mensaje = "Seleccione un rango de fechas";
+            }
+            return $mensaje;
+        }
     }
 
 }

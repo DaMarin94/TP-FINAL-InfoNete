@@ -1,38 +1,31 @@
-<div class="w3-margin-top">
-    <h2 class="w3-black titulo2">Mi biblioteca</h2>
-</div>
+<h1 class="w3-container titulo w3-center">Mi biblioteca</h1>
+<h2 class="w3-black titulo2">Suscripciones</h2>
 
-<div class="contAddUser">
-    <h1>Suscripciones</h1>
-</div>
-
-    <div style="overflow-x:auto;">
-        <div class="w3-row lector">
-            {{#edicionesSuscrito}}
-                <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
-                    <a class="w3-center" href="http://localhost/infonete/edicion?id={{id}}&ids=null">
-                    <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
-                    <ul class="w3-ul">{{edicion}}</ul>
-                    </a>
-                </div>
-            {{/edicionesSuscrito}}
-        </div>
+<div style="overflow-x:auto;">
+    <div class="w3-row lector">
+        {{#edicionesSuscrito}}
+            <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
+                <a class="w3-center" href="http://localhost/infonete/edicion?id={{id}}&ids=null">
+                <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
+                <ul class="w3-ul">{{edicion}}</ul>
+                </a>
+            </div>
+        {{/edicionesSuscrito}}
     </div>
-
-<div class="contAddUser">
-    <h1>Compras</h1>
 </div>
 
-    <div style="overflow-x:auto;">
-        <div class="w3-row lector">
-            {{#edicionesCompradas}}
-                <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
-                    <a class="w3-center" href="http://localhost/infonete/edicion?id={{id}}&ids=null">
-                    <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
-                    <ul class="w3-ul">{{edicion}}</ul>
-                    </a>
-                </div>
-            {{/edicionesCompradas}}
-        </div>
+<h2 class="w3-black titulo2">Compras</h2>
+
+<div style="overflow-x:auto;">
+    <div class="w3-row lector">
+        {{#edicionesCompradas}}
+            <div class="w3-col m4 l3 w3-hover-grayscale w3-padding">
+                <a class="w3-center" href="http://localhost/infonete/edicion?id={{id}}&ids=null">
+                <ul class="w3-ul"><img src="/public/images/{{portada}}"></ul>
+                <ul class="w3-ul">{{edicion}}</ul>
+                </a>
+            </div>
+        {{/edicionesCompradas}}
     </div>
+</div>
 

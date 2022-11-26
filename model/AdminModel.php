@@ -250,7 +250,7 @@ class AdminModel
 
     public function getProductosSuscripcionesReporteGraficoBarra($fechaInicio, $fechaFin) {
 
-        $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant, DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y') as fecha
+        $sql = "SELECT count(s.producto_id) as sub_cant, DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y') as fecha
                 FROM suscripcion s JOIN producto p ON s.producto_id = p.id JOIN tipo t ON p.tipo = t.id
                 WHERE s.fechaAdquirido BETWEEN  '$fechaInicio' AND '$fechaFin'
                 GROUP BY p.id, DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y')
@@ -261,8 +261,8 @@ class AdminModel
 
     public function getProductosComprasReporteGraficoBarra($fechaInicio, $fechaFin) {
 
-        $sql = "SELECT COUNT(c.edicion_id) as compras, e.edicion as nombre, DATE_FORMAT(c.fecha, '%d-%m-%Y') as fecha
-                FROM producto p JOIN edicion e ON e.producto = p.id LEFT JOIN compra c ON e.id = c.edicion_id
+        $sql = "SELECT COUNT(c.edicion_id) as compras, DATE_FORMAT(c.fecha, '%d-%m-%Y') as fecha
+                FROM producto p JOIN edicion e ON e.producto = p.id JOIN compra c ON e.id = c.edicion_id
                 AND  c.fecha BETWEEN  '$fechaInicio' AND '$fechaFin'
                 GROUP BY DATE_FORMAT(c.fecha, '%d-%m-%Y')
                 ORDER BY c.fecha";
