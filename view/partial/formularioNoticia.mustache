@@ -53,8 +53,8 @@
             <label for="audio" class="contenidista-multimedia-label">Graba un audio para la nota:</label>
             <select name="listaDeDispositivos" id="listaDeDispositivos" class="w3-margin-top"></select>
             <p id="duracion"></p>
-            <a id="btnComenzarGrabacion" class="w3-button w3-yellow">Comenzar</a>
-            <a id="btnDetenerGrabacion" class="w3-button w3-red">Detener</a>
+            <a id="btnComenzarGrabacion" class="w3-button w3-blue" style="border-radius: 5px;">Comenzar</a>
+            <a id="btnDetenerGrabacion" class="w3-button w3-red" style="border-radius: 5px;">Detener</a>
         </div>
 
         <div class="w3-margin-top">
@@ -91,12 +91,14 @@
             <h2 class="contenidista-form-titulo">Ubicacion</h2>
             <label for="ubicacion" class="contenidista-form-label">Click derecho en el mapa</label>
             <div id="mapa" style="width:100%; height:400px;" class="w3-margin-top"></div>
-                <label for="latitud"  class="contenidista-form-label">Latitud:</label>
+            <div style="display:flex; margin: 1em 0em;">
+                <label for="latitud"  class="contenidista-form-label" style="padding: 10px 80px;">Latitud:</label>
                 <input type="text" class="w3-input w3-light-grey w3-margin-top" style="width: 30%; margin: auto; text-align: center;" id="latitud" name="latitud"
                 pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
-                <label for="longitud"  class="contenidista-form-label">Longitud:</label>
+                <label for="longitud"  class="contenidista-form-label" style="padding: 10px 80px;">Longitud:</label>
                 <input type="text"  class="w3-input w3-light-grey w3-margin-top" style="width: 30%; margin: auto; text-align: center;" id="longitud" name="longitud"
                 pattern="^(-?\d+(\.\d+)?).\s*(-?\d+(\.\d+)?)$">
+            </div>
         </div>
 
         <button class="w3-button w3-black w3-margin-top" style="border-radius: 50px; width: 20%;" type="submit">Enviar</button>

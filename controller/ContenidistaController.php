@@ -290,6 +290,18 @@ class ContenidistaController
         Redirect::redirect("noticiasBorrador");
     }
 
+    public function borrarImagen2(){
+        $idNoticia = $_GET["noticia"];
+        $this->model->deleteImagen2FromNoticia($idNoticia);
+        Redirect::redirect("editarNoticia?id=$idNoticia");
+    }
+
+    public function borrarImagen3(){
+        $idNoticia = $_GET["noticia"];
+        $this->model->deleteImagen3FromNoticia($idNoticia);
+        Redirect::redirect("editarNoticia?id=$idNoticia");
+    }
+
     //Metodos AJAX para obtener las secciones
     public function ajaxSecciones(){
         $edicion = $_GET["edicion"];
@@ -338,8 +350,6 @@ class ContenidistaController
         $data['listaNoticias'] = $this->model->getNoticiasPublicadasByAutor($idContenidista);
         $this->renderer->render('contenidista.mustache', $data);
     }
-
-
 
     public function validarNoticia(){
         if(empty($_POST["titulo"])){

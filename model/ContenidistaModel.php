@@ -29,6 +29,20 @@ class ContenidistaModel
         return $this->database->execute($sql2);
     }
 
+    public function deleteImagen2FromNoticia($idNoticia){
+        $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
+                                               SET cm.imagen2 = '' 
+                                               WHERE c.id = '$idNoticia'";
+        return $this->database->execute($sql);
+    }
+
+    public function deleteImagen3FromNoticia($idNoticia){
+        $sql = "UPDATE contenido_multimedia cm JOIN contenido c ON cm.id = c.multimedia 
+                                               SET cm.imagen3 = '' 
+                                               WHERE c.id = '$idNoticia'";
+        return $this->database->execute($sql);
+    }
+
     public function procesarMultimedia()
     {
         $imagen1 = $_FILES['imagen1']['name'];
@@ -114,6 +128,9 @@ class ContenidistaModel
             $this->database->execute($sql);
         }
 
+        $sql2 = "UPDATE edicion_seccion_noticia esn SET esn.seccion = '$seccion', esn.edicion='$edicion'
+                                                    WHERE esn.noticia = '$idNoticia'";
+        $this->database->execute($sql2);
         return $this->database->execute($sql);
     }
 
