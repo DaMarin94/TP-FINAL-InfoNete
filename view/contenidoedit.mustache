@@ -1,50 +1,49 @@
 {{> header}}
 
-    <div class="w3-container w3-content  w3-padding-64" style="max-width:1000px" id="band">
+    <div class="w3-container w3-content">
         <div>
             {{#contenidoEdit}}
-               <h1>Contenido N° {{id}}</h1>
+                <h1 class="w3-container titulo w3-center">Contenido N° {{id}}</h1>
 
                <form action="contenidoedit/alta">
                    <input id="id" name="id" type="hidden" value="{{id}}">
                    <input id="id" name="contenidista" type="hidden" value="{{c_id}}">
 
-                    <div class="editor-contenido-titulo">Título</div>
+                   <h2 class="w3-black titulo2">Título</h2>
                     <div class="editor-contenido-texto">{{titulo}}</div>
 
-
-                    <div class="editor-contenido-titulo">Subtítulo</div>
+                   <h2 class="w3-black titulo2">Subtítulo</h2>
                      <div class="editor-contenido-texto">{{subtitulo}}</div>
 
-                     <div class="editor-contenido-titulo">Contenido</div>
+                   <h2 class="w3-black titulo2">Contenido</h2>
                      <div class="editor-contenido-texto">{{contenido}}</div>
 
-                     <div class="editor-contenido-titulo">Imagenes</div>
+                   <h2 class="w3-black titulo2">Imágenes</h2>
                      <div class="w3-row" style="display: flex;">
                         <div class="w3-col m4" style="margin: 2em 5px;">
-                            <h3 class="editor-contenido-titulo seccion-editor">Imagen 1</h3>
+                            <h2 class="w3-black titulo2">Imágen 1</h2>
                             <img src="../public/images/{{imagen}}" width="100%" height="300"/>
                         </div>
                         {{#imagen2}}
                         <div class="w3-col m4" style="margin: 2em 5px;">
-                            <h3 class="editor-contenido-titulo seccion-editor">Imagen 2</h3>
+                            <h2 class="w3-black titulo2">Imágen 2</h2>
                             <img src="../public/images/{{imagen2}}" width="100%" height="300"/>
                         </div>
                         {{/imagen2}}
                         {{#imagen3}}
                         <div class="w3-col m4" style="margin: 2em 5px;">
-                            <h3 class="editor-contenido-titulo seccion-editor">Imagen 3</h3>
+                            <h2 class="w3-black titulo2">Imágen 3</h2>
                             <img src="../public/images/{{imagen3}}" width="100%" height="300"/>
                         </div>
                         {{/imagen3}}
                      </div>
 
-                     <div class="editor-contenido-titulo">Contenidista</div>
+                   <h2 class="w3-black titulo2">Contenidista</h2>
                      <div class="editor-contenido-texto">{{contenidista}}</div>
 
                      <hr>
 
-                    <div class="editor-contenido-titulo seccion-editor">Edición de contenido</div>
+                   <h2 class="w3-black titulo2">Reporte</h2>
                     <div class="editor-contenido-edicion">
                        <table class="w3-table">
                                  <tr>
@@ -70,9 +69,9 @@
                                  </tr>
                        </table>
                    </div>
-                   <div class="editor-contenido-botones">
-                                           <button class="btn boton-enviar" type="submit">Enviar</button>
-                                           <a class="btn boton-cancelar" href="/editor/misContenidos"> Cancelar </a>
+                   <div class="w3-center">
+                        <button class="w3-button w3-black w3-margin-top w3-round" type="submit">Enviar</button>
+                        <a class="w3-button w3-grey w3-margin-top w3-round" href="/editor/contenidos"> Cancelar </a>
                    </div>
 
                </form>

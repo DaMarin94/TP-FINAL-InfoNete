@@ -13,6 +13,10 @@ class EditorController{
     }
 
     public function list(){
+        $this->contenidos();
+    }
+
+    public function contenidos(){
         $data['contenidos'] = true;
         $data['listaContenidos'] = $this->model->getContenidos();
         $this->renderer->render("editor.mustache", $data);

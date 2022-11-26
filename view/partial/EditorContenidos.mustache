@@ -1,8 +1,6 @@
-<div class="contAddUser">
-    <h1>Contenidos sin publicar</h1>
-</div>
+<h1 class="w3-container titulo w3-center">Contenidos sin publicar</h1>
 
-<table class='w3-table w3-striped'>
+<table class='w3-table w3-hoverable w3-striped'>
     <thead>
     <tr class="w3-dark-grey">
         <th>Id</th>
@@ -22,7 +20,7 @@
             <td>{{contenido}}...</td>
             <td><img src="../public/images/{{imagen}}" width="200" height="100"/></td>
             <td>{{descripcion}}</td>
-            <td><a href="../contenidoedit?id={{id}}" class="w3-button w3-black w3-round-large">Ver contenido</a></td>
+            <td><a href="../contenidoedit?id={{id}}" class="w3-button w3-black w3-round-large w3-hover-teal">Ver contenido</a></td>
         </tr>
     {{/listaContenidosPendientes}}
 </table>

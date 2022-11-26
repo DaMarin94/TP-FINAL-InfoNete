@@ -2,8 +2,15 @@
 
 <div class="w3-sidebar w3-bar-block w3-light-grey" style="z-index: 0">
     <h3 class="w3-bar-item">Editor</h3>
-    <a href="/editor/misContenidos" class="w3-bar-item w3-button w3-hover-teal">Sin publicar</a>
-    <a href="/editor/verificar" class="w3-bar-item w3-button w3-hover-teal">A Verificar</a>
+    <button class="w3-button w3-block w3-left-align" onclick="myAccFunc()">
+        Contenidos <i class="fa fa-caret-down"></i>
+    </button>
+    <div id="demoAcc" class="w3-hide w3-white w3-card">
+        <a href="/editor/contenidos" class="w3-bar-item w3-button w3-hover-grey">Todos</a>
+        <a href="/editor/misContenidos" class="w3-bar-item w3-button w3-hover-grey">Sin publicar</a>
+        <a href="/editor/verificar" class="w3-bar-item w3-button w3-hover-grey">A Verificar</a>
+    </div>
+
     <a href="/editor/reportes" class="w3-bar-item w3-button w3-hover-teal">Reportes</a>
     <a href="/infonete/cerrarSesion" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-center w3-text-white w3-black">Cerrar Sesión</a>
 </div>
@@ -14,7 +21,7 @@
 <div class="w3-container w3-content w3-center w3-padding-30" style="max-width:1300px; min-height: 70vh" id="band">
 
     {{#contenidos}}
-        {{> ContenidosTodos}}
+        {{> EditorContenidosTodos}}
     {{/contenidos}}
 
     {{#miscontenidos}}
@@ -22,7 +29,7 @@
     {{/miscontenidos}}
 
     {{#verificar}}
-        {{> VerificarContenidos}}
+        {{> EditorVerificarContenidos}}
     {{/verificar}}
 
     {{#reportes}}

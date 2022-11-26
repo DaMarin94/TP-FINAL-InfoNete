@@ -28,7 +28,7 @@ class ContenidoEditController
         $contenidista = $_GET["contenidista"];
 
         if($this->model->alta($id, $contenidista, $comentario, $estado)){
-            Redirect::redirect('/editor/misContenidos');
+            Redirect::redirect('/editor/contenidos');
         }else{
             Redirect::redirect('/editor');
         }
