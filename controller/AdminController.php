@@ -286,10 +286,9 @@ class AdminController{
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFin = $_POST['fechaFin'];
 
-        $data ['fechaInicio'] = $fechaInicio;
-        $data ['fechaFin'] = $fechaFin;
-
-        $data ['suscripciones'] = json_encode($this->model->getProductosReporteGraficoTorta($fechaInicio, $fechaFin));
+        $data ['suscripciones'] = json_encode($this->model->getProductosSuscripcionesReporteGraficoTorta($fechaInicio, $fechaFin));
+        $data ['suscripcionesBarra'] = json_encode($this->model->getProductosSuscripcionesReporteGraficoBarra($fechaInicio, $fechaFin));
+        $data ['compras'] = json_encode($this->model->getProductosComprasReporteGraficoBarra($fechaInicio, $fechaFin));
 
         $data['graficos'] = true;
 

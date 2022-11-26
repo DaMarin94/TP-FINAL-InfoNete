@@ -238,7 +238,7 @@ class AdminModel
         return $productos;
     }
 
-    public function getProductosReporteGraficoTorta($fechaInicio, $fechaFin) {
+    public function getProductosSuscripcionesReporteGraficoTorta($fechaInicio, $fechaFin) {
 
         $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant, s.fechaAdquirido AS fecha
                 FROM suscripcion s JOIN producto p ON s.producto_id = p.id JOIN tipo t ON p.tipo = t.id
@@ -248,14 +248,26 @@ class AdminModel
         return $this->database->query($sql);
     }
 
-    public function getProductosReporteGraficoBarra($fechaInicio, $fechaFin) {
+    public function getProductosSuscripcionesReporteGraficoBarra($fechaInicio, $fechaFin) {
 
-        $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant, s.fechaAdquirido AS fecha
+        $sql = "SELECT p.nombre as nombre, count(s.producto_id) as sub_cant, DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y') as fecha
                 FROM suscripcion s JOIN producto p ON s.producto_id = p.id JOIN tipo t ON p.tipo = t.id
                 WHERE s.fechaAdquirido BETWEEN  '$fechaInicio' AND '$fechaFin'
-                GROUP BY p.id";
+                GROUP BY p.id, DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y')
+                ORDER BY s.fechaAdquirido";
 
         return $this->database->query($sql);
+    }
+
+    public function getProductosComprasReporteGraficoBarra($fechaInicio, $fechaFin) {
+
+        $sql = "SELECT COUNT(c.edicion_id) as compras, e.edicion as nombre, DATE_FORMAT(c.fecha, '%d-%m-%Y') as fecha
+                FROM producto p JOIN edicion e ON e.producto = p.id LEFT JOIN compra c ON e.id = c.edicion_id
+                AND  c.fecha BETWEEN  '$fechaInicio' AND '$fechaFin'
+                GROUP BY DATE_FORMAT(c.fecha, '%d-%m-%Y')
+                ORDER BY c.fecha";
+        return $this->database->query($sql);
+
     }
 
     private function getEdicionesReporte($productoId) {
