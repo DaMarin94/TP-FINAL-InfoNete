@@ -31,6 +31,17 @@ class InfoneteController {
     }
 
     public function list() {
+        //mensajes si se hizo o no la suscripcion
+        $data['exitoSuscripcion'] = $this->mensajeSuscripcionExitosa();
+        $data['errorSuscripcion'] = $this->mensajeSuscripcionError();
+
+        //mensajes si se hizo o no la compra
+        $data['exitoCompra'] = $this->mensajeCompraExitosa();
+        $data['errorCompra'] = $this->mensajeCompraError();
+
+        //mensaje por si no esta logueado
+        $data['errorUsuario'] = $this->mensajeUsuarioError();
+
         $data['productos'] = true;
         $data['listaProductos'] = $this->model->getProductos();
         $data['clima'] = $this->clima;
@@ -39,6 +50,7 @@ class InfoneteController {
     }
 
     public function producto(){
+
         $data['ediciones'] = true;
         $idProducto = $_GET['id'];
         $data['producto'] = $this->model->getProductoPorId($idProducto);
@@ -51,8 +63,10 @@ class InfoneteController {
         $idProducto = $_POST['id_producto'];
         $usuario = $_SESSION['id_user'];
 
-        $this->model->suscribirseProducto($idProducto, $usuario);
-        Redirect::redirect('/');
+        if($this->model->suscribirseProducto($idProducto, $usuario)){
+            $this->exitoSuscripcion();
+        }
+        $this->errorSuscripcion();
     }
 
     public function edicion(){
@@ -65,8 +79,8 @@ class InfoneteController {
         $data['edicion'] = $this->model->getEdicionPorId($idEdicion);
         $data['listaSecciones'] = $this->model->getSeccionesPorEdicion($idEdicion);
 
-        if($usuario ==null){
-            Redirect::redirect('/');
+        if($usuario == null){
+            $this->errorUsuario();
         }
 
         $data['contenidoSuscrito'] = $this->model->getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion);
@@ -86,8 +100,10 @@ class InfoneteController {
         $idEdicion = $_POST['id_edicion'];
         $usuario = $_SESSION['id_user'];
 
-        $this->model->comprarEdicion($idEdicion, $usuario);
-        Redirect::redirect('/');
+        if($this->model->comprarEdicion($idEdicion, $usuario)){
+            $this->exitoCompra();
+        }
+        $this->errorCompra();
     }
 
     public function iraPerfil(){
@@ -117,6 +133,76 @@ class InfoneteController {
     public function cerrarSesion(){
         session_destroy();
         Redirect::redirect('/login');
+    }
+
+    public function exitoCompra(){
+        Redirect::redirect("/?exito=compraExitosa");
+    }
+
+    public function mensajeCompraExitosa(){
+        $mensaje = "";
+        if (isset($_GET["exito"])) {
+            if ($_GET["exito"] == "compraExitosa") {
+                $mensaje = $mensaje . "La compraste con éxito!";
+            }
+            return $mensaje;
+        }
+    }
+
+    public function errorCompra(){
+        Redirect::redirect("/?error=compraError");
+    }
+
+    public function mensajeCompraError(){
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "compraError") {
+                $mensaje = $mensaje . "Ya tenés esa edición!";
+            }
+            return $mensaje;
+        }
+    }
+
+    public function exitoSuscripcion(){
+        Redirect::redirect("/?exito=suscripcionExitosa");
+    }
+
+    public function mensajeSuscripcionExitosa(){
+        $mensaje = "";
+        if (isset($_GET["exito"])) {
+            if ($_GET["exito"] == "suscripcionExitosa") {
+                $mensaje = $mensaje . "Te suscribiste con éxito!";
+            }
+            return $mensaje;
+        }
+    }
+
+    public function errorSuscripcion(){
+        Redirect::redirect("/?error=suscripcionError");
+    }
+
+    public function mensajeSuscripcionError(){
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "suscripcionError") {
+                $mensaje = $mensaje . "Ya tenés una suscripción activa!";
+            }
+            return $mensaje;
+        }
+    }
+
+    public function errorUsuario(){
+        Redirect::redirect("/?error=usuarioError");
+    }
+
+    public function mensajeUsuarioError(){
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "usuarioError") {
+                $mensaje = $mensaje . "Solo los usuarios pueden ver o comprar contenido!";
+            }
+            return $mensaje;
+        }
     }
 
 }

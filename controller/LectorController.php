@@ -66,22 +66,6 @@ class LectorController
         }
     }
 
-    public function errorFechaSuscripciones()
-    {
-        Redirect::redirect("misPagos?error=fechaSuscripciones");
-    }
-
-    public function mensajeErrorSuscripciones()
-    {
-        $mensaje = "";
-        if (isset($_GET["error"])) {
-            if ($_GET["error"] == "fechaSuscripciones") {
-                $mensaje = $mensaje . "Seleccione un rango de fechas";
-            }
-            return $mensaje;
-        }
-    }
-
     public function getPdfCompras() {
         $usuario = $_SESSION['id_user'];
 
@@ -109,6 +93,22 @@ class LectorController
         if (isset($_GET["error"])) {
             if ($_GET["error"] == "fechaCompras") {
                 $mensaje = "Seleccione un rango de fechas";
+            }
+            return $mensaje;
+        }
+    }
+
+    public function errorFechaSuscripciones()
+    {
+        Redirect::redirect("misPagos?error=fechaSuscripciones");
+    }
+
+    public function mensajeErrorSuscripciones()
+    {
+        $mensaje = "";
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "fechaSuscripciones") {
+                $mensaje = $mensaje . "Seleccione un rango de fechas";
             }
             return $mensaje;
         }

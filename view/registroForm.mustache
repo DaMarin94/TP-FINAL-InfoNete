@@ -1,8 +1,10 @@
 {{> header}}
 <body onload="loadMap()">
+<div class="w3-container">
+<h1 class="w3-container titulo w3-center">Registro</h1>
+</div>
+<div class="w3-container w3-content w3-center" style="max-width:500px" id="band">
 
-<div class="w3-container w3-content w3-center" style="max-width:500px ; height: 1100px" id="band">
-    <h1>Registro</h1>
     <form action="/registro/procesarAlta"  method="post">
         <div>
             <label for="name">Nombre: </label>
@@ -30,8 +32,8 @@
 
         </div>
 
-        <button class="w3-button w3-black w3-margin-top" type="submit">Enviar</button>
-
+        <button class="w3-button w3-black w3-margin-top w3-round" type="submit">Enviar</button>
+        <p>Ya tenés cuenta? <a href="/login/">Logueáte!</a></p>
         {{#error}}
           <p>{{error}}</p>
         {{/error}}

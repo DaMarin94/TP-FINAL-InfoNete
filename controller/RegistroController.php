@@ -79,10 +79,10 @@ class RegistroController
         // (también será válida para lectores de pantalla)
 
         $mensaje = "<h1>Hola!</h1><br>"
-                    . "<p>Porfavor verifique su correo:</p><br>"
+                    . "<p>Por favor verificá tu correo:</p><br>"
                     . "<form action='http://localhost/registro/verificarEmail' method='post'>
                        <input type='hidden' name='email' id='email' value='$email'>
-                       <button type='submit'>Click aqui!</button>
+                       <button type='submit'>Click acá!</button>
                        </form>";
 
         $mail->Body = $mensaje;

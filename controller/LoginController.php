@@ -40,7 +40,7 @@ class LoginController{
                     break;
             }
         } else {
-            $data['error'] = "Revisa los datos de logueo";
+            $data['error'] = "Revisá los datos de logueo";
             $this->renderer->render("loginForm.mustache", $data);
         }
 

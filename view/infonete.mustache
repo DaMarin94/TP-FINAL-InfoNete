@@ -23,6 +23,36 @@
 
 <div class="w3-container w3-center" id="band">
 
+    {{#exitoSuscripcion}}
+        <div class="w3-panel w3-pale-green w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid green; width: 70%;">
+            <p class="w3-text-green">{{exitoSuscripcion}}</p>
+        </div>
+    {{/exitoSuscripcion}}
+
+    {{#errorSuscripcion}}
+        <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+            <p class="w3-text-red">{{errorSuscripcion}}</p>
+        </div>
+    {{/errorSuscripcion}}
+
+    {{#exitoCompra}}
+        <div class="w3-panel w3-pale-green w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid green; width: 70%;">
+            <p class="w3-text-green">{{exitoCompra}}</p>
+        </div>
+    {{/exitoCompra}}
+
+    {{#errorCompra}}
+        <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+            <p class="w3-text-red">{{errorCompra}}</p>
+        </div>
+    {{/errorCompra}}
+
+    {{#errorUsuario}}
+        <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+            <p class="w3-text-red">{{errorUsuario}}</p>
+        </div>
+    {{/errorUsuario}}
+
         {{#productos}}
             {{>infoneteProductos}}
         {{/productos}}

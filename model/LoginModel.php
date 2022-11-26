@@ -11,7 +11,8 @@ class LoginModel
 
     public function alta($mail, $password){
 
-        $sql = "SELECT u.id, u.mail, u.role, p.clave, u.estado FROM usuarios u LEFT JOIN passwords p ON u.password = p.id WHERE u.mail = '$mail'";
+        $sql = "SELECT u.id, u.mail, u.role, p.clave, u.estado 
+                FROM usuarios u LEFT JOIN passwords p ON u.password = p.id WHERE u.mail = '$mail'";
 
         $result = $this->database->query($sql);
         if(count($result) > 0){
@@ -27,13 +28,10 @@ class LoginModel
                 return true;
             }
         }
-
         return false;
-
     }
 
     public function getRoleName($role){
-
     }
 
     public function getPasswordValido($hash, $valid){

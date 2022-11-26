@@ -36,30 +36,31 @@ class InfoneteModel {
 
     public function getContenidoSuscritoPorEdicionSeccion($usuario, $idSeccion, $idEdicion) {
         $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, 
-                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url FROM contenido c 
-                                        JOIN contenido_multimedia cm ON c.multimedia = cm.id
-                                        JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
-                                        JOIN edicion e ON e.id = esn.edicion
-                                        JOIN suscripcion s ON s.producto_id = e.producto
-                WHERE esn.edicion = '$idEdicion' 
-                AND esn.seccion = '$idSeccion'
-                AND s.usuario_id = $usuario
-                AND c.estado = 2
-                AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento";
+                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url 
+                FROM contenido c JOIN contenido_multimedia cm ON c.multimedia = cm.id
+                                JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                JOIN edicion e ON e.id = esn.edicion
+                                JOIN suscripcion s ON s.producto_id = e.producto
+                    WHERE esn.edicion = '$idEdicion' 
+                    AND esn.seccion = '$idSeccion'
+                    AND s.usuario_id = $usuario
+                    AND c.estado = 2
+                    AND e.fecha BETWEEN DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y') 
+                                AND DATE_FORMAT(s.fechaVencimiento, '%d-%m-%Y')";
         return $this->database->query($sql);
     }
 
     public function getContenidoCompradoPorEdicionSeccion($usuario, $idSeccion, $idEdicion) {
         $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, 
-                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url FROM contenido c 
-                                        JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
-                                        JOIN contenido_multimedia cm ON c.multimedia = cm.id
-                                        JOIN edicion e ON e.id = esn.edicion
-                                        JOIN compra co ON co.edicion_id = e.id
-                WHERE esn.edicion = '$idEdicion' 
-                AND esn.seccion = '$idSeccion'
-                AND co.usuario_id = $usuario
-                AND c.estado = 2";
+                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url 
+                FROM contenido c JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                JOIN contenido_multimedia cm ON c.multimedia = cm.id
+                                JOIN edicion e ON e.id = esn.edicion
+                                JOIN compra co ON co.edicion_id = e.id
+                    WHERE esn.edicion = '$idEdicion' 
+                    AND esn.seccion = '$idSeccion'
+                    AND co.usuario_id = $usuario
+                    AND c.estado = 2";
         return $this->database->query($sql);
     }
 
