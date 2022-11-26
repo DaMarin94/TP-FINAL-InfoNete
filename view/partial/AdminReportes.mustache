@@ -1,3 +1,4 @@
+
 <h1>Reportes</h1>
 <div class="contBotonReporte">
     <div class="">
@@ -9,4 +10,18 @@
     <div class="">
         <a href="/admin/getPdfProductos" class="w3-button w3-amber botonReportes">Productos</a>
     </div>
+
 </div>
+
+
+    <form action="/admin/graficos" method="post">
+        <label for="fechaInicio">Desde:</label>
+        <input type="datetime-local" id="fechaInicio" name="fechaInicio">
+        <label for="fechaFin">Hasta:</label>
+        <input type="datetime-local" id="fechaFin" name="fechaFin">
+        <br>
+        <button class="w3-button w3-black w3-margin-top" type="submit">Generar Graficos</button>
+
+    </form>
+
+

@@ -255,7 +255,9 @@ class AdminController{
 
     public function reportes(){
         $data['reportes'] = true;
+
         $this->renderer->render('admin.mustache', $data);
+
     }
 
     public function getPdfContenidistas() {
@@ -278,4 +280,19 @@ class AdminController{
         $html = $this->renderer->getHtml('reportesPdf/templatePdfProductos.mustache', $data);
         $this->pdfGenerator->generarPdf($html, 'portrait', 'reporte-contenidistas');
     }
+
+    public function graficos(){
+
+        $fechaInicio = $_POST['fechaInicio'];
+        $fechaFin = $_POST['fechaFin'];
+
+        $data ['suscripciones'] = json_encode($this->model->getProductosSuscripcionesReporteGraficoTorta($fechaInicio, $fechaFin));
+        $data ['suscripcionesBarra'] = json_encode($this->model->getProductosSuscripcionesReporteGraficoBarra($fechaInicio, $fechaFin));
+        $data ['compras'] = json_encode($this->model->getProductosComprasReporteGraficoBarra($fechaInicio, $fechaFin));
+
+        $data['graficos'] = true;
+
+        $this->renderer->render('admin.mustache', $data);
+    }
+
 }
