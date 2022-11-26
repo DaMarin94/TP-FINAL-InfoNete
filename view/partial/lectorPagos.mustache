@@ -21,11 +21,11 @@
 </table>
 
 <div class="w3-center-align w3-padding-24">
-    <form action="/lector/getPdfSuscripciones" method="post">
+    <form action="/lector/getPdfSuscripciones" method="get">
         <label for="fechaInicio">Desde:</label>
-        <input type="datetime-local" id="fechaInicio" name="fechaInicio">
+        <input type="date" id="fechaInicio" name="fechaInicio">
         <label for="fechaFin">Hasta:</label>
-        <input type="datetime-local" id="fechaFin" name="fechaFin">
+        <input type="date" id="fechaFin" name="fechaFin">
         <br>
         <button class="w3-button w3-black w3-margin-top w3-round" type="submit">Imprimir</button>
     </form>
@@ -61,9 +61,9 @@
 <div class="w3-center-align w3-padding-24">
     <form action="/lector/getPdfCompras" method="get">
         <label for="fechaInicio">Desde:</label>
-        <input type="datetime-local" id="fechaInicio" name="fechaInicio">
+        <input type="date" id="fechaInicio" name="fechaInicio">
         <label for="fechaFin">Hasta:</label>
-        <input type="datetime-local" id="fechaFin" name="fechaFin">
+        <input type="date" id="fechaFin" name="fechaFin">
         <br>
         <button class="w3-button w3-black w3-margin-top w3-round" type="submit">Imprimir</button>
     </form>

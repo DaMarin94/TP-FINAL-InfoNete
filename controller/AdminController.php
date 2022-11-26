@@ -288,6 +288,9 @@ class AdminController{
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFin = $_POST['fechaFin'];
 
+        $data ['fechaInicio']= $fechaInicio;
+        $data ['fechaFin'] = $fechaFin;
+
         if($fechaInicio!= null && $fechaFin != null){
 
         $data ['suscripciones'] = json_encode($this->model->getProductosSuscripcionesReporteGraficoTorta($fechaInicio, $fechaFin));

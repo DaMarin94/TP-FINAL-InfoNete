@@ -1,5 +1,16 @@
 <body onload="loadCharts('{{suscripciones}}','{{compras}}', '{{suscripcionesBarra}}')">
 
-    <div id="piechart_div"></div>
-    <div id="barchart_div"></div>
-    <div id="barchart2_div"></div>
+<h1 class="w3-container titulo w3-center">Gráficos</h1>
+
+    <h2 class="w3-black titulo2">Torta</h2>
+
+    <p>Suscripciones totales entre {{fechaInicio}} y {{fechaFin}}</p>
+        <div id="piechart_div"></div>
+
+    <h2 class="w3-black titulo2">Barra compras</h2>
+    <p>Compras por día entre {{fechaInicio}} y {{fechaFin}}</p>
+        <div id="barchart_div"></div>
+
+    <h2 class="w3-black titulo2">Barra suscripciones</h2>
+    <p>Suscripciones por día entre {{fechaInicio}} y {{fechaFin}}</p>
+        <div id="barchart2_div"></div>

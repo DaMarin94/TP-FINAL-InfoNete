@@ -30,7 +30,7 @@ function pie_chart(jsonSuscripciones) {
 
     var options = {
         title: "Suscripciones",
-        width: 600,
+        width: 1000,
         height: 400,
     };
 
@@ -53,10 +53,9 @@ function bar_chart(jsonCompras) {
     }
     var options = {
         title: "Compras",
-        width: 800,
+        width: 1000,
         height: 600,
         bar: {groupWidth: "80%"},
-        legend: { position: "none" },
     };
 
     var chart = new google.visualization.BarChart(document.getElementById('barchart_div'));
@@ -78,10 +77,10 @@ function bar_chart2(jsonSuscripcionesBarra) {
     }
     var options = {
         title: "Suscripciones",
-        width: 800,
+        width: 1000,
         height: 600,
         bar: {groupWidth: "80%"},
-        legend: { position: "none" },
+
     };
 
     var chart = new google.visualization.BarChart(document.getElementById('barchart2_div'));
