@@ -5,11 +5,17 @@ class LoginController{
     private $model;
 
     public function __construct($render, $model){
-        $this->renderer = $render;
-        $this->model = $model;
+
+            $this->renderer = $render;
+            $this->model = $model;
     }
+
     public function list(){
-        echo $this->renderer->render("loginForm.mustache");
+        if(!isset($_SESSION["id_user"])) {
+            echo $this->renderer->render("loginForm.mustache");
+        }else{
+            Redirect::redirect('/');
+        }
     }
 
     public function procesarAlta(){

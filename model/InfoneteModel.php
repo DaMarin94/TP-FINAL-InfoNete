@@ -94,8 +94,8 @@ class InfoneteModel {
                     FROM suscripcion s JOIN edicion e ON s.producto_id = e.producto
                             WHERE s.usuario_id = '$usuario'
                             AND e.id = '$idEdicion'
-                            AND DATE_FORMAT(e.fecha, '%d-%m-%Y') BETWEEN DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y') 
-                                        AND DATE_FORMAT(s.fechaVencimiento, '%d-%m-%Y')";
+                            AND DATE_FORMAT(e.fecha, '%m-%Y') BETWEEN DATE_FORMAT(s.fechaAdquirido, '%m-%Y') 
+                                        AND DATE_FORMAT(s.fechaVencimiento, '%m-%Y')";
         return $this->database->query($sql);
     }
 

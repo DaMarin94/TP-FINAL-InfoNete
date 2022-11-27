@@ -17,7 +17,11 @@ class RegistroController
     }
 
     public function alta(){
-        $this->renderer->render("registroForm.mustache");
+        if(!isset($_SESSION["id_user"])) {
+            $this->renderer->render("registroForm.mustache");
+        }else{
+            Redirect::redirect('/');
+        }
     }
 
     public function procesarAlta(){
