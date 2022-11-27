@@ -64,6 +64,7 @@ class ContenidistaModel
         }
 
         $video = null;
+        $videoName = null;
         if (!is_null($video)) {
             $videoName = uniqid().".mp4";
             move_uploaded_file($video, "public/multimedia/" . $videoName);
@@ -79,7 +80,7 @@ class ContenidistaModel
 
         $url = $_POST['url'];
 
-        $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video, url) VALUES('$imagen1', '$imagenName2', '$imagenName3', '$audioName', '$videoName', '$url')";
+        $multimediasql = "INSERT INTO contenido_multimedia (imagen1, imagen2, imagen3, audio, video, url) VALUES('$imagen1', '$imagen2', '$imagen3', '$audioName', '$videoName', '$url')";
         return $this->database->insert($multimediasql);
     }
 
