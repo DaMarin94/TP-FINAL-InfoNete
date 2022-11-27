@@ -66,9 +66,4 @@ class LectorModel
         return $this->database->query($sql);
     }
 
-    public function getProductoPorId($idProducto){
-        $sql = "SELECT * FROM producto WHERE id = '$idProducto'";
-        return $this->database->query($sql);
-    }
-
 }

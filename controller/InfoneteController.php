@@ -30,6 +30,35 @@ class InfoneteController {
         $this->clima = Clima::getClima();
     }
 
+    public function iraPerfil(){
+        switch($_SESSION['usuario'][0]['role']){
+            case 4:
+                Redirect::redirect('/admin');
+                break;
+            case 3:
+                Redirect::redirect('/editor');
+                break;
+            case 2:
+                Redirect::redirect('/contenidista');
+                break;
+            case 1:
+                Redirect::redirect('/lector');
+                break;
+            default:
+                Redirect::redirect('/');
+                break;
+        }
+    }
+
+    public function mostrarClima(){
+        $this->validarRol();
+    }
+
+    public function cerrarSesion(){
+        session_destroy();
+        Redirect::redirect('/login');
+    }
+
     public function list() {
         //mensajes si se hizo o no la suscripcion
         $data['exitoSuscripcion'] = $this->mensajeSuscripcionExitosa();
@@ -88,11 +117,6 @@ class InfoneteController {
 
         $data['contenido'] = $this->model->getContenidoEdicionSeccion($idSeccion, $idEdicion);
 
-        /*if($idSeccion != null){
-            $idContenido = $data['contenido'][0]['id'];
-            $data['multimedia'] = $this->model->getMultimediaByContenido($idContenido);
-        }*/
-
         $this->renderer->render('infonete.mustache', $data);
     }
 
@@ -104,35 +128,6 @@ class InfoneteController {
             $this->exitoCompra();
         }
         $this->errorCompra();
-    }
-
-    public function iraPerfil(){
-        switch($_SESSION['usuario'][0]['role']){
-            case 4:
-                Redirect::redirect('/admin');
-                break;
-            case 3:
-                Redirect::redirect('/editor');
-                break;
-            case 2:
-                Redirect::redirect('/contenidista');
-                break;
-            case 1:
-                Redirect::redirect('/lector');
-                break;
-            default:
-                Redirect::redirect('/');
-                break;
-        }
-    }
-
-    public function mostrarClima(){
-        $this->validarRol();
-    }
-
-    public function cerrarSesion(){
-        session_destroy();
-        Redirect::redirect('/login');
     }
 
     public function exitoCompra(){
