@@ -215,11 +215,22 @@ class AdminModel
     }
 
     public function detalleContenido($id){
-        $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, cm.imagen1 as imagen, e.descripcion as estado, u.nombre as contenidista 
-                FROM contenido c JOIN contenido_multimedia cm ON c.multimedia = cm.id JOIN estado e ON e.id = c.estado 
-                JOIN usuarios u ON u.id = c.contenidista WHERE c.id ='$id'";
+        $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, 
+                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url,
+                       e.id as edicionid, e.edicion as edicion,
+                       s.id as seccionid, s.descripcion as seccion,
+                       es.descripcion as estado, u.nombre as contenidista 
+                                        FROM contenido c 
+                                        JOIN contenido_multimedia cm ON c.multimedia = cm.id
+                                        JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                        JOIN estado es ON es.id = c.estado
+                                        JOIN edicion e ON e.id = esn.edicion
+                                        JOIN seccion s ON s.id = esn.seccion
+                                        JOIN usuarios u ON u.id = c.contenidista
+                                        WHERE c.id = '$id'";
         return $this->database->query($sql);
     }
+
     public function bajaContenido($id){
         $sql = "UPDATE contenido SET estado = 4 WHERE id = '$id'";
         return $this->database->execute($sql);
@@ -234,7 +245,6 @@ class AdminModel
             $producto += [ "edicion" => $this->getEdicionesReporte($producto['id']) ];
             array_push($productos, $producto);
         }
-
         return $productos;
     }
 

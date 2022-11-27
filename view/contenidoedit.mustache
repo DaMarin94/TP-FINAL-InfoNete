@@ -20,18 +20,18 @@
 
                    <h2 class="w3-black titulo2">Imágenes</h2>
                      <div class="w3-row" style="display: flex;">
-                        <div class="w3-col m4" style="margin: 2em 5px;">
+                        <div class="w3-col m4" style="margin: 0em 5px;">
                             <h2 class="w3-black titulo2">Imágen 1</h2>
                             <img src="../public/images/{{imagen}}" width="100%" height="300"/>
                         </div>
                         {{#imagen2}}
-                        <div class="w3-col m4" style="margin: 2em 5px;">
+                        <div class="w3-col m4" style="margin: 0em 5px;">
                             <h2 class="w3-black titulo2">Imágen 2</h2>
                             <img src="../public/images/{{imagen2}}" width="100%" height="300"/>
                         </div>
                         {{/imagen2}}
                         {{#imagen3}}
-                        <div class="w3-col m4" style="margin: 2em 5px;">
+                        <div class="w3-col m4" style="margin: 0em 5px;">
                             <h2 class="w3-black titulo2">Imágen 3</h2>
                             <img src="../public/images/{{imagen3}}" width="100%" height="300"/>
                         </div>
@@ -40,16 +40,21 @@
 
                    {{#audio}}
                     <h2 class="w3-black titulo2">Audio</h2>
-                    <div class="editor-contenido-texto" style="text-align: center; margin-top: 1em;">
+                    <div style="text-align: center; margin-top: 1em;">
                         <audio controls>
                             <source src="/public/multimedia/{{audio}}" type="audio/mp3">
                         </audio>
                     </div>
                    {{/audio}}
 
+                   {{#url}}
+                   <h2 class="w3-black titulo2">Enlace</h2>
+                   <div style="text-align: center;"><a href="{{url}}">{{url}}</a></div>
+                   {{/url}}
+
                    <h2 class="w3-black titulo2">Contenidista</h2>
-                     <div class="editor-contenido-texto">{{contenidista}}</div>
-                     <hr>
+                   <div class="editor-contenido-texto">{{contenidista}}</div>
+                   <hr>
 
                    <h2 class="w3-black titulo2">Reporte</h2>
                     <div class="editor-contenido-edicion">

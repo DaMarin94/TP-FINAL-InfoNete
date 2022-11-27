@@ -36,31 +36,56 @@
 
 {{#detalleContenido}}
     <h1>Contenido N° {{id}}</h1>
-    <table class="w3-table w3-grey">
-        <tr>
-            <th>Titulo</th>
-            <td>{{titulo}}</td>
-        </tr>
-        <tr>
-            <th>Subtitulo</th>
-            <td>{{subtitulo}}</td>
-        </tr>
-        <tr>
-            <th>Contenido</th>
-            <td>{{{contenido}}}</td>
-        </tr>
-        <tr>
-            <th>Imagen</th>
-            <td><img src="../public/images/{{imagen}}" width="400" height="300"/></td>
-        </tr>
-        <tr>
-            <th>Contenidista</th>
-            <td>{{contenidista}}</td>
-        </tr>
-        <tr>
-            <th>Estado</th>
-            <td>{{estado}}</td>
-        </tr>
-    </table>
+        <div>
+        <h1 class="contenidista-form-titulo">{{edicion}}</h1>
+        <p class="contenidista-form-label">{{seccion}}</p>
+        </div>
+
+         <h2 class="noticia-titulo">{{titulo}}</h2>
+         <h3 class="noticia-subtitulo">{{subtitulo}}</h3>
+
+            <!--imagenes-->
+            <body onload="currentSlide(1), loadMapNoticia({{latitud}}, {{longitud}})">
+            <div class="slideshow-container">
+
+              <div class="mySlides fade">
+                <img src="/public/images/{{imagen1}}" style="height: 400px; width: 100%;">
+              </div>
+
+              {{#imagen2}}
+              <div class="mySlides fade">
+                <img src="/public/images/{{imagen2}}" style="height: 400px; width: 100%;">
+              </div>
+              {{/imagen2}}
+
+              {{#imagen3}}
+              <div class="mySlides fade">
+                <img src="/public/images/{{imagen3}}" style="height: 400px; width: 100%;">
+              </div>
+              {{/imagen3}}
+
+              {{#imagen2}}
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              {{/imagen2}}
+            </div>
+
+            {{#audio}}
+            <div style="text-align: center; margin-top: 1em;">
+                <audio controls>
+                    <source src="/public/multimedia/{{audio}}" type="audio/mp3">
+                </audio>
+            </div>
+            {{/audio}}
+
+            <div class ="w3-left-align">
+                <p class="noticia-contenido" id="contenido">{{{contenido}}}</p>
+            </div>
+
+            <div id="mapa" style="width:100%; height:300px;"></div>
+
+            {{#url}}
+            <div><iframe width="100%" height="500px" src="{{url}}"</iframe></div>
+            {{/url}}
 
 {{/detalleContenido}}
