@@ -2,6 +2,12 @@
     <h1 class="w3-container w3-center titulo">{{edicion}}</h1>
 </div>
 
+{{^listaSecciones}}
+    <div class="w3-panel w3-pale-red w3-animate-bottom w3-display-bottommiddle" style="border: 1px solid red; width: 70%;">
+        <p class="w3-text-red">No tenés esta edición!</p>
+    </div>
+{{/listaSecciones}}
+
 <div class="w3-black" style="display: flex; width: auto;">
 
     {{#listaSecciones}}

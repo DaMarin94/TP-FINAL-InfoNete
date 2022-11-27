@@ -12,7 +12,8 @@ class LectorModel
         $sql = "SELECT e.id, e.portada, e.edicion, e.producto FROM edicion e JOIN producto p on e.producto = p.id 
                                         JOIN suscripcion s ON s.producto_id = p.id
                                         WHERE s.usuario_id = '$usuario'
-                                        AND e.fecha BETWEEN s.fechaAdquirido AND s.fechaVencimiento
+                                        AND DATE_FORMAT(e.fecha, '%d-%m-%Y') BETWEEN DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y') 
+                                        AND DATE_FORMAT(s.fechaVencimiento, '%d-%m-%Y')
                 GROUP BY e.id, e.portada, e.edicion, e.producto";
         return $this->database->query($sql);
     }

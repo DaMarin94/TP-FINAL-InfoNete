@@ -122,12 +122,45 @@ class InfoneteModel {
     }
 
     public function getProductosSuscrito($usuario) {
-        $sql = "SELECT s.producto_id FROM suscripcion s WHERE s.usuario_id = '$usuario' ";
+        $sql = "SELECT s.producto_id 
+                    FROM suscripcion s WHERE s.usuario_id = '$usuario' ";
         return $this->database->query($sql);
     }
 
     public function getClima(){
 
+    }
+
+    public function getEdicionComprada($idEdicion, $usuario){
+
+        $sql = " SELECT c.edicion_id 
+                FROM compra c
+                        WHERE c.usuario_id = '$usuario'
+                        AND c.edicion_id = '$idEdicion'";
+        return $this->database->query($sql);
+    }
+
+    public function getProductoSuscrito($idEdicion, $usuario){
+
+        $sql = " SELECT s.producto_id 
+                    FROM suscripcion s JOIN edicion e ON s.producto_id = e.producto
+                            WHERE s.usuario_id = '$usuario'
+                            AND e.id = '$idEdicion'
+                            AND DATE_FORMAT(e.fecha, '%d-%m-%Y') BETWEEN DATE_FORMAT(s.fechaAdquirido, '%d-%m-%Y') 
+                                        AND DATE_FORMAT(s.fechaVencimiento, '%d-%m-%Y')";
+        return $this->database->query($sql);
+    }
+
+    public function getContenidoEdicionSeccion($idSeccion, $idEdicion) {
+        $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, 
+                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url 
+                FROM contenido c JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
+                                JOIN contenido_multimedia cm ON c.multimedia = cm.id
+                                JOIN edicion e ON e.id = esn.edicion
+                    WHERE esn.edicion = '$idEdicion'
+                    AND esn.seccion = '$idSeccion'
+                    AND c.estado = 2";
+        return $this->database->query($sql);
     }
 
 }
