@@ -85,8 +85,9 @@ class ContenidistaModel
     }
 
     public function editarNoticia($idNoticia, $titulo, $subtitulo, $contenido, $seccion, $edicion, $latitud, $longitud){
+        $estado = 1;
         $sql = "UPDATE contenido c SET c.titulo = '$titulo', c.subtitulo = '$subtitulo', c.contenido = '$contenido', 
-                                       c.latitud = '$latitud', c.longitud = '$longitud', c.estado = 1
+                                       c.latitud = '$latitud', c.longitud = '$longitud', c.estado = '$estado'
                                    WHERE c.id = $idNoticia;";
 
         if(!empty($_FILES['imagen1']['name'])){

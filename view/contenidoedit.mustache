@@ -16,7 +16,7 @@
                      <div class="editor-contenido-texto">{{subtitulo}}</div>
 
                    <h2 class="w3-black titulo2">Contenido</h2>
-                     <div class="editor-contenido-texto">{{contenido}}</div>
+                     <div class="editor-contenido-texto">{{{contenido}}}</div>
 
                    <h2 class="w3-black titulo2">Imágenes</h2>
                      <div class="w3-row" style="display: flex;">
@@ -38,9 +38,17 @@
                         {{/imagen3}}
                      </div>
 
+                   {{#audio}}
+                    <h2 class="w3-black titulo2">Audio</h2>
+                    <div class="editor-contenido-texto" style="text-align: center; margin-top: 1em;">
+                        <audio controls>
+                            <source src="/public/multimedia/{{audio}}" type="audio/mp3">
+                        </audio>
+                    </div>
+                   {{/audio}}
+
                    <h2 class="w3-black titulo2">Contenidista</h2>
                      <div class="editor-contenido-texto">{{contenidista}}</div>
-
                      <hr>
 
                    <h2 class="w3-black titulo2">Reporte</h2>

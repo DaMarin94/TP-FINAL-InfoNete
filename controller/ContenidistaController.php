@@ -308,7 +308,7 @@ class ContenidistaController
         $seccionesDisponibles =  $this->model->getSeccionesFaltantesByEdicion($edicion);
 
         echo "<label for='seccion' class='contenidista-form-label'>Elegi una seccion:</label>";
-        echo "<select name='seccion' class='w3-input w3-margin-top contenidista-form-select' style='width: 90%'>";
+        echo "<select name='seccion' class='w3-input w3-margin-top contenidista-form-select'>";
         echo "<option value='0'>Seleccione una seccion</option>";
         foreach ($seccionesDisponibles as $seccion){
             echo "<option value='" . $seccion['id'].  "'>" . $seccion['descripcion'] . "</option>";
