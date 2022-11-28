@@ -20,7 +20,8 @@ class AdminModel
     }
 
     public function getProductosBaja(){
-        $sql = "SELECT p.id, p.nombre, p.portada, p.precio, t.descripcion as tipo FROM producto p join tipo t on p.tipo = t.id WHERE alta = 0";
+        $sql = "SELECT p.id, p.nombre, p.portada, p.precio, t.descripcion as tipo 
+                FROM producto p join tipo t on p.tipo = t.id WHERE alta = 0";
         return $this->database->query($sql);
     }
 

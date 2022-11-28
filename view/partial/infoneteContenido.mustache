@@ -1,7 +1,4 @@
 <div class="w3-container w3-content w3-padding-64 " id="band">
-    {{^contenido}}
-        <h1 class="w3-container w3-red w3-display-middle">Comprá la edicion o suscribite para poder ver su contenido!</h1>
-    {{/contenido}}
 
     {{#contenido}}
          <h1 class="noticia-titulo">{{titulo}}</h1>
@@ -42,7 +39,7 @@
             {{/audio}}
 
             <div class ="w3-left-align">
-                <p class="noticia-contenido">{{contenido}}</p>
+                <p class="noticia-contenido">{{{contenido}}}</p>
             </div>
 
             <div id="mapa" style="width:100%; height:300px;"></div>

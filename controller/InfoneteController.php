@@ -94,8 +94,9 @@ class InfoneteController {
 
         if($this->model->suscribirseProducto($idProducto, $usuario)){
             $this->exitoSuscripcion();
+        }else{
+            $this->errorSuscripcion();
         }
-        $this->errorSuscripcion();
     }
 
     public function edicion(){
@@ -126,8 +127,9 @@ class InfoneteController {
 
         if($this->model->comprarEdicion($idEdicion, $usuario)){
             $this->exitoCompra();
+        }else{
+            $this->errorCompra();
         }
-        $this->errorCompra();
     }
 
     public function exitoCompra(){
