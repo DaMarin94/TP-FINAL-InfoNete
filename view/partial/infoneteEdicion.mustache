@@ -1,5 +1,7 @@
 <div class="w3-margin-top">
+    <a class="" href="http://localhost/infonete/producto?id={{producto}}">
     <h1 class="w3-container w3-center titulo">{{edicion}}</h1>
+    </a>
 </div>
 
 {{^listaSecciones}}
@@ -9,6 +11,7 @@
 {{/listaSecciones}}
 
 <div class="w3-black" style="display: flex; width: auto;">
+
 
     {{#listaSecciones}}
         <a href="edicion?id={{idEdicion}}&ids={{id}}" class="w3-bar-item w3-button w3-mobile" style="width: 100%;">{{descripcion}}</a>

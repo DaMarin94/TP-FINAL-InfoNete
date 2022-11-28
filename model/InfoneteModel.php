@@ -28,7 +28,7 @@ class InfoneteModel {
     }
 
     public function getSeccionesPorEdicion($idEdicion){
-        $sql = "SELECT s.descripcion, s.id FROM seccion s JOIN edicion_seccion es ON s.id = es.seccion 
+        $sql = "SELECT s.descripcion, s.id, e.producto FROM seccion s JOIN edicion_seccion es ON s.id = es.seccion 
                                                     JOIN edicion e ON e.id = es.edicion 
                                                     WHERE e.id = '$idEdicion'";
         return $this->database->query($sql);
@@ -101,7 +101,7 @@ class InfoneteModel {
 
     public function getContenidoEdicionSeccion($idSeccion, $idEdicion) {
         $sql = "SELECT c.id, c.titulo, c.subtitulo, c.contenido, c.multimedia, c.latitud, c.longitud, 
-                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url 
+                       cm.imagen1, cm.imagen2, cm.imagen3, cm.audio, cm.video, cm.url, e.producto
                 FROM contenido c JOIN edicion_seccion_noticia esn ON c.id = esn.noticia
                                 JOIN contenido_multimedia cm ON c.multimedia = cm.id
                                 JOIN edicion e ON e.id = esn.edicion
